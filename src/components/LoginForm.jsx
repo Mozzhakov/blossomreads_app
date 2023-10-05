@@ -1,56 +1,24 @@
 "use client";
-import { useState } from "react";
-import { auth, actionCodeSettings } from "@/firebase/Firebase";
-import {
-  signInWithEmailAndPassword,
-  sendSignInLinkToEmail,
-} from "firebase/auth";
-function LoginForm() {
-  const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    sendSignInLinkToEmail(auth, email, actionCodeSettings)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // signInWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     const user = userCredential.user;
-    //     console.log(user);
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(errorCode);
-    //     console.log(errorMessage);
-    //   });
-  };
+import styles from "../styles/loginForm.module.css";
 
+function LoginForm({ handleLogin, email, setEmail }) {
   return (
-    <div>
-      <form onSubmit={handleLogin}>
+    <>
+      <h1>To get access to your profile please enter your email</h1>
+      <form onSubmit={handleLogin} className={styles.form}>
         <input
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className={styles.formInput}
         />
-        {/* <input
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        /> */}
-        <button type="submit">Send Sign-In Link</button>
+        <button type="submit" className={styles.formBtn}>
+          LOGIN
+        </button>
       </form>
-    </div>
+    </>
   );
 }
 

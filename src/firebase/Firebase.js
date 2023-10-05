@@ -1,7 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import dotenv from "dotenv";
-dotenv.config();
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxKkncf1szIOvD9u77W-8Nc7Tq7Kxw-Zs",
@@ -16,8 +14,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const actionCodeSettings = {
-  url: "http://localhost:3000/",
-  handleCodeInApp: true,
-};
-export { auth, actionCodeSettings };
+export { auth };
