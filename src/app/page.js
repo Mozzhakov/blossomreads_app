@@ -11,7 +11,6 @@ import styles from "../styles/page.module.css";
 export default function Home() {
   const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
-  // console.log(user);
   function handleSignIn(e) {
     e.preventDefault();
     const emailLink = window.location.href;
