@@ -5,8 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import Link from "next/link";
 import Image from "next/image";
-// import logo from "../images/stastiem-logo.webp";
-import logo from "@/images/stastiem-logo.webp";
+import logo from "../images/stastiem-logo.webp";
+// import logo from "@/images/stastiem-logo.webp";
 import styles from "../styles/header.module.css";
 
 function Header() {
