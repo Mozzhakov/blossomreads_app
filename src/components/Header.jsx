@@ -21,7 +21,7 @@ function Header() {
   return (
     <header className={styles.header}>
       <Link href="/" className="logo">
-        <Image src="/stastim-logo.webp" alt="Logo" width="70" height="42" />
+        <Image src="/stastiem-logo.webp" alt="Logo" width="70" height="42" />
       </Link>
       <nav>
         <div>
