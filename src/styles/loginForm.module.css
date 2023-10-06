@@ -11,7 +11,7 @@
 }
 
 .formInput {
-  width: 100% - 15;
+  width: calc(100% - 15px);
   height: 30px;
   padding: 0;
   margin: 0;
