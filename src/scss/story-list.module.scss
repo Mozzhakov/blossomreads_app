@@ -1,0 +1,82 @@
+@import "vars";
+@import "mixins";
+.story-list-section {
+  padding: 30px 10px;
+  @include desktop {
+    padding: 40px 15px;
+  }
+}
+.story-list-title {
+  margin-bottom: 30px;
+  color: $black-color;
+  // font-family: var(--font-capriola);
+  font-size: 30px;
+  font-weight: 500;
+  font-style: italic;
+  text-align: center;
+  @include desktop {
+    margin-bottom: 50px;
+  }
+}
+.story-list-title-part {
+  color: $accent-color;
+}
+.story-list {
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  color: $black-color;
+  @include desktop {
+    gap: 30px;
+  }
+}
+.story-item {
+  display: block;
+  width: 300px;
+  border: 1px solid $grey-color;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    border-color: $accent-color;
+  }
+  @include desktop {
+    width: 250px;
+  }
+  &-image {
+    display: block;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+    // @include desktop {
+    //   width: 100%;
+    //   height: auto;
+    // }
+  }
+  &-title {
+    font-size: 14px;
+    font-weight: 500;
+    font-style: italic;
+    padding: 0 5px;
+    margin-bottom: 10px;
+  }
+  &-text {
+    width: 290px;
+    display: block;
+    text-align: justify;
+    font-size: 14px;
+    padding: 0 5px 5px;
+    @include desktop {
+      width: 240px;
+    }
+  }
+  &-btn {
+    display: inline;
+    font-style: italic;
+    text-decoration: underline;
+    color: $accent-color;
+  }
+}

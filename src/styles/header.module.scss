@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+.logo {
+  margin-right: 50px;
+}
+
+.logoutBtn {
+  width: fit-content;
+  /* height: 40px; */
+  padding: 10px;
+  margin: 0 0 0 auto;
+
+  outline: none;
+  color: #fff;
+  border: 1px solid #f0623d;
+  border-radius: 5px;
+  background-color: #f0623d;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  /* font-size: 18px; */
+}
+
+.logoutBtn:hover {
+  border: 1px solid #ff5123;
+  background-color: #ff5123;
+}

@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
+const path = require("path");
 const nextConfig = {
-  //   env: {
-  //     NODE_ENV: "production",
-  //   },
+  sassOptions: {
+    includePaths: [path.join(__dirname, "scss")],
+  },
 };
 
 module.exports = nextConfig;

@@ -1,35 +1,47 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/firebase/Firebase";
-import { signInWithEmailLink } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import WelcomePage from "@/components/WelcomePage";
+import { useDispatch } from "react-redux";
+import { logIn, refreshUser } from "@/redux/auth/auth-operations";
+import { fetchOrders } from "@/redux/orders/orders-operations";
+import { useSelector } from "react-redux";
+
+import Hero from "@/components/Hero";
 import LoginForm from "@/components/LoginForm";
+import OrdersList from "@/components/OrdersList";
+import { getOrders } from "@/redux/selectors";
 import styles from "../styles/page.module.css";
 
 export default function Home() {
+  const dispatch = useDispatch();
+
   const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
-  console.log(user);
-  function handleSignIn(e) {
+
+  useEffect(() => {
+    dispatch(refreshUser(auth.currentUser));
+  }, [dispatch]);
+
+  async function handleSignIn(e) {
     e.preventDefault();
     const emailLink = window.location.href;
-    signInWithEmailLink(auth, email, emailLink)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    dispatch(logIn({ auth, email, emailLink }));
   }
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchOrders(user.accessToken));
+    }
+  }, [user, dispatch]);
+
+  const orders = useSelector(getOrders);
 
   return (
     <main className={styles.main}>
       {user ? (
-        <>
-          <WelcomePage name={user.email} />
-        </>
+        <Hero />
       ) : loading ? (
         <h2>Loading...</h2>
       ) : (
@@ -39,6 +51,7 @@ export default function Home() {
           setEmail={setEmail}
         />
       )}
+      {orders && !loading && <OrdersList orders={orders} />}
       {error && <p>{error}</p>}
     </main>
   );
