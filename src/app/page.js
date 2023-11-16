@@ -7,11 +7,10 @@ import { useDispatch } from "react-redux";
 import { logIn, refreshUser } from "@/redux/auth/auth-operations";
 import { fetchOrders } from "@/redux/orders/orders-operations";
 import { useSelector } from "react-redux";
-
+import { getOrders } from "@/redux/selectors";
 import Hero from "@/components/Hero";
 import LoginForm from "@/components/LoginForm";
 import OrdersList from "@/components/OrdersList";
-import { getOrders } from "@/redux/selectors";
 import styles from "../styles/page.module.css";
 
 export default function Home() {
@@ -19,7 +18,7 @@ export default function Home() {
 
   const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
-
+  console.log(user);
   useEffect(() => {
     dispatch(refreshUser(auth.currentUser));
   }, [dispatch]);
@@ -31,7 +30,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (user) {
+    if (user && user.stsTokenManager.expirationTime > Date.now()) {
       dispatch(fetchOrders(user.accessToken));
     }
   }, [user, dispatch]);
@@ -52,6 +51,7 @@ export default function Home() {
         />
       )}
       {orders && !loading && <OrdersList orders={orders} />}
+      {/* <AutoSave /> */}
       {error && <p>{error}</p>}
     </main>
   );

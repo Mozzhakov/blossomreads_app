@@ -41,6 +41,7 @@ export default function OrderList({ orders }) {
                 alt={el.hero_name}
                 width={300}
                 className={styles["order-item-image"]}
+                priority={false}
               />
             </Link>
             <p className={styles["order-item-date"]}>

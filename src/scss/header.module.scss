@@ -10,13 +10,27 @@
   width: 100%;
   padding: 0 10px;
   box-shadow: $grey-color 0px 2px 8px;
-
+  @include desktop {
+    padding: 0 15px;
+    justify-content: left;
+  }
+  & a {
+    img {
+      display: block;
+      // max-width: 100%;
+      // height: auto;
+    }
+  }
   &-menu-btn {
     background: none;
     border: none;
     outline: none;
     padding: 0;
     cursor: pointer;
+    font-family: inherit;
+    & svg {
+      display: block;
+    }
     &:hover {
       scale: 1.2;
     }
@@ -26,21 +40,53 @@
   }
 
   &-profile-btn {
-    width: 36px;
-    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: $accent-color;
-    border: 1px solid $accent-color;
-    border-radius: 50%;
     text-decoration: none;
     @include desktop {
       margin-left: auto;
     }
   }
-  @include desktop {
-    padding: 0 15px;
-    justify-content: left;
+
+  &-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // gap: 5px;
+    font-size: 12px;
+    font-family: inherit;
+    color: #000;
+    background: none;
+    border: none;
+    outline: none;
+    &--disabled {
+      @extend .header-arrow;
+      color: grey;
+      pointer-events: none;
+    }
+  }
+
+  &-back-btn {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-family: inherit;
+    color: $accent-color;
+    background: none;
+    border: none;
+    outline: none;
+    @include desktop {
+      margin-right: 50px;
+    }
+  }
+  &-btn-wrapper {
+    display: flex;
+    gap: 10px;
+    @include desktop {
+      margin-left: auto;
+    }
   }
 }

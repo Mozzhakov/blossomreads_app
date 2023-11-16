@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchStories } from "./stories-operations";
+import { fetchStories, editStory } from "./stories-operations";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
-const handlePendidng = (state) => {
+const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleRejected = (state, action) => {
@@ -16,13 +16,21 @@ const stories = createSlice({
   initialState: { items: [], isLoading: false, error: null },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchStories.pending, handlePendidng)
+      .addCase(fetchStories.pending, handlePending)
       .addCase(fetchStories.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
       })
-      .addCase(fetchStories.rejected, handleRejected);
+      .addCase(fetchStories.rejected, handleRejected)
+
+      .addCase(editStory.pending, handlePending)
+      .addCase(editStory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        // state.items = action.payload;
+      })
+      .addCase(editStory.rejected, handleRejected);
   },
 });
 

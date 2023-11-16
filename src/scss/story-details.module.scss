@@ -1,0 +1,168 @@
+@import "vars";
+@import "mixins";
+// .story-window {
+//   width: 100vw;
+//   height: 100vh;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   z-index: 1;
+// }
+.story-overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  cursor: pointer;
+}
+.story-modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow: scroll;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  padding: 5px;
+  background-color: $white-color;
+  @include desktop {
+    width: 800px;
+    height: 550px;
+    top: 50%;
+    left: 50%;
+    padding: 15px;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+  }
+}
+.story-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.story-top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.story-back-btn {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-family: inherit;
+  color: $accent-color;
+  background: none;
+  border: none;
+  outline: none;
+  &--disabled {
+    @extend .story-back-btn;
+    color: rgba(16, 16, 16, 0.3);
+    pointer-events: none;
+  }
+}
+.story-nav-btn-wrap {
+  display: flex;
+  gap: 10px;
+}
+.story-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // gap: 5px;
+  font-size: 12px;
+  font-family: inherit;
+  color: #000;
+  background: none;
+  border: none;
+  outline: none;
+  &--disabled {
+    @extend .story-nav-btn;
+    color: rgba(16, 16, 16, 0.3);
+    pointer-events: none;
+  }
+}
+.story-title {
+  text-align: center;
+  color: $black-color;
+}
+.story-text {
+  font-size: 14px;
+}
+.story-textarea {
+  position: fixed;
+  left: auto;
+  right: auto;
+  bottom: 60px;
+  width: calc(100% - 10px);
+  height: calc(100% - 144px);
+  font-size: 14px;
+  font-family: inherit;
+  color: $black-color;
+  background-color: $white-color;
+  border: none;
+  outline: none;
+  @include desktop {
+    bottom: 70px;
+    width: calc(100% - 30px);
+    height: calc(100% - 164.73px);
+  }
+}
+.story-bottom-panel {
+  position: fixed;
+  left: 5px;
+  bottom: 5px;
+  width: calc(100% - 10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid $grey-color;
+  background-color: $white-color;
+  z-index: 5;
+
+  @include desktop {
+    left: 15px;
+    bottom: 15px;
+    width: calc(100% - 30px);
+  }
+}
+.story-btn-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.story-btn {
+  height: 25.81px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 12px;
+  font-family: inherit;
+  border: 1px solid $grey-color;
+  border-radius: 5px;
+  padding: 2px 5px;
+  background: none;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid $accent-color;
+  }
+}
+
+.story-edit-btn {
+  @extend .story-btn;
+  background-color: $white-color;
+  @include desktop {
+    position: fixed;
+    left: auto;
+    right: auto;
+    bottom: 15px;
+    z-index: 5;
+  }
+}

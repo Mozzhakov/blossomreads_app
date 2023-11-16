@@ -1,11 +1,12 @@
+@import "vars";
+
 .btn_primary {
   width: fit-content;
-  /* height: 40px; */
-  padding: 7px 15px;
-  margin: 0 0 0 auto;
+  padding: 5px 20px;
+  margin: 0;
 
   outline: none;
-  color: #fff;
+  color: $white-color;
   border: 1px solid $accent-color;
   border-radius: 5px;
   background-color: $accent-color;

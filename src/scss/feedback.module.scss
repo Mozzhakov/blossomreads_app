@@ -1,0 +1,58 @@
+@import "vars";
+@import "buttons";
+@import "mixins";
+.feedback-page {
+  padding: 30px 10px;
+  @include desktop {
+    padding: 30px 15px;
+  }
+  &-title {
+    margin-bottom: 30px;
+    text-align: center;
+    color: $black-color;
+    @include desktop {
+      text-align: left;
+    }
+  }
+}
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 300px;
+  padding: 30px 10px;
+  margin: 0 auto;
+  border: 1px solid $grey-color;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  @include desktop {
+    margin: 0;
+  }
+  &-legend {
+    color: $black-color;
+    font-weight: 500;
+  }
+  &-label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+    font-size: 14px;
+    color: $black-color;
+  }
+  &-input {
+    height: 25px;
+    border: 1px solid $grey-color;
+    border-radius: 3px;
+    background-color: $white-color;
+    &--area {
+      @extend .feedback-form-input;
+      height: 65px;
+    }
+    &--radio {
+      display: none;
+    }
+  }
+}

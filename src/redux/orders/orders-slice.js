@@ -3,7 +3,7 @@ import { fetchOrders } from "./orders-operations";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
-const handlePendidng = (state) => {
+const handlePending = (state) => {
   state.isLoading = true;
 };
 const handleRejected = (state, action) => {
@@ -16,7 +16,7 @@ const orders = createSlice({
   initialState: { items: [], isLoading: false, error: null },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOrders.pending, handlePendidng)
+      .addCase(fetchOrders.pending, handlePending)
       .addCase(fetchOrders.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
