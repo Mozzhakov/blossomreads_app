@@ -4,8 +4,18 @@ import styles from "../styles/loginForm.module.css";
 
 function LoginForm({ handleLogin, email, setEmail }) {
   return (
-    <>
-      <h1>Please provide your email to get access to your profile.</h1>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "50px",
+      }}
+    >
+      <h1 style={{ textAlign: "center" }}>
+        Please provide your email to get access to your profile.
+      </h1>
       <form onSubmit={handleLogin} className={styles.form}>
         <h2 className={styles.formTitle}>LOGIN</h2>
         <label htmlFor="email" className={styles.formLabel}>
@@ -25,7 +35,7 @@ function LoginForm({ handleLogin, email, setEmail }) {
           LOGIN
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

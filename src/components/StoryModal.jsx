@@ -13,7 +13,6 @@ import {
   EditIcon,
   BackIcon,
 } from "@/components/Icons";
-// import style from "../scss/header.module.scss";
 import styles from "../scss/story-details.module.scss";
 
 export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {

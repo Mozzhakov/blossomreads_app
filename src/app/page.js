@@ -18,7 +18,7 @@ export default function Home() {
 
   const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
-  console.log(user);
+
   useEffect(() => {
     dispatch(refreshUser(auth.currentUser));
   }, [dispatch]);
@@ -40,7 +40,10 @@ export default function Home() {
   return (
     <main className={styles.main}>
       {user ? (
-        <Hero />
+        <>
+          <Hero />
+          {orders && !loading && <OrdersList orders={orders} />}
+        </>
       ) : loading ? (
         <h2>Loading...</h2>
       ) : (
@@ -50,9 +53,9 @@ export default function Home() {
           setEmail={setEmail}
         />
       )}
-      {orders && !loading && <OrdersList orders={orders} />}
-      {/* <AutoSave /> */}
+
       {error && <p>{error}</p>}
+      {/* <LoginForm handleLogin={handleSignIn} email={email} setEmail={setEmail} /> */}
     </main>
   );
 }
