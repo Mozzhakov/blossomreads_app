@@ -32,7 +32,7 @@ export default function Hero() {
           </p>
           <div className={styles["hero-btn-wrapper"]}>
             <Link
-              href={`/orders/${earliestOrder.order_id}`}
+              href={orders ? `/orders/${earliestOrder.order_id}` : "/"}
               className={styles["hero-btn-primary"]}
             >
               <Image
