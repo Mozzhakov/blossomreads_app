@@ -32,6 +32,7 @@ function Home() {
   const orders = useSelector(getOrders);
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
+
   useEffect(() => {
     if (isOrderError) {
       showFailure(errorMessage);
@@ -41,14 +42,14 @@ function Home() {
   return (
     <PrivateRoute>
       <main>
-        <>
-          <Hero />
-          {orders && !loading && (
+        {orders && !loading && (
+          <>
+            <Hero orders={orders} />
             <Suspense fallback={<p>Loading orders...</p>}>
               <OrdersList orders={orders} />
             </Suspense>
-          )}
-        </>
+          </>
+        )}
         {error && <p>{error}</p>}
       </main>
     </PrivateRoute>

@@ -14,6 +14,8 @@ function Profile() {
 
   const onLogoutClick = () => {
     dispatch(logOut({ auth }));
+    localStorage.removeItem("persist:orders");
+    localStorage.removeItem("persist:stories");
   };
 
   return (

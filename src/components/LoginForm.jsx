@@ -50,7 +50,9 @@ function LoginForm({ handleLogin, email, setEmail }) {
         <form onSubmit={handleLogin} className={styles["form"]}>
           <div style={{ textAlign: "center" }}>
             <h2 className={styles["form-title"]}>Welcome</h2>
-            <p>Login to your profile using email</p>
+            <p className={styles["form-subtitle"]}>
+              Login to your profile using email
+            </p>
           </div>
           <div className={styles["form-input-wrapper"]}>
             <input

@@ -7,16 +7,20 @@ import styles from "../scss/hero.module.scss";
 import { useSelector } from "react-redux";
 import { getOrders } from "@/redux/orders/orders-selectors";
 
-export default function Hero() {
+export default function Hero({ orders }) {
   function convertDate(date) {
     return new Date(date).getTime();
   }
-  const orders = useSelector(getOrders);
+  // const orders = useSelector(getOrders);
+  // console.log(orders);
+  console.log(orders);
   const paidOrders = orders.filter((el) => el.status === "paid");
   const sortedOrders = paidOrders.sort(
     (a, b) => convertDate(a.created_at) - convertDate(b.created_at)
   );
   const earliestOrder = sortedOrders[sortedOrders.length - 1];
+
+  console.log(earliestOrder);
   return (
     <>
       <section className={styles["hero-section"]}>
@@ -31,17 +35,28 @@ export default function Hero() {
             the enchanting adventure you create together.
           </p>
           <div className={styles["hero-btn-wrapper"]}>
-            <Link
-              href={orders ? `/orders/${earliestOrder.order_id}` : "/"}
-              className={styles["hero-btn-primary"]}
-            >
-              <Image
-                src={review}
-                alt="Review icon"
-                className={styles["hero-btn-image"]}
-              />
-              Start reviewing
-            </Link>
+            {orders ? (
+              <Link
+                href={earliestOrder ? `/orders/${earliestOrder.order_id}` : "/"}
+                className={styles["hero-btn-primary"]}
+              >
+                <Image
+                  src={review}
+                  alt="Review icon"
+                  className={styles["hero-btn-image"]}
+                />
+                Start reviewing
+              </Link>
+            ) : (
+              <Link href={"/"} className={styles["hero-btn-primary"]}>
+                <Image
+                  src={review}
+                  alt="Review icon"
+                  className={styles["hero-btn-image"]}
+                />
+                Start reviewing
+              </Link>
+            )}
             {/* <Link href="/" className={styles["hero-btn-secondary"]}>
               <Image
                 src={info}
