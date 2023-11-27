@@ -52,8 +52,11 @@
       font-size: 13px;
       background-color: #fff;
       font-family: inherit;
-      &:hover {
+      &:nth-child(3n):hover {
         border: 1px solid $accent-color;
+        cursor: pointer;
+      }
+      &:hover {
       }
     }
     &-image-wrap {

@@ -1,7 +1,7 @@
 "use client";
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
-import isAuth from "@/auth/withAuth";
+// import isAuth from "@/auth/withAuth";
 import styles from "../../scss/feedback.module.scss";
 import PrivateRoute from "@/components/PrivateRoute";
 
@@ -101,4 +101,4 @@ function SendFeedback() {
   );
 }
 
-export default isAuth(SendFeedback);
+export default SendFeedback;
