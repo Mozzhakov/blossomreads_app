@@ -1,3 +1,6 @@
+@import "container";
+@import "vars";
+@import "mixins";
 .profile {
   padding: 20px 10px;
   display: flex;
@@ -9,33 +12,55 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 2px solid #f0623d;
+    text-align: center;
+    border-bottom: 2px solid $accent-color;
     padding: 10px;
     width: fit-content;
+    margin-bottom: 20px;
   }
-  &-content-box {
+  &-content {
+    width: 300px;
     display: flex;
-    justify-content: center;
-    align-items: start;
     flex-direction: column;
-    width: 100%;
-    gap: 15px;
-  }
-  &-content-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    font-size: 13px;
-  }
-  &-content-image-wrap {
-    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    // font-size: 13px;
+    @include desktop {
+      width: 500px;
+    }
+    &-box {
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      flex-direction: column;
+      width: 100%;
+      gap: 15px;
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+    &-title {
+      // margin-bottom: 15px;
+    }
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid $grey-color;
+      border-radius: 5px;
+      padding: 10px;
+      width: 100%;
+      font-size: 13px;
+      background-color: #fff;
+      font-family: inherit;
+      &:hover {
+        border: 1px solid $accent-color;
+      }
+    }
+    &-image-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
   }
 }

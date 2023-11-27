@@ -17,13 +17,6 @@ export const Sidebar = ({ onClose, open }) => {
         </Link>
         <nav className={styles["sidebar-menu-nav"]}>
           <Link
-            href="/terms-and-policy"
-            className={styles["sidebar-menu-nav-link"]}
-            onClick={onClose}
-          >
-            Terms & Policy
-          </Link>
-          <Link
             href="/help"
             className={styles["sidebar-menu-nav-link"]}
             onClick={onClose}
@@ -38,11 +31,11 @@ export const Sidebar = ({ onClose, open }) => {
             Send feedback
           </Link>
           <Link
-            href="/about"
+            href="/terms-and-policy"
             className={styles["sidebar-menu-nav-link"]}
             onClick={onClose}
           >
-            About Stastiem
+            Terms & Policy
           </Link>
         </nav>
       </div>

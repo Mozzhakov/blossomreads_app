@@ -124,7 +124,7 @@ export const StoryEditingModal = ({
             className={styles["story-btn"]}
           >
             <UndoIcon
-              color={canUndo ? "#f0623d" : "rgba(16, 16, 16, 0.3)"}
+              color={canUndo ? "#3b444b" : "rgba(16, 16, 16, 0.3)"}
               size={20}
             />
             Undo
@@ -135,7 +135,7 @@ export const StoryEditingModal = ({
             className={styles["story-btn"]}
           >
             <RedoIcon
-              color={canRedo ? "#f0623d" : "rgba(16, 16, 16, 0.3)"}
+              color={canRedo ? "#3b444b" : "rgba(16, 16, 16, 0.3)"}
               size={20}
             />
             Redo

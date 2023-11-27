@@ -1,0 +1,110 @@
+@import "vars";
+@import "mixins";
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  padding: 50px 5px;
+  &-title {
+    font-weight: 600;
+    color: #3b444b;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: calc(100% - 20px);
+  max-width: 350px;
+  padding: 30px 15px;
+  border-radius: 10px;
+  font-family: inherit;
+  @include desktop {
+    gap: 40px;
+  }
+}
+
+.form-title {
+  font-weight: 600;
+  color: #3b444b;
+  margin: 0 0 10px 0;
+  @include desktop {
+    font-size: 30px;
+    margin: 0 auto 10px auto;
+  }
+}
+
+.form-input-wrapper {
+  position: relative;
+  width: 90%;
+}
+
+.form-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #3b444b;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 13px;
+  color: #3b444b;
+  border: none;
+  border-bottom: 1px solid $grey-color;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+}
+
+.form-image {
+  display: none;
+  @include desktop {
+    display: block;
+    border-radius: 0 10px 10px 0;
+  }
+}
+
+.form-btn {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 8px;
+  margin: 0;
+  outline: none;
+  border-radius: 5px;
+
+  border: 1px solid $accent-color;
+  color: $white-color;
+  background-color: #f0623d;
+
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 400;
+}
+
+.form-btn:hover {
+  border: 1px solid $accent-color;
+  transform: scale(1.05);
+}
+
+.form-input:focus ~ .form-label,
+.form-input:valid ~ .form-label {
+  top: -22px;
+  left: 0;
+  color: $accent-color;
+  font-size: 12px;
+}

@@ -34,39 +34,50 @@ export default function StoryListComponent({ stories, params }) {
 
   return (
     <>
-      <ol className={styles["story-list"]}>
-        {stories.map((story) => (
-          <li
-            key={story.story_number}
-            className={styles["story-item"]}
-            onClick={() => {
-              setCurrStory(story.story_number);
-              setModalOpen(true);
-            }}
-          >
-            <Image
-              src={cover}
-              alt="Story cover"
-              width={280}
-              className={styles["story-item-image"]}
-              priority={false}
-            />
-            <div className={styles["story-item-content"]}>
-              <p className={styles["story-item-title"]}>
-                {story.story_number}. {story.story_title}
-              </p>
-              <p className={styles["story-item-text"]}>
-                {truncatedString(
-                  story.story_text,
-                  500,
-                  <span className={styles["story-item-btn"]}>more</span>
+      {stories && (
+        <ol className={styles["story-list"]}>
+          {stories.map((story) => (
+            <li
+              key={story.story_number}
+              className={styles["story-item"]}
+              onClick={() => {
+                setCurrStory(story.story_number);
+                setModalOpen(true);
+              }}
+            >
+              <Image
+                src={cover}
+                alt="Story cover"
+                width={280}
+                className={styles["story-item-image"]}
+                priority={false}
+              />
+              <div className={styles["story-item-content"]}>
+                <p className={styles["story-item-title"]}>
+                  {story.story_number}. {story.story_title}
+                </p>
+                {window.innerWidth > 768 ? (
+                  <p className={styles["story-item-text"]}>
+                    {truncatedString(
+                      story.story_text,
+                      600,
+                      <span className={styles["story-item-btn"]}>more</span>
+                    )}
+                  </p>
+                ) : (
+                  <p className={styles["story-item-text"]}>
+                    {truncatedString(
+                      story.story_text,
+                      300,
+                      <span className={styles["story-item-btn"]}>more</span>
+                    )}
+                  </p>
                 )}
-              </p>
-            </div>
-            {/* </div> */}
-          </li>
-        ))}
-      </ol>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
       {modalOpen && (
         <Portal>
           <StoryModal

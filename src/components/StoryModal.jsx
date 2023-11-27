@@ -2,7 +2,8 @@ import React from "react";
 import { auth } from "@/firebase/Firebase";
 import { BackBtn } from "./BackBtn";
 import { fetchStories } from "@/redux/stories/stories-operations";
-import { getStories } from "@/redux/selectors";
+// import { getStories } from "@/redux/selectors";
+import { getStories } from "@/redux/stories/stories-selectors";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,7 +62,7 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
             onClick={onClose}
           >
             <BackIcon
-              color={editingMode ? "rgba(16, 16, 16, 0.3)" : "#F0623d"}
+              color={editingMode ? "rgba(16, 16, 16, 0.3)" : "#3b444b"}
               size={25}
             />
             back
@@ -78,7 +79,7 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
               <LeftArrowIcon
                 color={
                   currentStory.story_number > 1 && !editingMode
-                    ? "#f0623d"
+                    ? "#3b444b"
                     : "rgba(16, 16, 16, 0.3)"
                 }
                 size={22}
@@ -96,7 +97,7 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
               <RightArrowIcon
                 color={
                   currentStory.story_number < 6 && !editingMode
-                    ? "#f0623d"
+                    ? "#3b444b"
                     : "rgba(16, 16, 16, 0.3)"
                 }
                 size={22}
@@ -124,7 +125,7 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
                 className={styles["story-edit-btn"]}
                 onClick={() => setEditionMode(true)}
               >
-                <EditIcon color={"#f0623d"} size={20} />
+                <EditIcon color={"#3b444b"} size={20} />
                 Edit
               </button>
             </>

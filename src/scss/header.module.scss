@@ -1,24 +1,27 @@
 @import "vars";
 @import "mixins";
+@import "container";
+.header-wrap {
+  box-shadow: $grey-color 0px 2px 8px;
+  position: sticky;
+  position: 0;
+}
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid $grey-color;
   height: 60px;
   width: 100%;
   padding: 0 10px;
-  box-shadow: $grey-color 0px 2px 8px;
   @include desktop {
-    padding: 0 15px;
+    padding: 0 25px;
+    height: 65px;
     justify-content: left;
   }
   & a {
     img {
       display: block;
-      // max-width: 100%;
-      // height: auto;
     }
   }
   &-menu-btn {
@@ -31,8 +34,9 @@
     & svg {
       display: block;
     }
-    &:hover {
-      scale: 1.2;
+    &:hover path {
+      fill: $accent-color;
+      stroke: $accent-color;
     }
     @include desktop {
       margin-right: 50px;
@@ -45,6 +49,9 @@
     justify-content: center;
     color: $accent-color;
     text-decoration: none;
+    &:hover path {
+      stroke: $accent-color;
+    }
     @include desktop {
       margin-left: auto;
     }
@@ -74,10 +81,16 @@
     align-items: center;
     font-size: 13px;
     font-family: inherit;
-    color: $accent-color;
+    color: #3b444b;
     background: none;
     border: none;
     outline: none;
+    &:hover {
+      color: $accent-color;
+    }
+    &:hover path {
+      stroke: $accent-color;
+    }
     @include desktop {
       margin-right: 50px;
     }

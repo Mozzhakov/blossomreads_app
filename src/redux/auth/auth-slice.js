@@ -1,33 +1,56 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logIn, refreshUser } from "./auth-operations";
+import { logIn, logOut, refreshUser } from "./auth-operations";
 import { auth } from "@/firebase/Firebase";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
 
 const authorization = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    loading: false,
-    error: null,
+    isLoading: false,
+    isLoggedIn: false,
+    isError: false,
+    error: "",
   },
   extraReducers: (builder) => {
     builder
       .addCase(logIn.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.isLoggedIn = false;
+        state.isError = false;
       })
       .addCase(logIn.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isLoggedIn = true;
         state.user = action.payload;
       })
       .addCase(logIn.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+        state.isLoggedIn = false;
+        state.isError = true;
+        state.error =
+          "Wrong email or login link. Please log in using the link in the email we sent.";
       })
-      .addCase(refreshUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = auth.currentUser;
+      .addCase(logOut.pending, (state) => {
+        state.isLoggedIn = false;
+        state.isError = false;
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.isLoggedIn = false;
+        state.user = null;
+      })
+      .addCase(logOut.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.isError = true;
+        state.error = "Something went wrong";
       });
   },
 });
-// export default authorization.reducer;
+
+// const persistConfig = {
+//   key: "isLoggedIn",
+//   storage,
+//   whitelist: ["isLoggedIn"],
+// };
+
 export const authReducer = authorization.reducer;
+
+// export const authReducer = persistReducer(persistConfig, authorization.reducer);

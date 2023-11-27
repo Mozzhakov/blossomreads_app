@@ -3,18 +3,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { auth } from "@/firebase/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchStories } from "@/redux/stories/stories-operations";
-import { getOrders, getStories, getUser } from "@/redux/selectors";
-
+import { getOrders } from "@/redux/orders/orders-selectors";
+import {
+  getStories,
+  getIsStoryError,
+  getStoryError,
+} from "@/redux/stories/stories-selectors";
+import { Suspense } from "react";
+import { useNotify } from "@/hooks/useNotify";
 import StoryListComponent from "@/components/StoryList";
 import styles from "../../../scss/story-list.module.scss";
+import PrivateRoute from "@/components/PrivateRoute";
 
-export default function StoryPage({ params }) {
-  const dispatch = useDispatch();
+function StoryPage({ params }) {
+  const { showFailure } = useNotify();
   const [user] = useAuthState(auth);
-
+  const dispatch = useDispatch();
   const orders = useSelector(getOrders);
   const currentOrder = orders.find((el) => el.order_id === Number(params.id));
 
@@ -25,16 +32,36 @@ export default function StoryPage({ params }) {
   }, [user, dispatch, params]);
 
   const stories = useSelector(getStories);
+  const isStoryError = useSelector(getIsStoryError);
+  const storyErrorMessage = useSelector(getStoryError);
+
+  useEffect(() => {
+    if (isStoryError) {
+      showFailure(storyErrorMessage);
+    }
+  }, [isStoryError, showFailure, storyErrorMessage]);
 
   return (
-    <section className={styles["story-list-section"]}>
-      <h1 className={styles["story-list-title"]}>
-        <span className={styles["story-list-title-part"]}>
-          {currentOrder.hero_name}
-        </span>{" "}
-        stories
-      </h1>
-      {stories && <StoryListComponent stories={stories} params={params} />}
-    </section>
+    <PrivateRoute>
+      <section className={styles["story-list-section"]}>
+        {currentOrder ? (
+          <>
+            <h1 className={styles["story-list-title"]}>
+              <span className={styles["story-list-title-part"]}>
+                {currentOrder.hero_name}
+              </span>{" "}
+              stories
+            </h1>
+            <Suspense fallback={<p>Loading stories...</p>}>
+              <StoryListComponent stories={stories} params={params} />
+            </Suspense>
+          </>
+        ) : (
+          <p>There is no order with id {params.id} </p>
+        )}
+      </section>
+    </PrivateRoute>
   );
 }
+
+export default StoryPage;

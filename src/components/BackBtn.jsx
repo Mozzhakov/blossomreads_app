@@ -5,7 +5,7 @@ import styles from "../scss/header.module.scss";
 export const BackLink = ({ path = "#" }) => {
   return (
     <Link href={path} className={styles["header-back-btn"]}>
-      <BackIcon color={"#F0623d"} size={25} />
+      <BackIcon color={"#3b444b"} size={25} />
       back
     </Link>
   );

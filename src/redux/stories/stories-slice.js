@@ -5,15 +5,18 @@ import { persistReducer } from "redux-persist";
 
 const handlePending = (state) => {
   state.isLoading = true;
+  state.isError = false;
 };
 const handleRejected = (state, action) => {
   state.isLoading = false;
-  state.error = action.payload;
+  state.isError = true;
+  state.error =
+    "The error occurred during fetching the stories. Please reload the page.";
 };
 
 const stories = createSlice({
   name: "stories",
-  initialState: { items: [], isLoading: false, error: null },
+  initialState: { items: [], isLoading: false, isError: false, error: "" },
   extraReducers: (builder) => {
     builder
       .addCase(fetchStories.pending, handlePending)
@@ -30,7 +33,12 @@ const stories = createSlice({
         state.error = null;
         // state.items = action.payload;
       })
-      .addCase(editStory.rejected, handleRejected);
+      .addCase(editStory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error =
+          "The error occurred during editing the story. Please try again.";
+      });
   },
 });
 

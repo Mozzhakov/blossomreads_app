@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { signInWithEmailLink } from "firebase/auth";
+import { signInWithEmailLink, signOut, getAuth } from "firebase/auth";
+// import { auth } from "@/firebase/Firebase";
 
 export const logIn = createAsyncThunk(
   "auth/login",
@@ -13,14 +14,27 @@ export const logIn = createAsyncThunk(
   }
 );
 
-export const refreshUser = createAsyncThunk(
-  "auth/refreshUser",
-  async (user, { rejectWithValue }) => {
+// export const refreshUser = createAsyncThunk(
+//   "auth/refreshUser",
+//   (_, { rejectWithValue }) => {
+//     try {
+//       const response = getAuth(auth);
+//       // console.log(response);
+//       // return response.currentUser;
+//     } catch (error) {
+//       rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+export const logOut = createAsyncThunk(
+  "auth/logout",
+  async ({ auth }, { rejectWithValue }) => {
     try {
-      const response = user;
+      const response = await signOut(auth);
       return response;
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );

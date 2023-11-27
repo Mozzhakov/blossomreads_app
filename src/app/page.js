@@ -1,33 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { auth } from "@/firebase/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
-import { logIn, refreshUser } from "@/redux/auth/auth-operations";
 import { fetchOrders } from "@/redux/orders/orders-operations";
 import { useSelector } from "react-redux";
-import { getOrders } from "@/redux/selectors";
+import { Suspense } from "react";
+import { useNotify } from "@/hooks/useNotify";
+import {
+  getOrders,
+  getIsOrderError,
+  getOrderError,
+} from "@/redux/orders/orders-selectors";
 import Hero from "@/components/Hero";
-import LoginForm from "@/components/LoginForm";
 import OrdersList from "@/components/OrdersList";
-import styles from "../styles/page.module.css";
 
-export default function Home() {
+import PrivateRoute from "@/components/PrivateRoute";
+
+function Home() {
+  const { showFailure } = useNotify();
   const dispatch = useDispatch();
-
   const [user, loading, error] = useAuthState(auth);
-  const [email, setEmail] = useState("");
-
-  useEffect(() => {
-    dispatch(refreshUser(auth.currentUser));
-  }, [dispatch]);
-
-  async function handleSignIn(e) {
-    e.preventDefault();
-    const emailLink = window.location.href;
-    dispatch(logIn({ auth, email, emailLink }));
-  }
 
   useEffect(() => {
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
@@ -36,26 +30,29 @@ export default function Home() {
   }, [user, dispatch]);
 
   const orders = useSelector(getOrders);
+  const isOrderError = useSelector(getIsOrderError);
+  const errorMessage = useSelector(getOrderError);
+  useEffect(() => {
+    if (isOrderError) {
+      showFailure(errorMessage);
+    }
+  }, [errorMessage, isOrderError, showFailure]);
 
   return (
-    <main className={styles.main}>
-      {user ? (
+    <PrivateRoute>
+      <main>
         <>
           <Hero />
-          {orders && !loading && <OrdersList orders={orders} />}
+          {orders && !loading && (
+            <Suspense fallback={<p>Loading orders...</p>}>
+              <OrdersList orders={orders} />
+            </Suspense>
+          )}
         </>
-      ) : loading ? (
-        <h2>Loading...</h2>
-      ) : (
-        <LoginForm
-          handleLogin={handleSignIn}
-          email={email}
-          setEmail={setEmail}
-        />
-      )}
-
-      {error && <p>{error}</p>}
-      {/* <LoginForm handleLogin={handleSignIn} email={email} setEmail={setEmail} /> */}
-    </main>
+        {error && <p>{error}</p>}
+      </main>
+    </PrivateRoute>
   );
 }
+
+export default Home;

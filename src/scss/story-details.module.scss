@@ -1,13 +1,6 @@
 @import "vars";
 @import "mixins";
-// .story-window {
-//   width: 100vw;
-//   height: 100vh;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   z-index: 1;
-// }
+
 .story-overlay {
   width: 100vw;
   height: 100vh;
@@ -30,7 +23,7 @@
   background-color: $white-color;
   @include desktop {
     width: 800px;
-    height: 550px;
+    height: 600px;
     top: 50%;
     left: 50%;
     padding: 15px;
@@ -54,10 +47,18 @@
   align-items: center;
   font-size: 13px;
   font-family: inherit;
-  color: $accent-color;
+  color: $second-black-color;
   background: none;
   border: none;
   outline: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $accent-color;
+    & path {
+      stroke: $accent-color;
+    }
+  }
   &--disabled {
     @extend .story-back-btn;
     color: rgba(16, 16, 16, 0.3);
@@ -74,12 +75,16 @@
   align-items: center;
   justify-content: center;
   // gap: 5px;
-  font-size: 12px;
+  font-size: 13px;
   font-family: inherit;
-  color: #000;
+  color: $second-black-color;
   background: none;
   border: none;
   outline: none;
+  cursor: pointer;
+  &:hover path {
+    stroke: $accent-color;
+  }
   &--disabled {
     @extend .story-nav-btn;
     color: rgba(16, 16, 16, 0.3);
@@ -88,7 +93,7 @@
 }
 .story-title {
   text-align: center;
-  color: $black-color;
+  color: $second-black-color;
 }
 .story-text {
   font-size: 14px;
@@ -102,7 +107,7 @@
   height: calc(100% - 144px);
   font-size: 14px;
   font-family: inherit;
-  color: $black-color;
+  color: $second-black-color;
   background-color: $white-color;
   border: none;
   outline: none;
@@ -158,6 +163,9 @@
 .story-edit-btn {
   @extend .story-btn;
   background-color: $white-color;
+  &:hover path {
+    stroke: $accent-color;
+  }
   @include desktop {
     position: fixed;
     left: auto;

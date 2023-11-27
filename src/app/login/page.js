@@ -1,23 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/firebase/Firebase";
 import LoginForm from "@/components/LoginForm";
-import styles from "../../styles/page.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "@/redux/auth/auth-operations";
+import { useLayoutEffect } from "react";
+import { redirect, useRouter } from "next/navigation";
+import PublicRoute from "@/components/PublicRoute";
 
-export default function Login() {
+function Login() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const router = useRouter();
 
-  function handleSignIn(e) {
+  async function handleSignIn(e) {
     e.preventDefault();
     const emailLink = window.location.href;
-    signInWithEmailLink(auth, email, emailLink)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    dispatch(logIn({ auth, email, emailLink }));
   }
 
-  return <div className={styles.main}></div>;
+  return (
+    <PublicRoute>
+      <LoginForm handleLogin={handleSignIn} email={email} setEmail={setEmail} />
+    </PublicRoute>
+  );
 }
+
+export default Login;

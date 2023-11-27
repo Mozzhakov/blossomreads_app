@@ -1,19 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchOrders } from "./orders-operations";
-import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const handlePending = (state) => {
   state.isLoading = true;
+  state.isError = false;
 };
 const handleRejected = (state, action) => {
   state.isLoading = false;
-  state.error = action.payload;
+  state.isError = true;
+  state.error =
+    "The error occurred during fetching the orders. Please reload the page.";
 };
 
 const orders = createSlice({
   name: "orders",
-  initialState: { items: [], isLoading: false, error: null },
+  initialState: { items: [], isLoading: false, isError: null, error: "" },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOrders.pending, handlePending)
