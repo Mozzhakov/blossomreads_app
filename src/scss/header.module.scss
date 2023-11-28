@@ -2,7 +2,8 @@
 @import "mixins";
 @import "container";
 .header-wrap {
-  box-shadow: $grey-color 0px 2px 8px;
+  // box-shadow: $grey-color 0px 2px 8px;
+  border-bottom: 1px solid $grey-color;
   position: sticky;
   position: 0;
 }
@@ -11,11 +12,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
+  height: 55px;
   width: 100%;
-  padding: 0 10px;
+  padding: 0 2px;
   @include desktop {
-    padding: 0 25px;
+    padding: 0 12px;
     height: 65px;
     justify-content: left;
   }
@@ -27,16 +28,20 @@
   &-menu-btn {
     background: none;
     border: none;
+    border-radius: 50%;
     outline: none;
-    padding: 0;
+    padding: 8px;
     cursor: pointer;
     font-family: inherit;
     & svg {
       display: block;
     }
-    &:hover path {
-      fill: $accent-color;
-      stroke: $accent-color;
+    &:hover {
+      background-color: rgba(60, 64, 67, 0.08);
+      path {
+        fill: $accent-color;
+        stroke: $accent-color;
+      }
     }
     @include desktop {
       margin-right: 50px;
@@ -49,8 +54,17 @@
     justify-content: center;
     color: $accent-color;
     text-decoration: none;
-    &:hover path {
-      stroke: $accent-color;
+    padding: 8px;
+    border-radius: 50%;
+    &--hidden {
+      @extend .header-profile-btn;
+      visibility: hidden;
+    }
+    &:hover {
+      background-color: rgba(60, 64, 67, 0.08);
+      path {
+        stroke: $accent-color;
+      }
     }
     @include desktop {
       margin-left: auto;

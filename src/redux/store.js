@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/auth-slice";
 import { ordersReducer } from "./orders/orders-slice";
 import { storiesReducer } from "./stories/stories-slice";
+import { userReducer } from "./user/user-slice";
 import { persistStore } from "redux-persist";
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     auth: authReducer,
     orders: ordersReducer,
     stories: storiesReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,27 +1,37 @@
 "use client";
-import { useState, useEffect } from "react";
-import { auth } from "@/firebase/Firebase";
+import { useState } from "react";
+import { auth, actionCodeSettings } from "@/firebase/Firebase";
 import LoginForm from "@/components/LoginForm";
-import { useDispatch, useSelector } from "react-redux";
-import { logIn } from "@/redux/auth/auth-operations";
-import { useLayoutEffect } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { logIn, sendLink } from "@/redux/auth/auth-operations";
+// import { useLayoutEffect } from "react";
+// import { redirect, useRouter } from "next/navigation";
 import PublicRoute from "@/components/PublicRoute";
 
 function Login() {
-  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const router = useRouter();
+  const dispatch = useDispatch();
+  const params = new URL(document.location).searchParams;
+  const paramsArr = Array.from(params.entries());
+  const paramsSize = paramsArr.length;
 
   async function handleSignIn(e) {
     e.preventDefault();
     const emailLink = window.location.href;
     dispatch(logIn({ auth, email, emailLink }));
   }
+  async function handleSendLink(e) {
+    e.preventDefault();
+    dispatch(sendLink({ auth, email, actionCodeSettings }));
+  }
 
   return (
     <PublicRoute>
-      <LoginForm handleLogin={handleSignIn} email={email} setEmail={setEmail} />
+      <LoginForm
+        handleLogin={paramsSize === 4 ? handleSignIn : handleSendLink}
+        email={email}
+        setEmail={setEmail}
+      />
     </PublicRoute>
   );
 }

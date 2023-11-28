@@ -10,7 +10,6 @@
 }
 .order-list-title {
   margin-bottom: 30px;
-  // color: $black-color;
   font-size: 25px;
   font-weight: 500;
 }
@@ -33,6 +32,7 @@
   height: auto;
   border: 1px solid transparent;
   border-radius: 5px;
+  z-index: 0;
   &:hover {
     border-color: $accent-color;
   }
@@ -54,4 +54,5 @@
   color: $second-black-color;
   background-color: $grey-color;
   border-radius: 0 0 5px 5px;
+  // z-index: 0;
 }

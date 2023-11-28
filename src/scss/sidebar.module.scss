@@ -2,47 +2,69 @@
 @import "mixins";
 
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 1;
+  transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
+  &--closed {
+    @extend .sidebar;
+    left: -100vw;
+  }
   &-overlay {
+    position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.4);
     cursor: pointer;
     z-index: 2;
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    &--closed {
+      @extend .sidebar-overlay;
+      left: -100vw;
+    }
   }
   &-menu {
-    width: 60vw;
+    width: 250px;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: $white-color;
-    padding: 10px;
     z-index: 3;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.28);
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
+    &--closed {
+      @extend .sidebar-menu;
+      left: -260px;
+      @include desktop {
+        left: -310px;
+      }
+    }
     @include desktop {
-      width: 30vw;
-      padding: 20px;
+      width: 300px;
     }
     &-logo {
       display: block;
       margin-bottom: 40px;
+      padding-top: 20px;
+      padding-left: 20px;
     }
     &-nav {
       display: flex;
       flex-direction: column;
-      gap: 25px;
-      margin-left: 25px;
       @include desktop {
-        gap: 30px;
       }
       &-link {
+        width: 100%;
         display: block;
         color: $black-color;
+        // padding-left: 25px;
+        padding: 15px 0 15px 40px;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
       }
     }
   }

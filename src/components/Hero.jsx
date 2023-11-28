@@ -4,6 +4,7 @@ import Image from "next/image";
 // import info from "../images/info-circle.svg";
 import review from "../images/review.svg";
 import styles from "../scss/hero.module.scss";
+import { ReviewIcon } from "./Icons";
 import { useSelector } from "react-redux";
 import { getOrders } from "@/redux/orders/orders-selectors";
 
@@ -11,16 +12,13 @@ export default function Hero({ orders }) {
   function convertDate(date) {
     return new Date(date).getTime();
   }
-  // const orders = useSelector(getOrders);
-  // console.log(orders);
-  console.log(orders);
+
   const paidOrders = orders.filter((el) => el.status === "paid");
   const sortedOrders = paidOrders.sort(
     (a, b) => convertDate(a.created_at) - convertDate(b.created_at)
   );
   const earliestOrder = sortedOrders[sortedOrders.length - 1];
 
-  console.log(earliestOrder);
   return (
     <>
       <section className={styles["hero-section"]}>
@@ -40,10 +38,10 @@ export default function Hero({ orders }) {
                 href={earliestOrder ? `/orders/${earliestOrder.order_id}` : "/"}
                 className={styles["hero-btn-primary"]}
               >
-                <Image
-                  src={review}
-                  alt="Review icon"
-                  className={styles["hero-btn-image"]}
+                <ReviewIcon
+                  color={"#fff"}
+                  size={20}
+                  style={styles["hero-btn-image"]}
                 />
                 Start reviewing
               </Link>
@@ -53,18 +51,11 @@ export default function Hero({ orders }) {
                   src={review}
                   alt="Review icon"
                   className={styles["hero-btn-image"]}
+                  // style={{ visibility: "hidden" }}
                 />
                 Start reviewing
               </Link>
             )}
-            {/* <Link href="/" className={styles["hero-btn-secondary"]}>
-              <Image
-                src={info}
-                alt="Info icon"
-                className={styles["hero-btn-image"]}
-              />
-              More info
-            </Link> */}
           </div>
         </div>
       </section>

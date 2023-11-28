@@ -1,9 +1,23 @@
 "use client";
 import { auth } from "@/firebase/Firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { EmailIcon, PhoneIcon, LinkArrowIcon } from "@/components/Icons";
-import { useDispatch } from "react-redux";
 import { logOut } from "@/redux/auth/auth-operations";
+import { useEffect } from "react";
+import { fetchUser } from "@/redux/user/user-operations";
+import { useNotify } from "@/hooks/useNotify";
+import { useSelector } from "react-redux";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
+import {
+  getUserInfo,
+  getIsUserError,
+  getUserError,
+} from "@/redux/user/user-selectors";
+import {
+  EmailIcon,
+  PhoneIcon,
+  LinkArrowIcon,
+  UserIcon,
+} from "@/components/Icons";
 import Link from "next/link";
 import styles from "../../scss/profile.module.scss";
 import PrivateRoute from "@/components/PrivateRoute";
@@ -11,6 +25,7 @@ import PrivateRoute from "@/components/PrivateRoute";
 function Profile() {
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
+  const { showFailure } = useNotify();
 
   const onLogoutClick = () => {
     dispatch(logOut({ auth }));
@@ -18,33 +33,67 @@ function Profile() {
     localStorage.removeItem("persist:stories");
   };
 
+  useEffect(() => {
+    if (user && user.stsTokenManager.expirationTime > Date.now()) {
+      dispatch(fetchUser(user.accessToken));
+    }
+  }, [dispatch, user]);
+
+  const userInfo = useSelector(getUserInfo);
+  const isUserError = useSelector(getIsUserError);
+  const errorMessage = useSelector(getUserError);
+
+  useEffect(() => {
+    if (isUserError) {
+      showFailure(errorMessage);
+    }
+  }, [errorMessage, isUserError, showFailure]);
+
+  const formatPhone = (user) => {
+    if (user && user.phone) {
+      if (user.phone.includes("+")) {
+        return user.phone;
+      }
+      return "+" + user.phone;
+    }
+  };
   return (
     <PrivateRoute>
       <div className={styles["profile"]}>
         <div className={styles.container}>
           <div className={styles["profile-content"]}>
-            <h1 className={styles["profile-title"]}>User&#39;s name</h1>
+            <h1 className={styles["profile-title"]}>Your profile</h1>
             <div className={styles["profile-content-box"]}>
               <p className={styles["profile-content-title"]}>
                 Personal information:
               </p>
               <ul style={{ display: "contents" }}>
                 <li className={styles["profile-content-item"]}>
-                  {/* <div className={styles["profile-content-item"]}> */}
                   <div className={styles["profile-content-image-wrap"]}>
-                    <EmailIcon color={"#3b444b"} size={25} />
-                    Email:
+                    <UserIcon color={"#3b444b"} size={20} />
+                    Name:
                   </div>
-                  {user && <p>{user.email}</p>}
-                  {/* </div> */}
+                  <p>
+                    {userInfo && userInfo.first_name
+                      ? userInfo.first_name + " " + userInfo.last_name
+                      : "N/A"}
+                  </p>
                 </li>
                 <li className={styles["profile-content-item"]}>
-                  {/* <div className={styles["profile-content-item"]}> */}
                   <div className={styles["profile-content-image-wrap"]}>
-                    <PhoneIcon color={"#3b444b"} size={25} />
+                    <EmailIcon color={"#3b444b"} size={20} />
+                    Email:
+                  </div>
+                  <p>{userInfo && userInfo.email ? userInfo.email : "N/A"}</p>
+                </li>
+                <li className={styles["profile-content-item"]}>
+                  <div className={styles["profile-content-image-wrap"]}>
+                    <PhoneIcon color={"#3b444b"} size={20} />
                     Phone:
                   </div>
-                  {/* </div> */}
+                  <p>
+                    {userInfo && userInfo.phone ? formatPhone(userInfo) : "N/A"}
+                  </p>
                 </li>
               </ul>
             </div>
@@ -58,7 +107,7 @@ function Profile() {
                     className={styles["profile-content-item"]}
                   >
                     <p>Make new order</p>
-                    <LinkArrowIcon color={"#f0623d"} size={25} />
+                    <LinkArrowIcon color={"#3b444b"} size={20} />
                   </Link>
                 </li>
                 <li style={{ listStyle: "none", width: "100%" }}>
@@ -68,7 +117,7 @@ function Profile() {
                     className={styles["profile-content-item"]}
                   >
                     <p>Ask for help</p>
-                    <LinkArrowIcon color={"#f0623d"} size={25} />
+                    <LinkArrowIcon color={"#3b444b"} size={20} />
                   </Link>
                 </li>
                 <li style={{ listStyle: "none", width: "100%" }}>
@@ -77,7 +126,7 @@ function Profile() {
                     onClick={onLogoutClick}
                   >
                     <p>Logout</p>
-                    <LinkArrowIcon color={"#f0623d"} size={25} />
+                    <LinkArrowIcon color={"#3b444b"} size={20} />
                   </button>
                 </li>
               </ul>

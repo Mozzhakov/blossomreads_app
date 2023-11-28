@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
+// import Link from "next/link";
+// import Image from "next/image";
 import { auth } from "@/firebase/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
@@ -41,6 +41,10 @@ function StoryPage({ params }) {
     }
   }, [isStoryError, showFailure, storyErrorMessage]);
 
+  const cover = stories.find((el) => {
+    return el.is_cover === true;
+  });
+
   return (
     <PrivateRoute>
       <section className={styles["story-list-section"]}>
@@ -48,10 +52,11 @@ function StoryPage({ params }) {
           <>
             <h1 className={styles["story-list-title"]}>
               <span className={styles["story-list-title-part"]}>
-                {currentOrder.hero_name}
+                {cover && cover.story_title.split(" ")[0]}
               </span>{" "}
-              stories
+              {cover && cover.story_title.split(" ")[1]}
             </h1>
+
             <Suspense fallback={<p>Loading stories...</p>}>
               <StoryListComponent stories={stories} params={params} />
             </Suspense>

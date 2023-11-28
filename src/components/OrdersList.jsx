@@ -33,7 +33,20 @@ export default function OrderList({ orders }) {
     orders && (
       <section className={styles["order-list-section"]}>
         <div className={styles.container}>
-          <h4 className={styles["order-list-title"]}>Your Stastiem books</h4>
+          {orders.length === 0 ? (
+            <h4 className={styles["order-list-title"]}>
+              You don&#39;t have orders. You can make new order{" "}
+              <Link
+                href="https://www.stastiem.com/order"
+                style={{ color: "#f0623d", textDecoration: "underline" }}
+                target="_blanc"
+              >
+                here
+              </Link>
+            </h4>
+          ) : (
+            <h4 className={styles["order-list-title"]}>Your Stastiem books</h4>
+          )}
           <ul className={styles["order-list"]}>
             {orders.map((el) => (
               <li key={el.order_id} className={styles["order-item"]}>
@@ -46,12 +59,10 @@ export default function OrderList({ orders }) {
                     priority="false"
                   />
                 </Link>
-                {/* <p className={styles["order-item-date"]}> */}
                 <div className={styles["order-item-date"]}>
                   <span>{formatDate(el.created_at)}</span>
                   <span>In progress</span>
                 </div>
-                {/* </p> */}
               </li>
             ))}
           </ul>

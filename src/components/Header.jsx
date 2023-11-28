@@ -15,57 +15,47 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../scss/header.module.scss";
 
-function Header() {
-  const firebase_auth = getAuth();
-  const onLogoutClick = () => {
-    signOut(firebase_auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error.message);
-      });
-  };
+function Header({ onOpen }) {
   const [user] = useAuthState(auth);
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
+  // const pathname = usePathname();
+  // const [isOpen, setIsOpen] = useState(false);
+  // const openSidebar = () => {
+  //   setIsOpen(true);
+  // };
+  // const closeSidebar = () => {
+  //   setIsOpen(false);
+  // };
   return (
     <div className={styles["header-wrap"]}>
       <header className={styles.header}>
-        {/* {pathname === "/" || pathname.includes("/login") ? ( */}
-        <button className={styles["header-menu-btn"]} onClick={toggle}>
+        <button className={styles["header-menu-btn"]} onClick={onOpen}>
           <MenuIcon
             color={"#3b444b"}
             size={window.innerWidth > 768 ? 30 : 25}
           />
         </button>
-        {/* ) : (
-          <BackLink path={"/"} />
-        )} */}
         <Link href="/" className={styles.logo}>
           <Image
             src="/stastiem-logo.webp"
             alt="Logo"
             width="70"
             height="42"
-            priority="false"
+            priority={true}
           />
         </Link>
-        <Link className={styles["header-profile-btn"]} href="/profile">
+        <Link
+          className={
+            user
+              ? styles["header-profile-btn"]
+              : styles["header-profile-btn--hidden"]
+          }
+          href="/profile"
+        >
           <ProfileIcon
             color={"#3b444b"}
             size={window.innerWidth > 768 ? 30 : 25}
           />
         </Link>
-        {isOpen && (
-          <Portal>
-            <Sidebar onClose={toggle} />
-          </Portal>
-        )}
       </header>
     </div>
   );

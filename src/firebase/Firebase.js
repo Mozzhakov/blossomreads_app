@@ -11,8 +11,13 @@ const firebaseConfig = {
   measurementId: "G-K1NJD1THHV",
 };
 
+const actionCodeSettings = {
+  // url: "http://localhost:3000/login/",
+  url: "https://app.stastiem.com/login/",
+  handleCodeInApp: true,
+};
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-// console.log(auth);
 
-export { auth };
+export { auth, actionCodeSettings };

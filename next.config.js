@@ -5,6 +5,18 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "scss")],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "stastiem-orders.s3.amazonaws.com",
+        port: "",
+      },
+    ],
+  },
+  // experimental: {
+  //   appDir: true,
+  // },
 };
 
 module.exports = nextConfig;

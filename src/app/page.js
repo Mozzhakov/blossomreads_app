@@ -8,6 +8,7 @@ import { fetchOrders } from "@/redux/orders/orders-operations";
 import { useSelector } from "react-redux";
 import { Suspense } from "react";
 import { useNotify } from "@/hooks/useNotify";
+import Header from "@/components/Header";
 import {
   getOrders,
   getIsOrderError,
@@ -38,7 +39,6 @@ function Home() {
       showFailure(errorMessage);
     }
   }, [errorMessage, isOrderError, showFailure]);
-
   return (
     <PrivateRoute>
       <main>

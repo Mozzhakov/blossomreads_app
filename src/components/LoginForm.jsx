@@ -3,22 +3,30 @@ import { useState, useEffect } from "react";
 import { LoginIcon } from "./Icons";
 import { useSelector } from "react-redux";
 import { useNotify } from "@/hooks/useNotify";
-import { getIsAuthError, getAuthError } from "@/redux/auth/auth-selectors";
+import {
+  getIsAuthError,
+  getAuthError,
+  getIsEmailSent,
+} from "@/redux/auth/auth-selectors";
 import loginImage from "../images/login-image.jpg";
 import styles from "../scss/login-form.module.scss";
 import Image from "next/image";
 
 function LoginForm({ handleLogin, email, setEmail }) {
-  const { showFailure } = useNotify();
+  const { showFailure, showSuccess } = useNotify();
   const [error, setError] = useState(null);
   const isError = useSelector(getIsAuthError);
   const errorMessage = useSelector(getAuthError);
+  const isEmailSent = useSelector(getIsEmailSent);
 
   useEffect(() => {
     if (isError) {
       showFailure(errorMessage);
     }
-  }, [errorMessage, isError, showFailure]);
+    if (isEmailSent) {
+      showSuccess("A login link has been sent to your email successfully.");
+    }
+  }, [errorMessage, isError, isEmailSent, showFailure, showSuccess]);
 
   // function isValidEmail(email) {
   //   return /\S+@\S+\.\S+/.test(email);
@@ -28,7 +36,7 @@ function LoginForm({ handleLogin, email, setEmail }) {
     const inputEmail = event.target.value;
     setEmail(inputEmail);
 
-    if (event.target.value.length < 0) {
+    if (event.target.value.length < 1) {
       setError("Email is invalid");
     } else {
       setError(null);

@@ -31,7 +31,6 @@ export default function StoryListComponent({ stories, params }) {
       );
     }
   };
-
   return (
     <>
       {stories && (
@@ -46,11 +45,16 @@ export default function StoryListComponent({ stories, params }) {
               }}
             >
               <Image
-                src={cover}
+                src={
+                  story.left_image_optimized
+                    ? story.left_image_optimized
+                    : cover
+                }
                 alt="Story cover"
-                width={280}
+                width={400}
+                height={400}
                 className={styles["story-item-image"]}
-                priority={false}
+                priority={true}
               />
               <div className={styles["story-item-content"]}>
                 <p className={styles["story-item-title"]}>

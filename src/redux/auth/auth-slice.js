@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logIn, logOut, refreshUser } from "./auth-operations";
-import { auth } from "@/firebase/Firebase";
-import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
+import { logIn, logOut, sendLink } from "./auth-operations";
+// import { auth } from "@/firebase/Firebase";
+// import storage from "redux-persist/lib/storage";
+// import { persistReducer } from "redux-persist";
 
 const authorization = createSlice({
   name: "auth",
@@ -10,6 +10,7 @@ const authorization = createSlice({
     user: null,
     isLoading: false,
     isLoggedIn: false,
+    isEmailSent: false,
     isError: false,
     error: "",
   },
@@ -41,6 +42,20 @@ const authorization = createSlice({
         state.isLoggedIn = false;
         state.isError = true;
         state.error = "Something went wrong";
+      })
+      .addCase(sendLink.pending, (state) => {
+        state.isEmailSent = false;
+        state.isError = false;
+      })
+      .addCase(sendLink.fulfilled, (state) => {
+        state.isEmailSent = true;
+        state.isError = false;
+      })
+      .addCase(sendLink.rejected, (state) => {
+        state.isEmailSent = false;
+        state.isError = true;
+        state.error =
+          "Something went wrong while sending the email. Please try again.";
       });
   },
 });

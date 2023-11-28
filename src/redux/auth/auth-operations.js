@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { signInWithEmailLink, signOut, getAuth } from "firebase/auth";
-// import { auth } from "@/firebase/Firebase";
+import {
+  signInWithEmailLink,
+  signOut,
+  sendSignInLinkToEmail,
+} from "firebase/auth";
 
 export const logIn = createAsyncThunk(
   "auth/login",
@@ -8,6 +11,22 @@ export const logIn = createAsyncThunk(
     try {
       const response = await signInWithEmailLink(auth, email, emailLink);
       return response.user;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const sendLink = createAsyncThunk(
+  "auth/sendLink",
+  async ({ auth, email, actionCodeSettings }, { rejectWithValue }) => {
+    try {
+      const response = await sendSignInLinkToEmail(
+        auth,
+        email,
+        actionCodeSettings
+      );
+      return response;
     } catch (error) {
       return rejectWithValue(error.message);
     }
