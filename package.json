@@ -14,7 +14,6 @@
     "firebase": "^10.4.0",
     "lodash": "^4.17.21",
     "next": "latest",
-    "next-auth": "^4.23.2",
     "react": "latest",
     "react-dom": "latest",
     "react-firebase-hooks": "^5.1.1",

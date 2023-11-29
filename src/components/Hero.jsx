@@ -1,12 +1,6 @@
-// import LoginForm from "./LoginForm";
 import Link from "next/link";
-import Image from "next/image";
-// import info from "../images/info-circle.svg";
-import review from "../images/review.svg";
 import styles from "../scss/hero.module.scss";
 import { ReviewIcon } from "./Icons";
-import { useSelector } from "react-redux";
-import { getOrders } from "@/redux/orders/orders-selectors";
 
 export default function Hero({ orders }) {
   function convertDate(date) {
@@ -33,29 +27,21 @@ export default function Hero({ orders }) {
             the enchanting adventure you create together.
           </p>
           <div className={styles["hero-btn-wrapper"]}>
-            {orders ? (
-              <Link
-                href={earliestOrder ? `/orders/${earliestOrder.order_id}` : "/"}
-                className={styles["hero-btn-primary"]}
-              >
-                <ReviewIcon
-                  color={"#fff"}
-                  size={20}
-                  style={styles["hero-btn-image"]}
-                />
-                Start reviewing
-              </Link>
-            ) : (
-              <Link href={"/"} className={styles["hero-btn-primary"]}>
-                <Image
-                  src={review}
-                  alt="Review icon"
-                  className={styles["hero-btn-image"]}
-                  // style={{ visibility: "hidden" }}
-                />
-                Start reviewing
-              </Link>
-            )}
+            <Link
+              href={earliestOrder ? `/orders/${earliestOrder.order_id}` : "/"}
+              className={
+                earliestOrder
+                  ? styles["hero-btn"]
+                  : styles["hero-btn--disabled"]
+              }
+            >
+              <ReviewIcon
+                color={"#fff"}
+                size={20}
+                style={styles["hero-btn-image"]}
+              />
+              Start reviewing
+            </Link>
           </div>
         </div>
       </section>

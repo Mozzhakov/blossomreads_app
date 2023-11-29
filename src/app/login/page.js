@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
-import { auth, actionCodeSettings } from "@/firebase/Firebase";
-import LoginForm from "@/components/LoginForm";
 import { useDispatch } from "react-redux";
 import { logIn, sendLink } from "@/redux/auth/auth-operations";
-// import { useLayoutEffect } from "react";
-// import { redirect, useRouter } from "next/navigation";
+import { auth, actionCodeSettings } from "@/firebase/Firebase";
+import LoginForm from "@/components/LoginForm";
 import PublicRoute from "@/components/PublicRoute";
 
 function Login() {

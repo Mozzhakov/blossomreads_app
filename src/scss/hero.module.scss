@@ -54,7 +54,7 @@
   gap: 10px;
 }
 
-.hero-btn-primary {
+.hero-btn {
   width: fit-content;
   padding: 7px 15px;
   display: flex;
@@ -68,14 +68,20 @@
   &:hover {
     transform: scale(1.05);
   }
+  &--disabled {
+    @extend .hero-btn;
+    pointer-events: none;
+    background-color: $grey-color;
+    border: 1px solid $grey-color;
+  }
 }
 
-.hero-btn-secondary {
-  @extend .hero-btn-primary;
-  color: $accent-color;
-  background-color: $white-color;
-  border: 1px solid $white-color;
-}
+// .hero-btn-secondary {
+//   @extend .hero-btn-primary;
+//   color: $accent-color;
+//   background-color: $white-color;
+//   border: 1px solid $white-color;
+// }
 
 .hero-btn-image {
   display: block;

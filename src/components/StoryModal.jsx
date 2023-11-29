@@ -1,12 +1,7 @@
 import React from "react";
-import { auth } from "@/firebase/Firebase";
-import { BackBtn } from "./BackBtn";
-import { fetchStories } from "@/redux/stories/stories-operations";
-// import { getStories } from "@/redux/selectors";
 import { getStories } from "@/redux/stories/stories-selectors";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { StoryEditingModal } from "./StoryEditingModal";
 import {
   LeftArrowIcon,
@@ -17,9 +12,7 @@ import {
 import styles from "../scss/story-details.module.scss";
 
 export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
-  const dispatch = useDispatch();
   const stories = useSelector(getStories);
-  const [user] = useAuthState(auth);
   const [editingMode, setEditionMode] = useState(false);
 
   const currentStory = stories.find(
@@ -42,10 +35,7 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
 
   let storyText = TextComponent(currentStory.story_text);
 
-  const fetchUpdatedStories = () => {
-    // if (user && user.stsTokenManager.expirationTime > Date.now()) {
-    //   dispatch(fetchStories({ id: order_id, token: user.accessToken }));
-    // }
+  const closeEditingMode = () => {
     setEditionMode(false);
   };
   return (
@@ -116,7 +106,7 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
               story_id={currentStory.story_number}
               story_title={currentStory.story_title}
               story_text={currentStory.story_text}
-              onClose={fetchUpdatedStories}
+              onClose={closeEditingMode}
             />
           ) : (
             <>

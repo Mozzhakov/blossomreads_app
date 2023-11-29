@@ -1,5 +1,7 @@
 @import "vars";
+@import "container";
 @import "mixins";
+
 .story-list-section {
   padding: 30px 10px;
   @include desktop {
@@ -9,7 +11,6 @@
 .story-list-title {
   margin-bottom: 30px;
   color: $second-black-color;
-  // font-family: var(--font-capriola);
   font-size: 30px;
   font-weight: 500;
   font-style: italic;

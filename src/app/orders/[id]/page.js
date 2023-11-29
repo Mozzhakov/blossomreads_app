@@ -1,6 +1,4 @@
 "use client";
-// import Link from "next/link";
-// import Image from "next/image";
 import { auth } from "@/firebase/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
@@ -22,6 +20,7 @@ function StoryPage({ params }) {
   const { showFailure } = useNotify();
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
+
   const orders = useSelector(getOrders);
   const currentOrder = orders.find((el) => el.order_id === Number(params.id));
 
@@ -44,26 +43,32 @@ function StoryPage({ params }) {
   const cover = stories.find((el) => {
     return el.is_cover === true;
   });
+  const heroName = cover && cover.story_title.split(" ")[0];
+  const bookTitle = cover && cover.story_title.split(" ")[1];
 
   return (
     <PrivateRoute>
       <section className={styles["story-list-section"]}>
-        {currentOrder ? (
-          <>
-            <h1 className={styles["story-list-title"]}>
-              <span className={styles["story-list-title-part"]}>
-                {cover && cover.story_title.split(" ")[0]}
-              </span>{" "}
-              {cover && cover.story_title.split(" ")[1]}
-            </h1>
+        <div className={styles.container}>
+          {currentOrder ? (
+            <>
+              <h1 className={styles["story-list-title"]}>
+                <span className={styles["story-list-title-part"]}>
+                  {cover && heroName}
+                </span>{" "}
+                {cover && bookTitle}
+              </h1>
 
-            <Suspense fallback={<p>Loading stories...</p>}>
-              <StoryListComponent stories={stories} params={params} />
-            </Suspense>
-          </>
-        ) : (
-          <p>There is no order with id {params.id} </p>
-        )}
+              <Suspense fallback={<p>Loading stories...</p>}>
+                <StoryListComponent stories={stories} params={params} />
+              </Suspense>
+            </>
+          ) : (
+            <h1 className={styles["story-list-title"]}>
+              There is no order with id {params.id}
+            </h1>
+          )}
+        </div>
       </section>
     </PrivateRoute>
   );

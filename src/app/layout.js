@@ -37,9 +37,9 @@ export default function RootLayout({ children }) {
           <Header onOpen={openSidebar} />
           {children}
           <div id="modal-root"></div>
+          <ToastContainer />
+          <Sidebar onClose={closeSidebar} isOpen={isOpen} />
         </ReduxProvider>
-        <ToastContainer />
-        <Sidebar onClose={closeSidebar} isOpen={isOpen} />
       </body>
     </html>
   );

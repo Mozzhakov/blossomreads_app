@@ -2,12 +2,10 @@ import React from "react";
 import { auth } from "@/firebase/Firebase";
 import { editStory, fetchStories } from "@/redux/stories/stories-operations";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { UndoIcon, RedoIcon, SavedIcon, DoneIcon } from "@/components/Icons";
+import { UndoIcon, RedoIcon, DoneIcon } from "@/components/Icons";
 import styles from "../scss/story-details.module.scss";
 import useUndoableState from "@/hooks/UseUndoableState";
-import debounce from "lodash/debounce";
 
 export const StoryEditingModal = ({
   order_id,
@@ -18,25 +16,6 @@ export const StoryEditingModal = ({
 }) => {
   const dispatch = useDispatch();
   const [user] = useAuthState(auth);
-  // const [saved, setSaved] = useState(false);
-
-  // const debouncedSave = useCallback(
-  //   debounce((value) => {
-  //     if (user && user.stsTokenManager.expirationTime > Date.now()) {
-  //       dispatch(
-  //         editStory({
-  //           order_id: Number(order_id),
-  //           story_id: Number(story_id),
-  //           story_title: story_title,
-  //           story_text: encodeURIComponent(value),
-  //           token: user.accessToken,
-  //         })
-  //       );
-  //     }
-  //     setSaved(true);
-  //   }, 1000),
-  //   []
-  // );
   const {
     state: doc,
     setState: setDoc,
@@ -50,37 +29,13 @@ export const StoryEditingModal = ({
   const canRedo = docStateIndex < docStateLastIndex;
 
   const handleChange = (e) => {
-    // setSaved(false);
     setDoc(e.target.value);
-    // debouncedSave(e.target.value);
   };
 
   const handleClick = (action) => {
-    // setSaved(false);
     action();
   };
 
-  // const onDoneClick = async (e) => {
-  //   e.preventDefault;
-  //   const storyTextValue = e.target.elements.textarea.value;
-  //   if (user && user.stsTokenManager.expirationTime > Date.now()) {
-  //     try {
-  //       await dispatch(
-  //         editStory({
-  //           order_id: Number(order_id),
-  //           story_id: Number(story_id),
-  //           story_title: story_title,
-  //           story_text: encodeURIComponent(storyTextValue),
-  //           token: user.accessToken,
-  //         })
-  //       );
-  //       dispatch(fetchStories({ id: order_id, token: user.accessToken }));
-  //       onClose();
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   }
-  // };
   const onDoneClick = async (e) => {
     e.preventDefault();
     const storyTextValue = e.target.elements.textarea.value;
@@ -96,7 +51,6 @@ export const StoryEditingModal = ({
           })
         );
 
-        // Call fetchStories only after editStory is successful
         dispatch(fetchStories({ id: order_id, token: user.accessToken }));
 
         onClose();

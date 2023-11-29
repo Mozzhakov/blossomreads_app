@@ -42,6 +42,7 @@ function LoginForm({ handleLogin, email, setEmail }) {
       setError(null);
     }
   };
+
   return (
     <div className={styles["login-page"]}>
       <h1 className={styles["login-page-title"]}>

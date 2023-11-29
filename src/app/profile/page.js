@@ -38,6 +38,7 @@ function Profile() {
       dispatch(fetchUser(user.accessToken));
     }
   }, [dispatch, user]);
+  // console.log(user.accessToken);
 
   const userInfo = useSelector(getUserInfo);
   const isUserError = useSelector(getIsUserError);
@@ -57,46 +58,50 @@ function Profile() {
       return "+" + user.phone;
     }
   };
+  // console.log(userInfo);
+  const name =
+    userInfo && !userInfo.detail
+      ? userInfo.first_name + " " + userInfo.last_name
+      : "N/A";
+  const email = userInfo && !userInfo.detail ? userInfo.email : "N/A";
+  const phone = userInfo && !userInfo.detail ? formatPhone(userInfo) : "N/A";
   return (
     <PrivateRoute>
       <div className={styles["profile"]}>
         <div className={styles.container}>
           <div className={styles["profile-content"]}>
             <h1 className={styles["profile-title"]}>Your profile</h1>
+
             <div className={styles["profile-content-box"]}>
               <p className={styles["profile-content-title"]}>
                 Personal information:
               </p>
+
               <ul style={{ display: "contents" }}>
                 <li className={styles["profile-content-item"]}>
                   <div className={styles["profile-content-image-wrap"]}>
                     <UserIcon color={"#3b444b"} size={20} />
                     Name:
                   </div>
-                  <p>
-                    {userInfo && userInfo.first_name
-                      ? userInfo.first_name + " " + userInfo.last_name
-                      : "N/A"}
-                  </p>
+                  <p>{name}</p>
                 </li>
                 <li className={styles["profile-content-item"]}>
                   <div className={styles["profile-content-image-wrap"]}>
                     <EmailIcon color={"#3b444b"} size={20} />
                     Email:
                   </div>
-                  <p>{userInfo && userInfo.email ? userInfo.email : "N/A"}</p>
+                  <p>{email}</p>
                 </li>
                 <li className={styles["profile-content-item"]}>
                   <div className={styles["profile-content-image-wrap"]}>
                     <PhoneIcon color={"#3b444b"} size={20} />
                     Phone:
                   </div>
-                  <p>
-                    {userInfo && userInfo.phone ? formatPhone(userInfo) : "N/A"}
-                  </p>
+                  <p>{phone}</p>
                 </li>
               </ul>
             </div>
+
             <div className={styles["profile-content-box"]}>
               <p className={styles["profile-content-title"]}>Other:</p>
               <ul style={{ display: "contents" }}>
