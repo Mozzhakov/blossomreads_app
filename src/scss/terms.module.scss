@@ -17,12 +17,13 @@
   line-height: 1.3;
   margin-bottom: 20px;
   @include desktop {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 }
 .terms-title {
   font-weight: 500;
   margin-bottom: 5px;
+  font-size: 16px;
 }
 .privacy-title {
 }

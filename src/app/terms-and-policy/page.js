@@ -4,7 +4,7 @@ export default function TermsPolicy() {
     <section className={styles["page-section"]}>
       <div className={styles.container}>
         <h1 className={styles["page-title"]}>Terms and Conditions</h1>
-        <p className={styles["terms-text"]}>Last Updated: [Insert Date]</p>
+        <p className={styles["terms-text"]}>Last Updated: 04.12.2023</p>
         <p className={styles["terms-title"]}>1. Introduction</p>
         <p className={styles["terms-text"]}>
           Welcome to the Stastiem Self-serving Platform. These Terms and
@@ -35,27 +35,26 @@ export default function TermsPolicy() {
         </p>
         <p className={styles["terms-title"]}>5. Privacy and Personal Data</p>
         <p className={styles["terms-text"]}>
-          a. We are committed to protecting your privacy. Please refer to our
+          We are committed to protecting your privacy. Please refer to our
           Privacy Policy for information on how we collect, use, and disclose
           personal data.
         </p>
         <p className={styles["terms-title"]}>6. Limitation of Liability</p>
         <p className={styles["terms-text"]}>
-          a. Stastiem is not liable for any direct, indirect, incidental,
-          special, or consequential damages arising from your use of the
-          platform.
+          Stastiem is not liable for any direct, indirect, incidental, special,
+          or consequential damages arising from your use of the platform.
         </p>
         <p className={styles["terms-title"]}>7. Amendments</p>
         <p className={styles["terms-text"]}>
-          a. We reserve the right to modify these terms at any time. Your
-          continued use of the platform after any changes constitutes your
-          acceptance of the new terms.
+          We reserve the right to modify these terms at any time. Your continued
+          use of the platform after any changes constitutes your acceptance of
+          the new terms.
         </p>
         <p className={styles["terms-title"]}>8. Governing Law</p>
         <p className={styles["terms-text"]}>
-          a. These terms shall be governed by and construed in accordance with
-          the laws of the jurisdiction where Stastiem is based, without regard
-          to its conflict of law provisions.
+          These terms shall be governed by and construed in accordance with the
+          laws of the jurisdiction where Stastiem is based, without regard to
+          its conflict of law provisions.
         </p>
         <p className={styles["terms-title"]}>9. Contact Information</p>
         <p className={styles["terms-text"]}>
@@ -63,7 +62,7 @@ export default function TermsPolicy() {
           at support@stastiem.com.
         </p>
         <h1 className={styles["page-title"]}>Privacy Policy</h1>
-        <p className={styles["terms-text"]}>Last Updated: [Insert Date]</p>
+        <p className={styles["terms-text"]}>Last Updated: 04.12.2023</p>
         <p className={styles["terms-text"]}>
           This Privacy Policy outlines how Stastiem collects, uses, and
           discloses information through the Self-serving Platform.
