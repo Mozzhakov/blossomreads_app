@@ -107,7 +107,7 @@
   right: auto;
   bottom: 60px;
   width: calc(100% - 10px);
-  height: calc(100% - 150.5px);
+  height: calc(100vh - 150.5px);
   font-size: 14px;
   font-family: inherit;
   color: $second-black-color;
@@ -121,8 +121,8 @@
   }
 }
 .story-bottom-panel {
-  position: fixed;
-  // position: absolute;
+  // position: fixed;
+  position: absolute;
   left: 5px;
   bottom: 5px;
   width: calc(100% - 10px);
