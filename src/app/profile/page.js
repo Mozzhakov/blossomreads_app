@@ -7,10 +7,12 @@ import { useNotify } from "@/hooks/useNotify";
 import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
+import { Loader } from "@/components/Loader";
 import {
   getUserInfo,
   getIsUserError,
   getUserError,
+  getIsUserLoading,
 } from "@/redux/user/user-selectors";
 import {
   EmailIcon,
@@ -43,6 +45,7 @@ function Profile() {
   const userInfo = useSelector(getUserInfo);
   const isUserError = useSelector(getIsUserError);
   const errorMessage = useSelector(getUserError);
+  const isUserLoading = useSelector(getIsUserLoading);
 
   useEffect(() => {
     if (isUserError) {
@@ -58,7 +61,7 @@ function Profile() {
       return "+" + user.phone;
     }
   };
-  // console.log(userInfo);
+
   const name =
     userInfo && !userInfo.detail
       ? userInfo.first_name + " " + userInfo.last_name
@@ -69,74 +72,78 @@ function Profile() {
     <PrivateRoute>
       <div className={styles["profile"]}>
         <div className={styles.container}>
-          <div className={styles["profile-content"]}>
-            <h1 className={styles["profile-title"]}>Your profile</h1>
+          {isUserLoading ? (
+            <Loader />
+          ) : (
+            <div className={styles["profile-content"]}>
+              <h1 className={styles["profile-title"]}>Your profile</h1>
 
-            <div className={styles["profile-content-box"]}>
-              <p className={styles["profile-content-title"]}>
-                Personal information:
-              </p>
+              <div className={styles["profile-content-box"]}>
+                <p className={styles["profile-content-title"]}>
+                  Personal information:
+                </p>
 
-              <ul style={{ display: "contents" }}>
-                <li className={styles["profile-content-item"]}>
-                  <div className={styles["profile-content-image-wrap"]}>
-                    <UserIcon color={"#3b444b"} size={20} />
-                    Name:
-                  </div>
-                  <p>{name}</p>
-                </li>
-                <li className={styles["profile-content-item"]}>
-                  <div className={styles["profile-content-image-wrap"]}>
-                    <EmailIcon color={"#3b444b"} size={20} />
-                    Email:
-                  </div>
-                  <p>{email}</p>
-                </li>
-                <li className={styles["profile-content-item"]}>
-                  <div className={styles["profile-content-image-wrap"]}>
-                    <PhoneIcon color={"#3b444b"} size={20} />
-                    Phone:
-                  </div>
-                  <p>{phone}</p>
-                </li>
-              </ul>
+                <ul style={{ display: "contents" }}>
+                  <li className={styles["profile-content-item"]}>
+                    <div className={styles["profile-content-image-wrap"]}>
+                      <UserIcon color={"#3b444b"} size={20} />
+                      Name:
+                    </div>
+                    <p>{name}</p>
+                  </li>
+                  <li className={styles["profile-content-item"]}>
+                    <div className={styles["profile-content-image-wrap"]}>
+                      <EmailIcon color={"#3b444b"} size={20} />
+                      Email:
+                    </div>
+                    <p>{email}</p>
+                  </li>
+                  <li className={styles["profile-content-item"]}>
+                    <div className={styles["profile-content-image-wrap"]}>
+                      <PhoneIcon color={"#3b444b"} size={20} />
+                      Phone:
+                    </div>
+                    <p>{phone}</p>
+                  </li>
+                </ul>
+              </div>
+
+              <div className={styles["profile-content-box"]}>
+                <p className={styles["profile-content-title"]}>Other:</p>
+                <ul style={{ display: "contents" }}>
+                  <li style={{ listStyle: "none", width: "100%" }}>
+                    <Link
+                      href="https://www.stastiem.com/order"
+                      target="_blanc"
+                      className={styles["profile-content-item"]}
+                    >
+                      <p>Make new order</p>
+                      <LinkArrowIcon color={"#3b444b"} size={20} />
+                    </Link>
+                  </li>
+                  <li style={{ listStyle: "none", width: "100%" }}>
+                    <Link
+                      href="/help"
+                      target="_blanc"
+                      className={styles["profile-content-item"]}
+                    >
+                      <p>Ask for help</p>
+                      <LinkArrowIcon color={"#3b444b"} size={20} />
+                    </Link>
+                  </li>
+                  <li style={{ listStyle: "none", width: "100%" }}>
+                    <button
+                      className={styles["profile-content-item"]}
+                      onClick={onLogoutClick}
+                    >
+                      <p>Logout</p>
+                      <LinkArrowIcon color={"#3b444b"} size={20} />
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
-
-            <div className={styles["profile-content-box"]}>
-              <p className={styles["profile-content-title"]}>Other:</p>
-              <ul style={{ display: "contents" }}>
-                <li style={{ listStyle: "none", width: "100%" }}>
-                  <Link
-                    href="https://www.stastiem.com/order"
-                    target="_blanc"
-                    className={styles["profile-content-item"]}
-                  >
-                    <p>Make new order</p>
-                    <LinkArrowIcon color={"#3b444b"} size={20} />
-                  </Link>
-                </li>
-                <li style={{ listStyle: "none", width: "100%" }}>
-                  <Link
-                    href="/help"
-                    target="_blanc"
-                    className={styles["profile-content-item"]}
-                  >
-                    <p>Ask for help</p>
-                    <LinkArrowIcon color={"#3b444b"} size={20} />
-                  </Link>
-                </li>
-                <li style={{ listStyle: "none", width: "100%" }}>
-                  <button
-                    className={styles["profile-content-item"]}
-                    onClick={onLogoutClick}
-                  >
-                    <p>Logout</p>
-                    <LinkArrowIcon color={"#3b444b"} size={20} />
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </PrivateRoute>

@@ -1,1 +1,30 @@
 @import "container";
+@import "mixins";
+
+.page-section {
+  padding: 30px 0;
+}
+.page-title {
+  text-align: center;
+  margin-bottom: 30px;
+  @include desktop {
+    margin-bottom: 50px;
+  }
+}
+.terms-text {
+  font-size: 14px;
+  text-align: justify;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  @include desktop {
+    margin-bottom: 16px;
+  }
+}
+.terms-title {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.privacy-title {
+}
+.privacy-text {
+}

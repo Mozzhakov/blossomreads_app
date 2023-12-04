@@ -1,19 +1,71 @@
 "use client";
+import { auth } from "@/firebase/Firebase";
 import { FaStar } from "react-icons/fa";
-import { useState } from "react";
+import { Loader } from "@/components/Loader";
+import { useNotify } from "@/hooks/useNotify";
+import { fetchUser } from "@/redux/user/user-operations";
+import { getUserInfo } from "@/redux/user/user-selectors";
+import { sendFeedback } from "@/redux/feedback/feedback-operations";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getIsFeedbackLoading,
+  getIsFeedbackSent,
+  getFeedbackSuccess,
+  getIsFeedbackError,
+  getFeedbackError,
+} from "@/redux/feedback/feedback-selectors";
 import styles from "../../scss/feedback.module.scss";
 import PrivateRoute from "@/components/PrivateRoute";
 
 function SendFeedback() {
+  const dispatch = useDispatch();
+  const [user] = useAuthState(auth);
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
+  const { showSuccess, showFailure } = useNotify();
+
+  useEffect(() => {
+    if (user && user.stsTokenManager.expirationTime > Date.now()) {
+      dispatch(fetchUser(user.accessToken));
+    }
+  }, [dispatch, user]);
+
+  const userInfo = useSelector(getUserInfo);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.elements.rating.value);
+    const name = userInfo.first_name + " " + userInfo.last_name;
+    const email = userInfo.email;
+    const subject = e.target.elements.subject.value;
+    const comment = e.target.elements.comment.value;
+    const feedbackData = { name, email, subject, comment, rating };
+    dispatch(sendFeedback(feedbackData));
     e.target.reset();
     setRating(null);
   };
+  const isFeedbackLoading = useSelector(getIsFeedbackLoading);
+  const isFeedbackSent = useSelector(getIsFeedbackSent);
+  const isFeedbackError = useSelector(getIsFeedbackError);
+  const feedbackSuccess = useSelector(getFeedbackSuccess);
+  const feedbackError = useSelector(getFeedbackError);
+
+  useEffect(() => {
+    if (isFeedbackSent) {
+      showSuccess(feedbackSuccess);
+    }
+    if (isFeedbackError) {
+      showFailure(feedbackError);
+    }
+  }, [
+    feedbackError,
+    feedbackSuccess,
+    isFeedbackError,
+    isFeedbackSent,
+    showFailure,
+    showSuccess,
+  ]);
   return (
     <PrivateRoute>
       <div className={styles["feedback-page"]}>
@@ -29,8 +81,9 @@ function SendFeedback() {
               Subject{" "}
               <input
                 type="text"
-                id="text"
-                name="text"
+                id="subject"
+                name="subject"
+                placeholder="Enter the subject here"
                 className={styles["feedback-form-input"]}
               />
             </label>
@@ -38,8 +91,9 @@ function SendFeedback() {
             <label className={styles["feedback-form-label"]}>
               Your comment{" "}
               <textarea
-                id="textarea"
-                name="textarea"
+                id="comment"
+                name="comment"
+                placeholder="Your comment here..."
                 className={styles["feedback-form-input--area"]}
               ></textarea>
             </label>
@@ -91,10 +145,11 @@ function SendFeedback() {
             </div>
 
             <button type="submit" className={styles["btn_primary"]}>
-              Send
+              Send feedback
             </button>
           </form>
         </div>
+        {isFeedbackLoading && <Loader />}
       </div>
     </PrivateRoute>
   );

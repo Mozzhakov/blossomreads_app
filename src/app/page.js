@@ -7,13 +7,14 @@ import { useDispatch } from "react-redux";
 import { fetchOrders } from "@/redux/orders/orders-operations";
 import { useSelector } from "react-redux";
 import { Suspense } from "react";
+import { Loader } from "@/components/Loader";
 import { useNotify } from "@/hooks/useNotify";
-import Header from "@/components/Header";
 import {
   getOrders,
   getIsOrderError,
   getOrderError,
 } from "@/redux/orders/orders-selectors";
+import { getStories } from "@/redux/stories/stories-selectors";
 import Hero from "@/components/Hero";
 import OrdersList from "@/components/OrdersList";
 
@@ -29,7 +30,8 @@ function Home() {
       dispatch(fetchOrders(user.accessToken));
     }
   }, [user, dispatch]);
-
+  const stories = useSelector(getStories);
+  console.log(stories);
   const orders = useSelector(getOrders);
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
@@ -39,16 +41,19 @@ function Home() {
       showFailure(errorMessage);
     }
   }, [errorMessage, isOrderError, showFailure]);
+  console.log(orders);
   return (
     <PrivateRoute>
       <main>
-        {orders && !loading && (
+        {!loading && user && orders ? (
           <>
             <Hero orders={orders} />
             <Suspense fallback={<p>Loading orders...</p>}>
               <OrdersList orders={orders} />
             </Suspense>
           </>
+        ) : (
+          <Loader />
         )}
         {error && <p>{error}</p>}
       </main>

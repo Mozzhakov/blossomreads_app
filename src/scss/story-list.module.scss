@@ -3,9 +3,9 @@
 @import "mixins";
 
 .story-list-section {
-  padding: 30px 10px;
+  padding: 30px 0;
   @include desktop {
-    padding: 40px 15px;
+    padding: 40px 0;
   }
 }
 .story-list-title {
@@ -88,6 +88,7 @@
       margin-bottom: 20px;
       @include desktop {
         font-size: 18px;
+        text-align: center;
       }
     }
     &-text {

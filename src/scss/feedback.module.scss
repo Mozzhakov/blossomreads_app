@@ -5,13 +5,16 @@
 
 .feedback-page {
   padding: 30px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   @include desktop {
     padding: 30px 15px;
   }
   &-title {
     margin-bottom: 30px;
     text-align: center;
-    color: $black-color;
+    // line-height: 1.5;
     @include desktop {
       text-align: left;
     }
@@ -22,7 +25,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
   width: 300px;
   padding: 30px 10px;
   margin: 0 auto;
@@ -30,31 +33,39 @@
   border-radius: 5px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   @include desktop {
+    width: 400px;
     margin: 0;
   }
   &-legend {
-    color: $black-color;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 22px;
   }
   &-label {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 5px;
-    font-size: 14px;
-    color: $black-color;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
   }
   &-input {
-    height: 25px;
+    height: 40px;
     border: 1px solid $grey-color;
     border-radius: 3px;
     background-color: $white-color;
+    padding: 0 10px;
+    font-family: inherit;
+    outline: none;
     &:hover {
+      border: 1px solid $accent-color;
+    }
+    &:focus {
       border: 1px solid $accent-color;
     }
     &--area {
       @extend .feedback-form-input;
-      height: 65px;
+      padding: 10px;
+      height: 100px;
     }
     &--radio {
       display: none;

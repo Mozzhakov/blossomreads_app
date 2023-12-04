@@ -2,10 +2,7 @@
 @import "mixins";
 @import "container";
 .header-wrap {
-  // box-shadow: $grey-color 0px 2px 8px;
   border-bottom: 1px solid $grey-color;
-  position: sticky;
-  position: 0;
 }
 
 .header {

@@ -3,6 +3,7 @@ import { authReducer } from "./auth/auth-slice";
 import { ordersReducer } from "./orders/orders-slice";
 import { storiesReducer } from "./stories/stories-slice";
 import { userReducer } from "./user/user-slice";
+import { feedbackReducer } from "./feedback/feedback-slice";
 import { persistStore } from "redux-persist";
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     orders: ordersReducer,
     stories: storiesReducer,
     user: userReducer,
+    feedback: feedbackReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

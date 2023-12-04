@@ -3,11 +3,9 @@ import styles from "../scss/hero.module.scss";
 import { ReviewIcon } from "./Icons";
 
 export default function Hero({ orders }) {
-  function convertDate(date) {
-    return new Date(date).getTime();
-  }
-
-  const paidOrders = orders.filter((el) => el.status === "paid");
+  const paidOrders = orders.filter(
+    (el) => el.status === "paid" || el.status === "queued"
+  );
   const sortedOrders = paidOrders.sort(
     (a, b) => convertDate(a.created_at) - convertDate(b.created_at)
   );

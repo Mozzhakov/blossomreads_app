@@ -1,5 +1,6 @@
 "use client";
 import { auth } from "@/firebase/Firebase";
+import { Loader } from "@/components/Loader";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,6 +10,7 @@ import {
   getStories,
   getIsStoryError,
   getStoryError,
+  getIsStoryLoading,
 } from "@/redux/stories/stories-selectors";
 import { Suspense } from "react";
 import { useNotify } from "@/hooks/useNotify";
@@ -28,11 +30,12 @@ function StoryPage({ params }) {
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
       dispatch(fetchStories({ id: params.id, token: user.accessToken }));
     }
-  }, [user, dispatch, params]);
+  }, [user, dispatch, params.id]);
 
   const stories = useSelector(getStories);
   const isStoryError = useSelector(getIsStoryError);
   const storyErrorMessage = useSelector(getStoryError);
+  const isStoryLoading = useSelector(getIsStoryLoading);
 
   useEffect(() => {
     if (isStoryError) {
@@ -58,10 +61,10 @@ function StoryPage({ params }) {
                 </span>{" "}
                 {cover && bookTitle}
               </h1>
-
               <Suspense fallback={<p>Loading stories...</p>}>
                 <StoryListComponent stories={stories} params={params} />
               </Suspense>
+              {isStoryLoading && <Loader />}
             </>
           ) : (
             <h1 className={styles["story-list-title"]}>
