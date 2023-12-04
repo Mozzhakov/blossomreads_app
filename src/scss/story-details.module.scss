@@ -13,9 +13,9 @@
 }
 .story-modal {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   position: fixed;
-  overflow: scroll;
+  overflow-y: scroll;
   top: 0;
   left: 0;
   z-index: 3;
@@ -35,7 +35,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 .story-top-nav {
   display: flex;
@@ -107,7 +107,7 @@
   right: auto;
   bottom: 60px;
   width: calc(100% - 10px);
-  height: calc(100% - 144px);
+  height: calc(100% - 150.5px);
   font-size: 14px;
   font-family: inherit;
   color: $second-black-color;
