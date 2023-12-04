@@ -13,7 +13,7 @@
 }
 .story-modal {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   overflow-y: scroll;
   top: 0;
@@ -43,6 +43,9 @@
   align-items: center;
   padding: 0 10px;
   margin-bottom: 10px;
+  @include desktop {
+    padding: 0;
+  }
 }
 .story-back-btn {
   display: flex;
@@ -70,6 +73,9 @@
 .story-nav-btn-wrap {
   display: flex;
   gap: 15px;
+  @include desktop {
+    gap: 10px;
+  }
 }
 .story-nav-btn {
   display: flex;
@@ -100,6 +106,7 @@
 .story-text {
   font-size: 14px;
   margin-bottom: 35px;
+  // height: calc(100% - 150.5px);
 }
 .story-textarea {
   position: fixed;
@@ -107,7 +114,7 @@
   right: auto;
   bottom: 60px;
   width: calc(100% - 10px);
-  height: calc(100vh - 150.5px);
+  height: calc(100% - 150.5px);
   font-size: 14px;
   font-family: inherit;
   color: $second-black-color;
