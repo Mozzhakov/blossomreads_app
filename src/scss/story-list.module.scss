@@ -48,6 +48,9 @@
     border: 1px solid $grey-color;
     border-radius: 5px;
     cursor: pointer;
+    @include desktop {
+      height: 420px;
+    }
     &:hover {
       border-color: $accent-color;
     }
@@ -62,12 +65,19 @@
       margin-bottom: 10px;
       width: 100%;
       height: auto;
+
       @include desktop {
         width: 420px;
         height: auto;
         margin-bottom: 0;
         border-radius: 5px 0 0 5px;
       }
+    }
+    &-image-ph {
+      @extend .story-item-image;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     &-content {
       @include desktop {

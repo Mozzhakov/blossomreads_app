@@ -115,6 +115,7 @@
   bottom: 60px;
   width: calc(100% - 10px);
   height: calc(100% - 150.5px);
+  max-height: 100svh;
   font-size: 14px;
   font-family: inherit;
   color: $second-black-color;

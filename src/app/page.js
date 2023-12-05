@@ -31,7 +31,7 @@ function Home() {
     }
   }, [user, dispatch]);
   const stories = useSelector(getStories);
-  console.log(stories);
+  // console.log(stories);
   const orders = useSelector(getOrders);
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
@@ -41,7 +41,7 @@ function Home() {
       showFailure(errorMessage);
     }
   }, [errorMessage, isOrderError, showFailure]);
-  console.log(orders);
+  // console.log(orders);
   return (
     <PrivateRoute>
       <main>

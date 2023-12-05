@@ -44,18 +44,24 @@ export default function StoryListComponent({ stories, params }) {
                 setModalOpen(true);
               }}
             >
-              <Image
-                src={
-                  story.left_image_optimized
-                    ? story.left_image_optimized
-                    : cover
-                }
-                alt="Story cover"
-                width={400}
-                height={400}
-                className={styles["story-item-image"]}
-                priority={true}
-              />
+              {story.left_image_optimized ? (
+                <Image
+                  src={story.left_image_optimized}
+                  alt="Story cover"
+                  width={400}
+                  height={400}
+                  className={styles["story-item-image"]}
+                  priority={true}
+                />
+              ) : (
+                <div
+                  className={styles["story-item-image-ph"]}
+                  style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
+                >
+                  {story.story_title}
+                </div>
+              )}
+
               <div className={styles["story-item-content"]}>
                 <p className={styles["story-item-title"]}>
                   {story.story_number}. {story.story_title}
