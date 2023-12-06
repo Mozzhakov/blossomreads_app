@@ -114,8 +114,8 @@
   right: auto;
   bottom: 60px;
   width: calc(100% - 10px);
-  height: calc(100% - 150.5px);
-  height: calc(100vh * var(--vh) - 150.5px);
+  height: calc(100vh - 150.5px);
+  // height: calc(100vh * var(--vh) - 150.5px);
   font-size: 14px;
   font-family: inherit;
   color: $second-black-color;
@@ -143,6 +143,7 @@
   border: 1px solid $grey-color;
   background-color: $white-color;
   z-index: 5;
+  color: $second-black-color;
 
   @include desktop {
     left: 15px;
@@ -167,6 +168,7 @@
   border-radius: 5px;
   padding: 2px 5px;
   background: none;
+  color: $second-black-color;
   cursor: pointer;
   &:hover {
     border: 1px solid $accent-color;

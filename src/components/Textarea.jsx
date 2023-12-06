@@ -34,6 +34,8 @@ const Textarea = ({ val, fn, styles }) => {
     <textarea
       name="textarea"
       onChange={fn}
+      onFocus={() => window.dispatchEvent(new Event("resize"))}
+      onBlur={() => window.dispatchEvent(new Event("resize"))}
       value={val}
       className={styles["story-textarea"]}
       style={{ height: elementHeight }}

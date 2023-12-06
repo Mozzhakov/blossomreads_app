@@ -1,10 +1,7 @@
-// "use client";
 import "../styles/globals.css";
-
 import { Montserrat } from "next/font/google";
 import { ReduxProvider } from "@/redux/provider";
 import { ToastContainer } from "react-toastify";
-import Header from "@/components/Header";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 export const viewport = {
