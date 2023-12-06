@@ -20,7 +20,7 @@ function StoryPage({ params }) {
   const { showFailure } = useNotify();
   const dispatch = useDispatch();
   const [stories, setStories] = useState([]);
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,13 +74,13 @@ function StoryPage({ params }) {
                 <StoryList stories={stories} params={params} />
               </>
             )}
-            {!isStoryLoading && stories.length === 0 && (
+            {!isStoryLoading && !loading && stories.length === 0 && (
               <h1 className={styles["story-list-title"]}>
                 Oops! No stories found for order ID {params.id}
               </h1>
             )}
 
-            {isStoryLoading && <Loader />}
+            {(isStoryLoading || loading) && <Loader />}
           </div>
         </section>
       </PrivateRoute>

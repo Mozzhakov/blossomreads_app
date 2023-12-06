@@ -9,11 +9,6 @@ import { Portal } from "./Modal";
 export default function StoryList({ stories, params }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currStory, setCurrStory] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  // function onImageLoad() {
-  //   setLoading(false);
-  //   console.log("loaded");
-  // }
 
   const goToPrev = () => {
     setCurrStory((currStory) => currStory - 1);
@@ -50,12 +45,6 @@ export default function StoryList({ stories, params }) {
               }}
             >
               {story.left_image_optimized ? (
-                // <>
-                //   {loading ? (
-                //     <div style={{ display: loading ? "block" : "none" }}>
-                //       Loading Spinner goes here
-                //     </div>
-                //   ) : (
                 <Image
                   src={story.left_image_optimized}
                   alt="Story cover"
@@ -63,11 +52,8 @@ export default function StoryList({ stories, params }) {
                   height={400}
                   className={styles["story-item-image"]}
                   priority={true}
-                  // onLoad={onImageLoad}
                 />
               ) : (
-                //   )}
-                // </>
                 <div
                   className={styles["story-item-image-ph"]}
                   style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
