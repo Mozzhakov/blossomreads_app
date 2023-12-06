@@ -114,10 +114,7 @@
   right: auto;
   bottom: 60px;
   width: calc(100% - 10px);
-  // height: calc(100vh - 150.5px);
-  // height: calc(100vh * var(--vh) - 150.5px);
-  // height: calc(100vh * var(--vh));
-  min-height: calc(100vh * var(--vh) - 150.5px);
+  height: calc(100% - 150.5px);
   height: auto;
   font-size: 14px;
   font-family: inherit;

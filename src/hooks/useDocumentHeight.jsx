@@ -1,30 +1,30 @@
-import { useCallback, useEffect, useState } from "react";
+// import { useCallback, useEffect, useState } from "react";
 
-const useDocumentHeight = () => {
-  const getHeight = useCallback(
-    () =>
-      window.visualViewport ? window.visualViewport.height : window.innerHeight,
-    []
-  );
-  const [height, setHeight] = useState(getHeight());
+// const useDocumentHeight = () => {
+//   const getHeight = useCallback(
+//     () =>
+//       window.visualViewport ? window.visualViewport.height : window.innerHeight,
+//     []
+//   );
+//   const [height, setHeight] = useState(getHeight());
 
-  useEffect(() => {
-    const handleResize = () => {
-      setHeight(getHeight());
-    };
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setHeight(getHeight());
+//     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
-    window.visualViewport?.addEventListener("resize", handleResize);
+//     window.addEventListener("resize", handleResize);
+//     window.addEventListener("orientationchange", handleResize);
+//     window.visualViewport?.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
-      window.visualViewport?.removeEventListener("resize", handleResize);
-    };
-  }, [getHeight]);
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//       window.removeEventListener("orientationchange", handleResize);
+//       window.visualViewport?.removeEventListener("resize", handleResize);
+//     };
+//   }, [getHeight]);
 
-  return height;
-};
+//   return height;
+// };
 
-export default useDocumentHeight;
+// export default useDocumentHeight;

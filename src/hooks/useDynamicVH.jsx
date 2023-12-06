@@ -1,24 +1,24 @@
-import { useEffect, useRef } from "react";
+// import { useEffect, useRef } from "react";
 
-const useDynamicVH = () => {
-  const vh = useRef(window.innerHeight * 0.01);
+// const useDynamicVH = () => {
+//   const vh = useRef(window.innerHeight * 0.01);
 
-  useEffect(() => {
-    const handleResize = () => {
-      vh.current = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh.current}px`);
-    };
+//   useEffect(() => {
+//     const handleResize = () => {
+//       vh.current = window.innerHeight * 0.01;
+//       document.documentElement.style.setProperty("--vh", `${vh.current}px`);
+//     };
 
-    handleResize();
+//     handleResize();
 
-    window.addEventListener("resize", handleResize);
+//     window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//     };
+//   }, []);
 
-  return vh.current;
-};
+//   return vh.current;
+// };
 
-export default useDynamicVH;
+// export default useDynamicVH;

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { UndoIcon, RedoIcon, DoneIcon } from "@/components/Icons";
 import styles from "../scss/story-details.module.scss";
 import useUndoableState from "@/hooks/UseUndoableState";
-import useDynamicVH from "@/hooks/useDynamicVH";
+// import useDynamicVH from "@/hooks/useDynamicVH";
 // import Textarea from "./Textarea";
 
 export const StoryEditingModal = ({
@@ -61,7 +61,7 @@ export const StoryEditingModal = ({
       }
     }
   };
-  const vh = useDynamicVH();
+  // const vh = useDynamicVH();
 
   return (
     // <div style={{ width: "100%" }}>
