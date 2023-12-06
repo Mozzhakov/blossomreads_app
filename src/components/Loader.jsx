@@ -1,5 +1,5 @@
 import { Puff } from "react-loader-spinner";
-import { Portal } from "./Modal";
+// import { Portal } from "./Modal";
 import styles from "../scss/loader.module.scss";
 export const Loader = () => {
   return (

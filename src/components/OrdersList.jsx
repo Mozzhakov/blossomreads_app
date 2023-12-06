@@ -71,7 +71,7 @@ export default function OrderList({ orders }) {
         <ul className={styles["order-list"]}>
           {orders.map((el) => (
             <li key={el.order_id} className={styles["order-item"]}>
-              <Link href={`/orders/${el.order_id}`}>
+              <Link href={`/order/${el.order_id}`}>
                 <Image
                   src={cover}
                   alt={el.hero_name}

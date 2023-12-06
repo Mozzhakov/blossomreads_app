@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 import { auth } from "@/firebase/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -9,15 +8,14 @@ import { useSelector } from "react-redux";
 import { Suspense } from "react";
 import { Loader } from "@/components/Loader";
 import { useNotify } from "@/hooks/useNotify";
+import { SidebarContainer } from "@/components/SidebarContainer";
 import {
   getOrders,
   getIsOrderError,
   getOrderError,
 } from "@/redux/orders/orders-selectors";
-import { getStories } from "@/redux/stories/stories-selectors";
 import Hero from "@/components/Hero";
 import OrdersList from "@/components/OrdersList";
-
 import PrivateRoute from "@/components/PrivateRoute";
 
 function Home() {
@@ -28,10 +26,10 @@ function Home() {
   useEffect(() => {
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
       dispatch(fetchOrders(user.accessToken));
+      localStorage.removeItem("persist:stories");
     }
   }, [user, dispatch]);
-  const stories = useSelector(getStories);
-  // console.log(stories);
+
   const orders = useSelector(getOrders);
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
@@ -41,23 +39,24 @@ function Home() {
       showFailure(errorMessage);
     }
   }, [errorMessage, isOrderError, showFailure]);
-  // console.log(orders);
   return (
-    <PrivateRoute>
-      <main>
-        {!loading && user && orders ? (
-          <>
-            <Hero orders={orders} />
-            <Suspense fallback={<p>Loading orders...</p>}>
-              <OrdersList orders={orders} />
-            </Suspense>
-          </>
-        ) : (
-          <Loader />
-        )}
-        {error && <p>{error}</p>}
-      </main>
-    </PrivateRoute>
+    <main>
+      <SidebarContainer>
+        <PrivateRoute>
+          {!loading && user && orders ? (
+            <>
+              <Hero orders={orders} />
+              <Suspense fallback={<p>Loading orders...</p>}>
+                <OrdersList orders={orders} />
+              </Suspense>
+            </>
+          ) : (
+            <Loader />
+          )}
+          {error && <p>{error}</p>}
+        </PrivateRoute>
+      </SidebarContainer>
+    </main>
   );
 }
 

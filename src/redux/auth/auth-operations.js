@@ -28,7 +28,19 @@ export const sendLink = createAsyncThunk(
       );
       return response;
     } catch (error) {
-      return rejectWithValue(error.message);
+      if (error.code === "auth/admin-restricted-operation") {
+        return rejectWithValue({
+          message:
+            "Oops! It looks like you don't have any orders yet. Please place an order to sign in and enjoy our services.",
+          status: error.code,
+        });
+      }
+      console.log(error);
+      return rejectWithValue({
+        message:
+          "Something went wrong while sending the email. Please try again.",
+        status: error.status,
+      });
     }
   }
 );

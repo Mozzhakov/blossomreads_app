@@ -1,5 +1,11 @@
+"use client";
+import { SidebarContainer } from "@/components/SidebarContainer";
 function Help() {
-  return <>Help</>;
+  return (
+    <SidebarContainer>
+      <>Help</>
+    </SidebarContainer>
+  );
 }
 
 export default Help;

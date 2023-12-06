@@ -13,7 +13,7 @@
   color: $second-black-color;
   font-size: 30px;
   font-weight: 500;
-  font-style: italic;
+  // font-style: italic;
   text-align: center;
   @include desktop {
     margin-bottom: 50px;
@@ -64,8 +64,8 @@
       border-radius: 5px 5px 0 0;
       margin-bottom: 10px;
       width: 100%;
-      height: auto;
-
+      // height: auto;
+      height: 290px;
       @include desktop {
         width: 420px;
         height: auto;

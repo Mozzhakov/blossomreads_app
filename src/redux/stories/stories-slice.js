@@ -48,6 +48,6 @@ const persistConfig = {
   whitelist: ["items"],
 };
 
-// export const storiesReducer = stories.reducer;
+export const storiesReducer = stories.reducer;
 
-export const storiesReducer = persistReducer(persistConfig, stories.reducer);
+// export const storiesReducer = persistReducer(persistConfig, stories.reducer);

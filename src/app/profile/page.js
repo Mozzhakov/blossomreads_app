@@ -23,6 +23,7 @@ import {
 import Link from "next/link";
 import styles from "../../scss/profile.module.scss";
 import PrivateRoute from "@/components/PrivateRoute";
+import { SidebarContainer } from "@/components/SidebarContainer";
 
 function Profile() {
   const [user] = useAuthState(auth);
@@ -69,84 +70,86 @@ function Profile() {
   const email = userInfo && !userInfo.detail ? userInfo.email : "N/A";
   const phone = userInfo && !userInfo.detail ? formatPhone(userInfo) : "N/A";
   return (
-    <PrivateRoute>
-      <div className={styles["profile"]}>
-        <div className={styles.container}>
-          {isUserLoading ? (
-            <Loader />
-          ) : (
-            <div className={styles["profile-content"]}>
-              <h1 className={styles["profile-title"]}>Your profile</h1>
+    <SidebarContainer>
+      <PrivateRoute>
+        <div className={styles["profile"]}>
+          <div className={styles.container}>
+            {isUserLoading ? (
+              <Loader />
+            ) : (
+              <div className={styles["profile-content"]}>
+                <h1 className={styles["profile-title"]}>Your profile</h1>
 
-              <div className={styles["profile-content-box"]}>
-                <p className={styles["profile-content-title"]}>
-                  Personal information:
-                </p>
+                <div className={styles["profile-content-box"]}>
+                  <p className={styles["profile-content-title"]}>
+                    Personal information:
+                  </p>
 
-                <ul style={{ display: "contents" }}>
-                  <li className={styles["profile-content-item"]}>
-                    <div className={styles["profile-content-image-wrap"]}>
-                      <UserIcon color={"#3b444b"} size={20} />
-                      Name:
-                    </div>
-                    <p>{name}</p>
-                  </li>
-                  <li className={styles["profile-content-item"]}>
-                    <div className={styles["profile-content-image-wrap"]}>
-                      <EmailIcon color={"#3b444b"} size={20} />
-                      Email:
-                    </div>
-                    <p>{email}</p>
-                  </li>
-                  <li className={styles["profile-content-item"]}>
-                    <div className={styles["profile-content-image-wrap"]}>
-                      <PhoneIcon color={"#3b444b"} size={20} />
-                      Phone:
-                    </div>
-                    <p>{phone}</p>
-                  </li>
-                </ul>
+                  <ul style={{ display: "contents" }}>
+                    <li className={styles["profile-content-item"]}>
+                      <div className={styles["profile-content-image-wrap"]}>
+                        <UserIcon color={"#3b444b"} size={20} />
+                        Name:
+                      </div>
+                      <p>{name}</p>
+                    </li>
+                    <li className={styles["profile-content-item"]}>
+                      <div className={styles["profile-content-image-wrap"]}>
+                        <EmailIcon color={"#3b444b"} size={20} />
+                        Email:
+                      </div>
+                      <p>{email}</p>
+                    </li>
+                    <li className={styles["profile-content-item"]}>
+                      <div className={styles["profile-content-image-wrap"]}>
+                        <PhoneIcon color={"#3b444b"} size={20} />
+                        Phone:
+                      </div>
+                      <p>{phone}</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className={styles["profile-content-box"]}>
+                  <p className={styles["profile-content-title"]}>Other:</p>
+                  <ul style={{ display: "contents" }}>
+                    <li style={{ listStyle: "none", width: "100%" }}>
+                      <Link
+                        href="https://www.stastiem.com/order"
+                        target="_blanc"
+                        className={styles["profile-content-item"]}
+                      >
+                        <p>Make new order</p>
+                        <LinkArrowIcon color={"#3b444b"} size={20} />
+                      </Link>
+                    </li>
+                    <li style={{ listStyle: "none", width: "100%" }}>
+                      <Link
+                        href="/help"
+                        target="_blanc"
+                        className={styles["profile-content-item"]}
+                      >
+                        <p>Ask for help</p>
+                        <LinkArrowIcon color={"#3b444b"} size={20} />
+                      </Link>
+                    </li>
+                    <li style={{ listStyle: "none", width: "100%" }}>
+                      <button
+                        className={styles["profile-content-item"]}
+                        onClick={onLogoutClick}
+                      >
+                        <p>Logout</p>
+                        <LinkArrowIcon color={"#3b444b"} size={20} />
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </div>
-
-              <div className={styles["profile-content-box"]}>
-                <p className={styles["profile-content-title"]}>Other:</p>
-                <ul style={{ display: "contents" }}>
-                  <li style={{ listStyle: "none", width: "100%" }}>
-                    <Link
-                      href="https://www.stastiem.com/order"
-                      target="_blanc"
-                      className={styles["profile-content-item"]}
-                    >
-                      <p>Make new order</p>
-                      <LinkArrowIcon color={"#3b444b"} size={20} />
-                    </Link>
-                  </li>
-                  <li style={{ listStyle: "none", width: "100%" }}>
-                    <Link
-                      href="/help"
-                      target="_blanc"
-                      className={styles["profile-content-item"]}
-                    >
-                      <p>Ask for help</p>
-                      <LinkArrowIcon color={"#3b444b"} size={20} />
-                    </Link>
-                  </li>
-                  <li style={{ listStyle: "none", width: "100%" }}>
-                    <button
-                      className={styles["profile-content-item"]}
-                      onClick={onLogoutClick}
-                    >
-                      <p>Logout</p>
-                      <LinkArrowIcon color={"#3b444b"} size={20} />
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-    </PrivateRoute>
+      </PrivateRoute>
+    </SidebarContainer>
   );
 }
 

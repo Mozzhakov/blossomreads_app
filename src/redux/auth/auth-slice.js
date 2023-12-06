@@ -56,12 +56,11 @@ const authorization = createSlice({
         state.isEmailSent = true;
         state.isError = false;
       })
-      .addCase(sendLink.rejected, (state) => {
+      .addCase(sendLink.rejected, (state, action) => {
         state.isLoading = false;
         state.isEmailSent = false;
         state.isError = true;
-        state.error =
-          "Something went wrong while sending the email. Please try again.";
+        state.error = action.payload.message;
       });
   },
 });

@@ -21,6 +21,7 @@ export const store = configureStore({
           "auth/login/fulfilled",
           "auth/refreshUser/fulfilled",
           "persist/PERSIST",
+          "auth/sendLink/rejected",
         ],
         ignoredActionPaths: ["meta.arg"],
         ignoredPaths: ["auth.user"],

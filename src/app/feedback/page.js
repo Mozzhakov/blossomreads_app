@@ -9,6 +9,7 @@ import { sendFeedback } from "@/redux/feedback/feedback-operations";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { SidebarContainer } from "@/components/SidebarContainer";
 import {
   getIsFeedbackLoading,
   getIsFeedbackSent,
@@ -67,91 +68,93 @@ function SendFeedback() {
     showSuccess,
   ]);
   return (
-    <PrivateRoute>
-      <div className={styles["feedback-page"]}>
-        <div className={styles.container}>
-          <h1 className={styles["feedback-page-title"]}>
-            Leave us your feedback
-          </h1>
-          <form className={styles["feedback-form"]} onSubmit={onSubmit}>
-            <legend className={styles["feedback-form-legend"]}>
-              Feedback form
-            </legend>
-            <label className={styles["feedback-form-label"]}>
-              Subject{" "}
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                placeholder="Enter the subject here"
-                className={styles["feedback-form-input"]}
-              />
-            </label>
+    <SidebarContainer>
+      <PrivateRoute>
+        <div className={styles["feedback-page"]}>
+          <div className={styles.container}>
+            <h1 className={styles["feedback-page-title"]}>
+              Leave us your feedback
+            </h1>
+            <form className={styles["feedback-form"]} onSubmit={onSubmit}>
+              <legend className={styles["feedback-form-legend"]}>
+                Feedback form
+              </legend>
+              <label className={styles["feedback-form-label"]}>
+                Subject{" "}
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="Enter the subject here"
+                  className={styles["feedback-form-input"]}
+                />
+              </label>
 
-            <label className={styles["feedback-form-label"]}>
-              Your comment{" "}
-              <textarea
-                id="comment"
-                name="comment"
-                placeholder="Your comment here..."
-                className={styles["feedback-form-input--area"]}
-              ></textarea>
-            </label>
+              <label className={styles["feedback-form-label"]}>
+                Your comment{" "}
+                <textarea
+                  id="comment"
+                  name="comment"
+                  placeholder="Your comment here..."
+                  className={styles["feedback-form-input--area"]}
+                ></textarea>
+              </label>
 
-            <div
-              style={{
-                display: "flex",
-                textAlign: "left",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <p
-                className={styles["feedback-form-label"]}
-                style={{ marginBottom: "5px" }}
+              <div
+                style={{
+                  display: "flex",
+                  textAlign: "left",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
               >
-                Rate your overall experience
-              </p>
-              <div>
-                {[...Array(5)].map((_, index) => {
-                  const currentRating = index + 1;
-                  return (
-                    <label key={index}>
-                      <input
-                        type="radio"
-                        name="rating"
-                        value={currentRating}
-                        onClick={() => setRating(currentRating)}
-                        className={styles["feedback-form-input--radio"]}
-                        required
-                      />
-                      <FaStar
-                        size={30}
-                        color={
-                          currentRating <= (hover || rating)
-                            ? "#ffc107"
-                            : "#e4e5e9"
-                        }
-                        style={{ cursor: "pointer" }}
-                        onMouseEnter={() => setHover(currentRating)}
-                        onMouseLeave={() => setHover(null)}
-                      />
-                    </label>
-                  );
-                })}
+                <p
+                  className={styles["feedback-form-label"]}
+                  style={{ marginBottom: "5px" }}
+                >
+                  Rate your overall experience
+                </p>
+                <div>
+                  {[...Array(5)].map((_, index) => {
+                    const currentRating = index + 1;
+                    return (
+                      <label key={index}>
+                        <input
+                          type="radio"
+                          name="rating"
+                          value={currentRating}
+                          onClick={() => setRating(currentRating)}
+                          className={styles["feedback-form-input--radio"]}
+                          required
+                        />
+                        <FaStar
+                          size={30}
+                          color={
+                            currentRating <= (hover || rating)
+                              ? "#ffc107"
+                              : "#e4e5e9"
+                          }
+                          style={{ cursor: "pointer" }}
+                          onMouseEnter={() => setHover(currentRating)}
+                          onMouseLeave={() => setHover(null)}
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
 
-            <button type="submit" className={styles["btn_primary"]}>
-              Send feedback
-            </button>
-          </form>
+              <button type="submit" className={styles["btn_primary"]}>
+                Send feedback
+              </button>
+            </form>
+          </div>
+          {isFeedbackLoading && <Loader />}
         </div>
-        {isFeedbackLoading && <Loader />}
-      </div>
-    </PrivateRoute>
+      </PrivateRoute>
+    </SidebarContainer>
   );
 }
 

@@ -1,7 +1,7 @@
 .loader-overlay {
   width: 100vw;
   height: 100vh;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(255, 255, 255, 0.4);
@@ -9,7 +9,7 @@
   //   cursor: pointer;
 }
 .loader {
-  position: absolute;
+  position: fixed;
   top: 30%;
   left: 50%;
   transform: translateX(-50%);

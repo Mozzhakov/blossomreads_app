@@ -13,6 +13,7 @@ import {
 import loginImage from "../images/login-image.jpg";
 import styles from "../scss/login-form.module.scss";
 import Image from "next/image";
+import { EmailSentSuccess } from "./EmailSentSuccess";
 
 function LoginWithoutLink({ handleLogin, email, setEmail }) {
   const { showFailure, showSuccess } = useNotify();
@@ -21,14 +22,10 @@ function LoginWithoutLink({ handleLogin, email, setEmail }) {
   const errorMessage = useSelector(getAuthError);
   const isEmailSent = useSelector(getIsEmailSent);
   const isLoading = useSelector(getIsLoading);
-
   useEffect(() => {
     if (isError) {
       showFailure(errorMessage);
     }
-    // if (isEmailSent) {
-    //   showSuccess("A login link has been sent to your email successfully.");
-    // }
   }, [errorMessage, isError, showFailure]);
 
   // function isValidEmail(email) {
@@ -48,48 +45,55 @@ function LoginWithoutLink({ handleLogin, email, setEmail }) {
 
   return (
     <div className={styles["login-page"]}>
-      <h1 className={styles["login-page-title"]}>
-        Please login to get access to your profile.
-      </h1>
-      <div className={styles["login-page-content"]}>
-        <form onSubmit={handleLogin} className={styles["form"]}>
-          <div>
-            <h2 className={styles["form-title"]}>Welcome</h2>
-            <p className={styles["form-subtitle"]}>
-              Login to your profile using email
-            </p>
-          </div>
-          <div className={styles["form-input-wrapper"]}>
-            <label className={styles["form-label"]} htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              placeholder="example@mail.com"
-              value={email}
-              onChange={handleChange}
-              onBlur={handleChange}
-              className={styles["form-input"]}
+      {isEmailSent ? (
+        <EmailSentSuccess email={email} styles={styles} />
+      ) : (
+        <>
+          <h1 className={styles["login-page-title"]}>
+            Please login to get access to your profile.
+          </h1>
+          <div className={styles["login-page-content"]}>
+            <form onSubmit={handleLogin} className={styles["form"]}>
+              <div>
+                <h2 className={styles["form-title"]}>Welcome</h2>
+                <p className={styles["form-subtitle"]}>
+                  Login to your profile using email
+                </p>
+              </div>
+              <div className={styles["form-input-wrapper"]}>
+                <label className={styles["form-label"]} htmlFor="email">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  required
+                  placeholder="example@mail.com"
+                  value={email}
+                  onChange={handleChange}
+                  onBlur={handleChange}
+                  className={styles["form-input"]}
+                />
+              </div>
+              <button type="submit" className={styles["form-btn"]}>
+                <LoginIcon color={"#fff"} size={20} />
+                Login
+              </button>
+            </form>
+            <Image
+              src={loginImage}
+              alt="Books"
+              width={500}
+              className={styles["form-image"]}
+              style={{
+                borderRadius: "0 10px 10px 0",
+              }}
+              priority={true}
             />
           </div>
-          <button type="submit" className={styles["form-btn"]}>
-            <LoginIcon color={"#fff"} size={20} />
-            Login
-          </button>
-        </form>
-        <Image
-          src={loginImage}
-          alt="Books"
-          width={500}
-          className={styles["form-image"]}
-          style={{
-            borderRadius: "0 10px 10px 0",
-          }}
-        />
-      </div>
+        </>
+      )}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {isLoading && <Loader />}
     </div>
