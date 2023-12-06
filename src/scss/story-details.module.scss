@@ -114,8 +114,8 @@
   right: auto;
   bottom: 60px;
   width: calc(100% - 10px);
-  height: calc(100vh - 150.5px);
-  // height: calc(100vh * var(--vh) - 150.5px);
+  // height: calc(100vh - 150.5px);
+  height: calc(100vh * var(--vh) - 150.5px);
   font-size: 14px;
   font-family: inherit;
   color: $second-black-color;
@@ -169,6 +169,7 @@
   padding: 2px 5px;
   background: none;
   color: $second-black-color;
+  font-weight: normal;
   cursor: pointer;
   &:hover {
     border: 1px solid $accent-color;

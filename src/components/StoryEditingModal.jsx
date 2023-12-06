@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { UndoIcon, RedoIcon, DoneIcon } from "@/components/Icons";
 import styles from "../scss/story-details.module.scss";
 import useUndoableState from "@/hooks/UseUndoableState";
-// import useDynamicVH from "@/hooks/useDynamicVH";
+import useDynamicVH from "@/hooks/useDynamicVH";
 import Textarea from "./Textarea";
 
 export const StoryEditingModal = ({
@@ -61,21 +61,19 @@ export const StoryEditingModal = ({
       }
     }
   };
-
-  // const vh = useDynamicVH;
-  // console.log(vh);
+  const vh = useDynamicVH();
 
   return (
     // <div style={{ width: "100%" }}>
     <form style={{ width: "100%" }} onSubmit={onDoneClick}>
-      <Textarea val={doc} fn={handleChange} styles={styles} />
-      {/* <textarea
+      {/* <Textarea val={doc} fn={handleChange} styles={styles} /> */}
+      <textarea
         name="textarea"
         onChange={handleChange}
         value={doc}
         autoFocus
         className={styles["story-textarea"]}
-      ></textarea> */}
+      ></textarea>
       <div className={styles["story-bottom-panel"]}>
         <div className={styles["story-btn-wrapper"]}>
           <button
@@ -101,16 +99,11 @@ export const StoryEditingModal = ({
             Redo
           </button>
         </div>
-        {/* {saved && <SavedIcon color={"yellowgreen"} size={25} />} */}
         <div className={styles["story-btn-wrapper"]}>
           <button className={styles["story-btn"]} onClick={onClose}>
             Cancel
           </button>
-          <button
-            type="submit"
-            className={styles["story-btn"]}
-            // onClick={onClose}
-          >
+          <button type="submit" className={styles["story-btn"]}>
             <DoneIcon color={"#f0623d"} size={20} />
             Done
           </button>
