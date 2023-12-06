@@ -6,7 +6,8 @@ import { useDispatch } from "react-redux";
 import { UndoIcon, RedoIcon, DoneIcon } from "@/components/Icons";
 import styles from "../scss/story-details.module.scss";
 import useUndoableState from "@/hooks/UseUndoableState";
-import useDynamicVH from "@/hooks/useDynamicVH";
+// import useDynamicVH from "@/hooks/useDynamicVH";
+import Textarea from "./Textarea";
 
 export const StoryEditingModal = ({
   order_id,
@@ -61,20 +62,20 @@ export const StoryEditingModal = ({
     }
   };
 
-  const vh = useDynamicVH;
-  console.log(vh);
+  // const vh = useDynamicVH;
+  // console.log(vh);
 
   return (
     // <div style={{ width: "100%" }}>
     <form style={{ width: "100%" }} onSubmit={onDoneClick}>
-      <textarea
+      <Textarea val={doc} fn={handleChange} styles={styles} />
+      {/* <textarea
         name="textarea"
         onChange={handleChange}
         value={doc}
         autoFocus
         className={styles["story-textarea"]}
-        // style={{ height: `calc(100vh * ${vh} - 150.5px)` }}
-      ></textarea>
+      ></textarea> */}
       <div className={styles["story-bottom-panel"]}>
         <div className={styles["story-btn-wrapper"]}>
           <button
