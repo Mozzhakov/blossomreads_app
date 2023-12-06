@@ -51,10 +51,11 @@ export default function OrderList({ orders }) {
 
     return sortedOrders;
   }
+  const relevantOrders = sortedOrders(orders);
   return (
     <section className={styles["order-list-section"]}>
       <div className={styles.container}>
-        {orders && orders.length === 0 ? (
+        {relevantOrders && relevantOrders.length === 0 ? (
           <h4 className={styles["order-list-title"]}>
             You don&#39;t have orders. You can make new order{" "}
             <Link
@@ -69,7 +70,7 @@ export default function OrderList({ orders }) {
           <h4 className={styles["order-list-title"]}>Your Stastiem books</h4>
         )}
         <ul className={styles["order-list"]}>
-          {orders.map((el) => (
+          {relevantOrders.map((el) => (
             <li key={el.order_id} className={styles["order-item"]}>
               <Link href={`/order/${el.order_id}`}>
                 <Image

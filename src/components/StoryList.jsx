@@ -31,11 +31,12 @@ export default function StoryList({ stories, params }) {
       );
     }
   };
+  const relevantStories = stories.slice(0, -1);
   return (
     <>
-      {stories && (
+      {relevantStories && (
         <ol className={styles["story-list"]}>
-          {stories.map((story) => (
+          {relevantStories.map((story) => (
             <li
               key={story.story_number}
               className={styles["story-item"]}
@@ -58,7 +59,9 @@ export default function StoryList({ stories, params }) {
                   className={styles["story-item-image-ph"]}
                   style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
                 >
-                  {story.story_title}
+                  <p className={styles["story-item-image-ph-text"]}>
+                    {story.story_title}
+                  </p>
                 </div>
               )}
 

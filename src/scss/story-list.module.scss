@@ -1,7 +1,7 @@
 @import "vars";
 @import "container";
 @import "mixins";
-
+@import "fonts";
 .story-list-section {
   padding: 30px 0;
   @include desktop {
@@ -78,6 +78,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      &-text {
+        font-family: BookFont;
+        text-align: center;
+        width: calc(100% - 40px);
+        font-size: 30px;
+      }
     }
     &-content {
       @include desktop {
