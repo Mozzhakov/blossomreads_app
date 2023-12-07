@@ -40,9 +40,9 @@ function SendFeedback() {
     e.preventDefault();
     const name = userInfo.first_name + " " + userInfo.last_name;
     const email = userInfo.email;
-    const subject = e.target.elements.subject.value;
+    const title = e.target.elements.subject.value;
     const comment = e.target.elements.comment.value;
-    const feedbackData = { name, email, subject, comment, rating };
+    const feedbackData = { name, email, title, comment, rating };
     dispatch(sendFeedback(feedbackData));
     e.target.reset();
     setRating(null);

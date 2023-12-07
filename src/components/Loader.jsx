@@ -30,17 +30,19 @@ export const Loader = () => {
 
 export const ImageLoader = () => {
   return (
-    <Oval
-      height={30}
-      width={30}
-      color="#f0623d"
-      wrapperStyle={{}}
-      wrapperClass=""
-      visible={true}
-      ariaLabel="oval-loading"
-      secondaryColor="#f0623d"
-      strokeWidth={2}
-      strokeWidthSecondary={2}
-    />
+    <div className={styles["image-loader"]}>
+      <Oval
+        height={30}
+        width={30}
+        color="#f0623d"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+        ariaLabel="oval-loading"
+        secondaryColor="#f0623d"
+        strokeWidth={2}
+        strokeWidthSecondary={2}
+      />
+    </div>
   );
 };

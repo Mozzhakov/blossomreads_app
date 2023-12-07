@@ -61,7 +61,26 @@ export const StoryEditingModal = ({
       }
     }
   };
-  // const vh = useDynamicVH();
+  useEffect(() => {
+    const bottomPanel = document.querySelector(
+      `.${styles["story-bottom-panel"]}`
+    );
+    const isiOS = /iPad|iPhone|iPod/.test(navigator.platform);
+    if (window.visualViewport && isiOS) {
+      const vv = window.visualViewport;
+
+      function fixPosition() {
+        bottomPanel.style.top = `${vv.height}px`;
+      }
+
+      vv.addEventListener("resize", fixPosition);
+      fixPosition(); // Make sure we call it once before resizing too
+
+      return () => {
+        vv.removeEventListener("resize", fixPosition);
+      };
+    }
+  }, []);
 
   return (
     // <div style={{ width: "100%" }}>

@@ -28,13 +28,13 @@ const feedback = createSlice({
       .addCase(sendFeedback.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isFeedbackSent = action.payload.success;
-        state.successMessage = action.payload.message;
+        state.successMessage = "Feedback sent successfully";
       })
       .addCase(sendFeedback.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.isFeedbackSent = action.payload.success;
-        state.error = action.payload.message + action.payload.error;
+        state.isFeedbackSent = false;
+        state.error = "Failed to send feedback. please try again later";
       });
   },
 });
