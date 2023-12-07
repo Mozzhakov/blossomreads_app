@@ -71,6 +71,7 @@ export const StoryEditingModal = ({
 
       function fixPosition() {
         bottomPanel.style.top = `${vv.height}px`;
+        bottomPanel.style.bottom = "auto";
       }
 
       vv.addEventListener("resize", fixPosition);
