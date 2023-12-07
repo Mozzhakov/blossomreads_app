@@ -63,14 +63,20 @@ export const StoryEditingModal = ({
   };
   useEffect(() => {
     const textarea = document.querySelector(`.${styles["story-textarea"]}`);
+    const bottomPanel = document.querySelector(
+      `.${styles["story-bottom-panel"]}`
+    );
     const isiOS = /iPad|iPhone|iPod/.test(navigator.platform);
     if (window.visualViewport && isiOS) {
       const vv = window.visualViewport;
 
       function fixPosition() {
         textarea.style.height = `calc(${vv.height}px - 150.5px)`;
-        // bottomPanel.style.bottom = "auto";
-        // bottomPanel.style.transform = "translateY(-100%)";
+        textarea.style.bottom = "auto";
+        textarea.style.top = "90.5px";
+        bottomPanel.style.top = `${vv.height}`;
+        bottomPanel.style.bottom = "auto";
+        bottomPanel.style.transform = "translateY(-100%)";
       }
 
       vv.addEventListener("resize", fixPosition);
