@@ -19,7 +19,7 @@ export async function POST(req) {
   const transport = nodemailer.createTransport(nodemailerConfig);
   const mailOptions = {
     from: "ivanmozzhakov@gmail.com",
-    to: "ivan.mozzhakov@stastiem.com",
+    to: "support@stastiem.com",
     subject: "Feedback",
     html: `<div>From: ${name}, ${email}</div><div>Subject: ${subject}</div><div>Comment: ${comment}</div><div>Rating: ${rating}</div>`,
   };
