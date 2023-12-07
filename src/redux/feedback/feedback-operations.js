@@ -5,7 +5,7 @@ export const sendFeedback = createAsyncThunk(
   async (feedbackData, { rejectWithValue }) => {
     try {
       console.log("started fetch");
-      const response = await fetch("http://localhost:3000/api/feedback", {
+      const response = await fetch("https://app.stastiem.com/api/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
