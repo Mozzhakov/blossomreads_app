@@ -10,6 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SidebarContainer } from "@/components/SidebarContainer";
+import { resetFeedbackStatus } from "@/redux/feedback/feedback-slice";
 import {
   getIsFeedbackLoading,
   getIsFeedbackSent,
@@ -55,6 +56,8 @@ function SendFeedback() {
   useEffect(() => {
     if (isFeedbackSent) {
       showSuccess(feedbackSuccess);
+
+      dispatch(resetFeedbackStatus());
     }
     if (isFeedbackError) {
       showFailure(feedbackError);
@@ -66,6 +69,7 @@ function SendFeedback() {
     isFeedbackSent,
     showFailure,
     showSuccess,
+    dispatch,
   ]);
   return (
     <SidebarContainer>
@@ -73,14 +77,14 @@ function SendFeedback() {
         <div className={styles["feedback-page"]}>
           <div className={styles.container}>
             <h1 className={styles["feedback-page-title"]}>
-              Leave us your feedback
+              Leave your feedback
             </h1>
             <form className={styles["feedback-form"]} onSubmit={onSubmit}>
               <legend className={styles["feedback-form-legend"]}>
                 Feedback form
               </legend>
               <label className={styles["feedback-form-label"]}>
-                Subject{" "}
+                Title{" "}
                 <input
                   type="text"
                   id="subject"
@@ -114,7 +118,7 @@ function SendFeedback() {
                   className={styles["feedback-form-label"]}
                   style={{ marginBottom: "5px" }}
                 >
-                  Rate your overall experience
+                  Rate your experience
                 </p>
                 <div>
                   {[...Array(5)].map((_, index) => {

@@ -9,6 +9,15 @@ const feedback = createSlice({
     isError: false,
     error: "",
   },
+  reducers: {
+    resetFeedbackStatus: (state) => {
+      state.isLoading = false;
+      state.isFeedbackSent = false;
+      state.successMessage = "";
+      state.isError = false;
+      state.error = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(sendFeedback.pending, (state) => {
@@ -29,5 +38,5 @@ const feedback = createSlice({
       });
   },
 });
-
+export const { resetFeedbackStatus } = feedback.actions;
 export const feedbackReducer = feedback.reducer;

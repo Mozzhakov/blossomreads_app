@@ -26,7 +26,7 @@ export default function Hero({ orders }) {
           </p>
           <div className={styles["hero-btn-wrapper"]}>
             <Link
-              href={earliestOrder ? `/orders/${earliestOrder.order_id}` : "/"}
+              href={earliestOrder ? `/order/${earliestOrder.order_id}` : "/"}
               className={
                 earliestOrder
                   ? styles["hero-btn"]

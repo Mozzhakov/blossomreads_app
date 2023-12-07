@@ -66,14 +66,14 @@ export const StoryEditingModal = ({
   return (
     // <div style={{ width: "100%" }}>
     <form style={{ width: "100%" }} onSubmit={onDoneClick}>
-      <Textarea val={doc} fn={handleChange} styles={styles} />
-      {/* <textarea
+      {/* <Textarea val={doc} fn={handleChange} styles={styles} /> */}
+      <textarea
         name="textarea"
         onChange={handleChange}
         value={doc}
         autoFocus
         className={styles["story-textarea"]}
-      ></textarea> */}
+      ></textarea>
       <div className={styles["story-bottom-panel"]}>
         <div className={styles["story-btn-wrapper"]}>
           <button

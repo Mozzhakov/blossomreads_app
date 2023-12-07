@@ -4,12 +4,14 @@ import cover from "../images/order-placeholder.png";
 import styles from "../scss/story-list.module.scss";
 import { useState } from "react";
 import { StoryModal } from "@/components/StoryModal";
+import { ImageLoader } from "./Loader";
 import { Portal } from "./Modal";
 
 export default function StoryList({ stories, params }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currStory, setCurrStory] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(isLoading);
   const goToPrev = () => {
     setCurrStory((currStory) => currStory - 1);
   };
@@ -46,6 +48,9 @@ export default function StoryList({ stories, params }) {
               }}
             >
               {story.left_image_optimized ? (
+                // isLoading ? (
+                //   <ImageLoader />
+                // ) : (
                 <Image
                   src={story.left_image_optimized}
                   alt="Story cover"
@@ -53,6 +58,10 @@ export default function StoryList({ stories, params }) {
                   height={400}
                   className={styles["story-item-image"]}
                   priority={true}
+                  onLoad={() => {
+                    console.log("Image loaded successfully");
+                    setIsLoading(false);
+                  }}
                 />
               ) : (
                 <div

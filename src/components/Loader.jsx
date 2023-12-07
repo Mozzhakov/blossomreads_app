@@ -1,4 +1,4 @@
-import { Puff } from "react-loader-spinner";
+import { Puff, Oval } from "react-loader-spinner";
 // import { Portal } from "./Modal";
 import styles from "../scss/loader.module.scss";
 export const Loader = () => {
@@ -22,5 +22,25 @@ export const Loader = () => {
         />
       </div>
     </div>
+    // <div className={styles["loading-bar"]}>
+    //   <div className={styles["progress-bar"]}></div>
+    // </div>
+  );
+};
+
+export const ImageLoader = () => {
+  return (
+    <Oval
+      height={30}
+      width={30}
+      color="#f0623d"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+      ariaLabel="oval-loading"
+      secondaryColor="#f0623d"
+      strokeWidth={2}
+      strokeWidthSecondary={2}
+    />
   );
 };
