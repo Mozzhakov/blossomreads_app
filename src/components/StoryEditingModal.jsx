@@ -43,18 +43,21 @@ export const StoryEditingModal = ({
     const storyTextValue = e.target.elements.textarea.value;
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
       try {
-        await dispatch(
-          editStory({
-            order_id: Number(order_id),
-            story_id: Number(story_id),
-            story_title: story_title,
-            story_text: encodeURIComponent(storyTextValue),
-            token: user.accessToken,
-          })
-        );
+        if (storyTextValue !== story_text) {
+          await dispatch(
+            editStory({
+              order_id: Number(order_id),
+              story_id: Number(story_id),
+              story_title: story_title,
+              story_text: encodeURIComponent(storyTextValue),
+              token: user.accessToken,
+            })
+          );
 
-        dispatch(fetchStories({ id: order_id, token: user.accessToken }));
+          dispatch(fetchStories({ id: order_id, token: user.accessToken }));
 
+          onClose();
+        }
         onClose();
       } catch (error) {
         console.log(error.message);

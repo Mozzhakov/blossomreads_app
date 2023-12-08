@@ -62,7 +62,6 @@ function Profile() {
       return "+" + user.phone;
     }
   };
-
   const name =
     userInfo && !userInfo.detail
       ? userInfo.first_name + " " + userInfo.last_name
@@ -78,7 +77,12 @@ function Profile() {
               <Loader />
             ) : (
               <div className={styles["profile-content"]}>
-                <h1 className={styles["profile-title"]}>Your profile</h1>
+                <h1 className={styles["profile-title"]}>
+                  Your{" "}
+                  <span style={{ color: "#f0623d", display: "contents" }}>
+                    profile
+                  </span>
+                </h1>
 
                 <div className={styles["profile-content-box"]}>
                   <p className={styles["profile-content-title"]}>
@@ -125,8 +129,8 @@ function Profile() {
                     </li>
                     <li style={{ listStyle: "none", width: "100%" }}>
                       <Link
-                        href="/help"
-                        target="_blanc"
+                        href="mailto:support@stastiem.com"
+                        // target="_blanc"
                         className={styles["profile-content-item"]}
                       >
                         <p>Ask for help</p>

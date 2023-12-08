@@ -1,9 +1,11 @@
 "use client";
-import { useEffect } from "react";
+
 import { auth } from "@/firebase/Firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchOrders } from "@/redux/orders/orders-operations";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 import { useSelector } from "react-redux";
 import { Suspense } from "react";
 import { Loader } from "@/components/Loader";
@@ -26,11 +28,11 @@ function Home() {
   useEffect(() => {
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
       dispatch(fetchOrders(user.accessToken));
-      localStorage.removeItem("persist:stories");
     }
   }, [user, dispatch]);
 
   const orders = useSelector(getOrders);
+
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
 
@@ -47,7 +49,7 @@ function Home() {
             <>
               <Hero orders={orders} />
               <Suspense fallback={<p>Loading orders...</p>}>
-                <OrdersList orders={orders} />
+                <OrdersList orders={orders} user={user} />
               </Suspense>
             </>
           ) : (

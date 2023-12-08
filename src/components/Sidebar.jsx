@@ -32,6 +32,13 @@ export const Sidebar = ({ onClose, isOpen }) => {
         </Link>
         <nav className={styles["sidebar-menu-nav"]}>
           <Link
+            href="/"
+            className={styles["sidebar-menu-nav-link"]}
+            onClick={onClose}
+          >
+            Home
+          </Link>
+          <Link
             href="/help"
             className={styles["sidebar-menu-nav-link"]}
             onClick={onClose}
