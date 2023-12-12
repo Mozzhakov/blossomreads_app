@@ -15,14 +15,9 @@ export default function Hero({ orders }) {
     <>
       <section className={styles["hero-section"]}>
         <div className={styles.container}>
-          <h1 className={styles["hero-title"]}>
-            Crafting magic: Edit your child&#39;s adventure
-          </h1>
+          <h1 className={styles["hero-title"]}>Welcome to your Story Hub</h1>
           <p className={styles["hero-text"]}>
-            Edit, personalize, and cherish each page of your child&#39;s tale,
-            crafting a one-of-a-kind story that reflects their unique magic.
-            With our intuitive tools, every detail becomes a cherished memory in
-            the enchanting adventure you create together.
+            Preview and personalize your unique Storybook Adventures
           </p>
           <div className={styles["hero-btn-wrapper"]}>
             <Link
@@ -46,3 +41,4 @@ export default function Hero({ orders }) {
     </>
   );
 }
+// style={{ color: "#f0623d" }}

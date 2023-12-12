@@ -11,6 +11,14 @@ const authorization = createSlice({
     isError: false,
     error: "",
   },
+  // reducers: {
+  //   resetAuthState: (state) => {
+  //     state.isLoading = false;
+  //     state.isLoggedIn = false;
+  //     state.isError = false;
+  //     state.error = "";
+  //   },
+  // },
   extraReducers: (builder) => {
     builder
       .addCase(logIn.pending, (state) => {
@@ -27,8 +35,7 @@ const authorization = createSlice({
         state.isLoading = false;
         state.isLoggedIn = false;
         state.isError = true;
-        state.error =
-          "Wrong email or login link. Please log in using the link in the email we sent.";
+        state.error = "Invalid email or expired link.";
       })
       .addCase(logOut.pending, (state) => {
         state.isLoading = true;
@@ -64,5 +71,5 @@ const authorization = createSlice({
       });
   },
 });
-
+// export const { resetAuthState } = authorization.actions;
 export const authReducer = authorization.reducer;

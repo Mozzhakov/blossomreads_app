@@ -1,0 +1,10 @@
+@import "vars";
+.custom-toast {
+  background-color: $white-color;
+  color: $second-black-color;
+  font-family: inherit;
+}
+
+.custom-toast-body {
+  font-size: 14px;
+}

@@ -1,0 +1,24 @@
+@import "mixins";
+@import "container";
+@import "vars";
+
+.help-section {
+  padding: 30px 0;
+  @include desktop {
+    padding: 40px 0;
+  }
+}
+.help-title {
+  text-align: center;
+}
+.help-list {
+  list-style: none;
+}
+.help-item {
+  margin-bottom: 15px;
+}
+.help-item-title {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}

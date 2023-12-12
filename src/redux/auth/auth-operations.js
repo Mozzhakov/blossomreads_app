@@ -30,8 +30,7 @@ export const sendLink = createAsyncThunk(
     } catch (error) {
       if (error.code === "auth/admin-restricted-operation") {
         return rejectWithValue({
-          message:
-            "Oops! It looks like you don't have any orders yet. Please place an order to sign in and enjoy our services.",
+          message: "Oops! It looks like you don't have any orders yet.",
           status: error.code,
         });
       }

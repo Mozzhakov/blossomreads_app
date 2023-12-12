@@ -7,13 +7,11 @@ import { SidebarContainer } from "@/components/SidebarContainer";
 import LoginWithoutLink from "@/components/LoginWithoutLink";
 import LoginWithLink from "@/components/LoginWithLink";
 import PublicRoute from "@/components/PublicRoute";
+import { isSignInWithEmailLink } from "firebase/auth";
 
 function Login() {
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
-  const params = new URL(document.location).searchParams;
-  const paramsArr = Array.from(params.entries());
-  const paramsSize = paramsArr.length;
 
   async function handleSignIn(e) {
     e.preventDefault();
@@ -30,7 +28,7 @@ function Login() {
   return (
     <SidebarContainer>
       <PublicRoute>
-        {paramsSize === 4 ? (
+        {isSignInWithEmailLink(auth, window.location.href) ? (
           <LoginWithLink
             handleLogin={handleSignIn}
             email={email}

@@ -1,0 +1,106 @@
+@import "vars";
+.input-wrapper {
+  position: relative;
+  //   margin-top: 30px; // To create space for floating inputs
+  margin-inline: auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+.input {
+  font-size: 14px;
+  width: 100%;
+  padding: 8px 10px 8px 10px;
+  color: $second-black-color;
+  border: none;
+  border: 1px solid $grey-color;
+  border-radius: 5px;
+  transition: border-color 250ms;
+  background-color: transparent;
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-color;
+    &::placeholder {
+      opacity: 1;
+    }
+  }
+
+  &::placeholder {
+    opacity: 0;
+  }
+
+  //   // Hide Safari's autofill button
+  //   &::-webkit-contacts-auto-fill-button {
+  //     visibility: hidden;
+  //     pointer-events: none;
+  //     position: absolute;
+  //   }
+  &-error {
+    @extend .input;
+    border-color: red;
+    &:focus {
+      border-color: red;
+    }
+  }
+}
+
+.label {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  padding: 0 5px;
+  font-size: 14px;
+  color: $second-black-color;
+  pointer-events: none;
+  transform-origin: left center;
+  transition: transform 250ms;
+  background: $white-color;
+  font-family: inherit;
+  transition: 0.2s;
+  &-error {
+    @extend .label;
+    color: red;
+  }
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+  transform: translateY(-100%) scale(0.75);
+  color: $accent-color;
+}
+.input-error:focus + .label-error,
+.input-error:not(:placeholder-shown) + .label-error {
+  transform: translateY(-100%) scale(0.75);
+  color: red;
+}
+
+// .clear {
+//   cursor: pointer;
+//   appearance: none;
+//   -webkit-appearance: none;
+//   position: absolute;
+//   top: 50%;
+//   right: -9px; // To visually align with inputs right edge
+//   transform: translateY(-50%);
+//   background: none;
+//   border: none;
+//   border-radius: 50%;
+//   height: 30px;
+//   width: 30px;
+//   color: #777;
+//   transition: color 250ms;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   &:hover,
+//   &:focus {
+//     color: #333;
+//   }
+// }
+
+// .input:placeholder-shown + .label + .clear {
+//   display: none;
+// }

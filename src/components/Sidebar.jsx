@@ -2,8 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 // import { useState } from "react";
 import styles from "../scss/sidebar.module.scss";
+import { usePathname } from "next/navigation";
 
 export const Sidebar = ({ onClose, isOpen }) => {
+  const pathname = usePathname();
   return (
     <div className={isOpen ? styles["sidebar"] : styles["sidebar--closed"]}>
       <div
@@ -31,13 +33,15 @@ export const Sidebar = ({ onClose, isOpen }) => {
           />
         </Link>
         <nav className={styles["sidebar-menu-nav"]}>
-          <Link
-            href="/"
-            className={styles["sidebar-menu-nav-link"]}
-            onClick={onClose}
-          >
-            Home
-          </Link>
+          {pathname !== "/" && (
+            <Link
+              href="/"
+              className={styles["sidebar-menu-nav-link"]}
+              onClick={onClose}
+            >
+              Home
+            </Link>
+          )}
           <Link
             href="/help"
             className={styles["sidebar-menu-nav-link"]}
