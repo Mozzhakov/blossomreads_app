@@ -1,9 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  signInWithEmailLink,
-  signOut,
-  sendSignInLinkToEmail,
-} from "firebase/auth";
+import { signInWithEmailLink, signOut } from "firebase/auth";
 
 export const logIn = createAsyncThunk(
   "auth/login",
@@ -19,43 +15,26 @@ export const logIn = createAsyncThunk(
 
 export const sendLink = createAsyncThunk(
   "auth/sendLink",
-  async ({ auth, email, actionCodeSettings }, { rejectWithValue }) => {
+  async ({ email, testing }, { rejectWithValue }) => {
+    const url = `https://api.stastiem.com/firebase/signin-link-to-email?user_email=${encodeURIComponent(
+      email
+    )}&testing=${testing}`;
+    const headers = {
+      accept: "application/json",
+    };
     try {
-      const response = await sendSignInLinkToEmail(
-        auth,
-        email,
-        actionCodeSettings
-      );
-      return response;
-    } catch (error) {
-      if (error.code === "auth/admin-restricted-operation") {
-        return rejectWithValue({
-          message: "Oops! It looks like you don't have any orders yet.",
-          status: error.code,
-        });
+      const response = await fetch(url, { method: "GET", headers });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.detail);
       }
-      console.log(error);
-      return rejectWithValue({
-        message:
-          "Something went wrong while sending the email. Please try again.",
-        status: error.status,
-      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
     }
   }
 );
-
-// export const refreshUser = createAsyncThunk(
-//   "auth/refreshUser",
-//   (_, { rejectWithValue }) => {
-//     try {
-//       const response = getAuth(auth);
-//       // console.log(response);
-//       // return response.currentUser;
-//     } catch (error) {
-//       rejectWithValue(error.message);
-//     }
-//   }
-// );
 
 export const logOut = createAsyncThunk(
   "auth/logout",

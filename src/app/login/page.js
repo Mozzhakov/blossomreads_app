@@ -10,6 +10,7 @@ import PublicRoute from "@/components/PublicRoute";
 import { isSignInWithEmailLink } from "firebase/auth";
 
 function Login() {
+  const testing = !window.location.href.includes("app.stastiem.com");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ function Login() {
 
   async function handleSendLink(e) {
     e.preventDefault();
-    await dispatch(sendLink({ auth, email, actionCodeSettings }));
+    await dispatch(sendLink({ email, testing }));
     setEmail("");
   }
 
