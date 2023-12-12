@@ -77,7 +77,7 @@ function SendFeedback() {
         <div className={styles["feedback-page"]}>
           <div className={styles.container}>
             <h1 className={styles["feedback-page-title"]}>
-              Leave your feedback
+              Leave your <span style={{ color: "#f0623d" }}>feedback</span>
             </h1>
             <form className={styles["feedback-form"]} onSubmit={onSubmit}>
               <legend className={styles["feedback-form-legend"]}>

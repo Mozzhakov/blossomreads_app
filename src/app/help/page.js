@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { SidebarContainer } from "@/components/SidebarContainer";
+import { ArrowDown, ArrowUp } from "@/components/Icons";
 import styles from "../../scss/help.module.scss";
 function Help() {
   const [answersVisible, setAnswersVisible] = useState({});
@@ -47,7 +48,7 @@ function Help() {
               <h5 className={styles["help-item-title"]}>
                 1. Overview of Stastiem App
               </h5>
-              <p>
+              <p className={styles["help-item-content"]}>
                 Welcome to the Stastiem App, your personal portal to creating
                 magical storybook experiences for the children in your life. Our
                 app is designed to bring your personalized storybook orders to
@@ -62,23 +63,46 @@ function Help() {
               <h5 className={styles["help-item-title"]}>
                 2. Frequently Asked Questions (FAQs)
               </h5>
+              {/* <ul className={styles["help-item-list"]}> */}
               {faqsData.map((item) => (
-                <div key={item.id} style={{ marginBottom: "30px" }}>
+                <div
+                  key={item.id}
+                  className={styles["help-item"]}
+                  style={{
+                    padding: "5px",
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    borderRadius: "5px",
+                  }}
+                >
                   <p
-                    style={{ cursor: "pointer" }}
+                    className={styles["help-item-content"]}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
                     onClick={() => toggleAnswer(item.id)}
                   >
                     {item.question}
+                    {answersVisible[item.id] ? (
+                      <ArrowUp size={20} color={"#F0623d"} />
+                    ) : (
+                      <ArrowDown size={20} color={"#000"} />
+                    )}
                   </p>
-                  {answersVisible[item.id] && <p>{item.answer}</p>}
+                  {answersVisible[item.id] && (
+                    <p className={styles["help-item-content"]}>{item.answer}</p>
+                  )}
                 </div>
               ))}
+              {/* </ul> */}
             </li>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}>
                 5. Contact Support Need Help or Have Questions?
               </h5>
-              <p>
+              <p className={styles["help-item-content"]}>
                 Our dedicated support team is here to assist you with any
                 queries or concerns. Feel free to reach out to us at
                 support@stastiem.com, and we’ll ensure to provide timely and
@@ -89,52 +113,71 @@ function Help() {
               <h5 className={styles["help-item-title"]}>
                 6. Policies and Procedures
               </h5>
-              <p>Understanding Our Process</p>
-              <p>
+              <p className={styles["help-item-content"]}>
+                Understanding Our Process
+              </p>
+              <p className={styles["help-item-content"]}>
                 From the moment you place your order to the delivery of your
                 personalized book, we are committed to ensuring a smooth and
                 enjoyable experience. Here’s a quick overview of our process:
               </p>
-              <ul>
+              <ul className={styles["help-item-list"]}>
                 <li>
-                  Order and Customization: After placing your order, you’ll have
-                  the opportunity to upload photos and customize your stories.
+                  <p className={styles["help-item-content"]}>
+                    Order and Customization: After placing your order, you’ll
+                    have the opportunity to upload photos and customize your
+                    stories.
+                  </p>
                 </li>
                 <li>
-                  Preview and Edit: Before printing, we’ll provide a preview of
-                  the stories and illustrations for your review and edits.
+                  <p className={styles["help-item-content"]}>
+                    Preview and Edit: Before printing, we’ll provide a preview
+                    of the stories and illustrations for your review and edits.
+                  </p>
                 </li>
                 <li>
-                  Shipping and Delivery: Once finalized, your book will be
-                  printed and shipped. Shipping times and costs vary based on
-                  location, detailed at checkout.
+                  <p className={styles["help-item-content"]}>
+                    Shipping and Delivery: Once finalized, your book will be
+                    printed and shipped. Shipping times and costs vary based on
+                    location, detailed at checkout.
+                  </p>
                 </li>
               </ul>
             </li>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}> 7. Tips and Best</h5>
-              <p>
+              <p className={styles["help-item-content"]}>
                 Practices Creating the Perfect Storybook To ensure your Stastiem
                 book is as magical as possible, consider the following tips:
               </p>
-              <ul>
+              <ul className={styles["help-item-list"]}>
                 <li>
-                  Choose clear, well-lit photos where the child’s face is
-                  visible.
+                  <p className={styles["help-item-content"]}>
+                    Choose clear, well-lit photos where the child’s face is
+                    visible.
+                  </p>
                 </li>
                 <li>
-                  Think about the child’s interests and hobbies for story
-                  inspiration.
+                  <p className={styles["help-item-content"]}>
+                    Think about the child’s interests and hobbies for story
+                    inspiration.
+                  </p>
                 </li>
-                <li>Review and edit the story text to add a personal touch.</li>
+                <li>
+                  <p className={styles["help-item-content"]}>
+                    Review and edit the story text to add a personal touch.
+                  </p>
+                </li>
               </ul>
             </li>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}>
                 8. Feedback and Suggestions
               </h5>
-              <p>We Value Your Feedback</p>
-              <p>
+              <p className={styles["help-item-content"]}>
+                We Value Your Feedback
+              </p>
+              <p className={styles["help-item-content"]}>
                 Your opinions and suggestions are vital to us. Please use the
                 feedback section in our app to rate your experience (1-5 stars)
                 and leave any comments or suggestions. Your input helps us

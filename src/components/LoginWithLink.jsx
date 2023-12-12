@@ -43,7 +43,7 @@ function LoginWithLink({ handleLogin, email, setEmail }) {
                 <p className={styles["form-error-msg"]}>
                   {errorMessage} Click{" "}
                   <a
-                    href="http://localhost:3000/login"
+                    href="https://app.stastiem.com/login"
                     className={styles["form-error-msg-link"]}
                   >
                     here

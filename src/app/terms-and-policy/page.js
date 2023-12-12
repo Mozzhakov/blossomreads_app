@@ -65,7 +65,7 @@ export default function TermsPolicy() {
             to its conflict of law provisions.
           </p>
           <p className={styles["terms-title"]}>9. Contact Information</p>
-          <p className={styles["terms-text"]}>
+          <p className={styles["terms-text"]} style={{ marginBottom: "30px" }}>
             For any questions or concerns regarding these terms, please contact
             us at support@stastiem.com.
           </p>
