@@ -74,3 +74,15 @@
     }
   }
 }
+
+.success-msg {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.error-msg {
+  @extend .success-msg;
+  color: red;
+}

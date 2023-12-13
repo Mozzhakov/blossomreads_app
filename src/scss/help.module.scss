@@ -35,10 +35,47 @@
 .help-item-content {
   font-size: 14px;
   line-height: 1.5;
+  &-title {
+    font-weight: 600;
+  }
   @include desktop {
     font-size: 16px;
+  }
+}
+.faq-item {
+  @extend .help-item;
+  padding: 10px 5px 0 5px;
+  border: 1px solid $grey-color;
+  border-radius: 5px;
+}
+.faq-item-content-title {
+  @extend .help-item-content-title;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.faq-item-content {
+  @extend .help-item-content;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.2s;
+  &--visible {
+    @extend .faq-item-content;
+    max-height: 200px;
   }
 }
 .help-item-list {
   padding-left: 15px;
 }
+// .help-arrow {
+//   transition: 0.2s;
+//   & path {
+//     fill: $second-black-color;
+//   }
+//   &--open {
+//     @extend .help-arrow;
+//     transform: rotate(180deg);
+//   }
+// }

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { SidebarContainer } from "@/components/SidebarContainer";
-import { ArrowDown, ArrowUp } from "@/components/Icons";
+import { ArrowUp } from "@/components/Icons";
 import styles from "../../scss/help.module.scss";
 function Help() {
   const [answersVisible, setAnswersVisible] = useState({});
@@ -42,7 +42,9 @@ function Help() {
     <SidebarContainer>
       <section className={styles["help-section"]}>
         <div className={styles["container"]}>
-          <h1 className={styles["help-title"]}>Need help?</h1>
+          <h1 className={styles["help-title"]}>
+            Need <span style={{ color: "#f0623d" }}>help?</span>
+          </h1>
           <ul className={styles["help-list"]}>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}>
@@ -63,55 +65,52 @@ function Help() {
               <h5 className={styles["help-item-title"]}>
                 2. Frequently Asked Questions (FAQs)
               </h5>
-              {/* <ul className={styles["help-item-list"]}> */}
+
               {faqsData.map((item) => (
-                <div
-                  key={item.id}
-                  className={styles["help-item"]}
-                  style={{
-                    padding: "5px",
-                    border: "1px solid rgba(0,0,0,0.15)",
-                    borderRadius: "5px",
-                  }}
-                >
+                <div key={item.id} className={styles["faq-item"]}>
                   <p
-                    className={styles["help-item-content"]}
-                    style={{
-                      cursor: "pointer",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
+                    className={styles["faq-item-content-title"]}
                     onClick={() => toggleAnswer(item.id)}
                   >
                     {item.question}
-                    {answersVisible[item.id] ? (
-                      <ArrowUp size={20} color={"#F0623d"} />
-                    ) : (
-                      <ArrowDown size={20} color={"#000"} />
-                    )}
+                    <ArrowUp
+                      size={20}
+                      color={"#3b444b"}
+                      isOpen={answersVisible[item.id]}
+                    />
                   </p>
-                  {answersVisible[item.id] && (
-                    <p className={styles["help-item-content"]}>{item.answer}</p>
-                  )}
+                  <div
+                    className={
+                      answersVisible[item.id]
+                        ? styles["faq-item-content--visible"]
+                        : styles["faq-item-content"]
+                    }
+                  >
+                    {item.answer}
+                  </div>
                 </div>
               ))}
-              {/* </ul> */}
             </li>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}>
-                5. Contact Support Need Help or Have Questions?
+                3. Contact Support Need Help or Have Questions?
               </h5>
               <p className={styles["help-item-content"]}>
                 Our dedicated support team is here to assist you with any
-                queries or concerns. Feel free to reach out to us at
-                support@stastiem.com, and we’ll ensure to provide timely and
-                helpful responses to your inquiries.
+                queries or concerns. Feel free to reach out to us at{" "}
+                <a
+                  href={"mailto:support@stastiem.com"}
+                  style={{ color: "#f0623d" }}
+                >
+                  support@stastiem.com
+                </a>
+                , and we’ll ensure to provide timely and helpful responses to
+                your inquiries.
               </p>
             </li>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}>
-                6. Policies and Procedures
+                4. Policies and Procedures
               </h5>
               <p className={styles["help-item-content"]}>
                 Understanding Our Process
@@ -145,7 +144,7 @@ function Help() {
               </ul>
             </li>
             <li className={styles["help-item"]}>
-              <h5 className={styles["help-item-title"]}> 7. Tips and Best</h5>
+              <h5 className={styles["help-item-title"]}> 5. Tips and Best</h5>
               <p className={styles["help-item-content"]}>
                 Practices Creating the Perfect Storybook To ensure your Stastiem
                 book is as magical as possible, consider the following tips:
@@ -172,7 +171,7 @@ function Help() {
             </li>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}>
-                8. Feedback and Suggestions
+                6. Feedback and Suggestions
               </h5>
               <p className={styles["help-item-content"]}>
                 We Value Your Feedback

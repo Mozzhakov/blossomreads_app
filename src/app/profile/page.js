@@ -1,13 +1,15 @@
 "use client";
 import { auth } from "@/firebase/Firebase";
 import { logOut } from "@/redux/auth/auth-operations";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchUser } from "@/redux/user/user-operations";
 import { useNotify } from "@/hooks/useNotify";
 import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 import { Loader } from "@/components/Loader";
+import { Portal } from "@mui/material";
+import { LogoutModal } from "@/components/LogoutModal";
 import {
   getUserInfo,
   getIsUserError,
@@ -26,22 +28,22 @@ import PrivateRoute from "@/components/PrivateRoute";
 import { SidebarContainer } from "@/components/SidebarContainer";
 
 function Profile() {
+  const [modalOpen, setModalOpen] = useState(false);
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
   const { showFailure } = useNotify();
 
-  const onLogoutClick = () => {
-    dispatch(logOut({ auth }));
-    localStorage.removeItem("persist:orders");
-    localStorage.removeItem("persist:stories");
-  };
+  // const onLogoutClick = () => {
+  //   dispatch(logOut({ auth }));
+  //   localStorage.removeItem("persist:orders");
+  //   localStorage.removeItem("persist:stories");
+  // };
 
   useEffect(() => {
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
       dispatch(fetchUser(user.accessToken));
     }
   }, [dispatch, user]);
-  // console.log(user.accessToken);
 
   const userInfo = useSelector(getUserInfo);
   const isUserError = useSelector(getIsUserError);
@@ -140,7 +142,7 @@ function Profile() {
                     <li style={{ listStyle: "none", width: "100%" }}>
                       <button
                         className={styles["profile-content-item"]}
-                        onClick={onLogoutClick}
+                        onClick={() => setModalOpen(true)}
                       >
                         <p>Logout</p>
                         <LinkArrowIcon color={"#3b444b"} size={20} />
@@ -149,6 +151,11 @@ function Profile() {
                   </ul>
                 </div>
               </div>
+            )}
+            {modalOpen && (
+              <Portal>
+                <LogoutModal onClose={() => setModalOpen(false)} />
+              </Portal>
             )}
           </div>
         </div>

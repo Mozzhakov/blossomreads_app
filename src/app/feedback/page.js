@@ -10,7 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SidebarContainer } from "@/components/SidebarContainer";
-import { resetFeedbackStatus } from "@/redux/feedback/feedback-slice";
+import { SuccessIcon } from "@/components/Icons";
 import {
   getIsFeedbackLoading,
   getIsFeedbackSent,
@@ -26,7 +26,8 @@ function SendFeedback() {
   const [user] = useAuthState(auth);
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
-  const { showSuccess, showFailure } = useNotify();
+  // const { showSuccess, showFailure } = useNotify();
+  // const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
@@ -38,14 +39,17 @@ function SendFeedback() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const name = userInfo.first_name + " " + userInfo.last_name;
     const email = userInfo.email;
     const title = e.target.elements.subject.value;
     const comment = e.target.elements.comment.value;
-    const feedbackData = { name, email, title, comment, rating };
+    const feedbackData = { email, title, comment, rating };
     dispatch(sendFeedback(feedbackData));
     e.target.reset();
     setRating(null);
+    // setShowNotification(true);
+    // setTimeout(() => {
+    //   setShowNotification(false);
+    // }, 2000);
   };
   const isFeedbackLoading = useSelector(getIsFeedbackLoading);
   const isFeedbackSent = useSelector(getIsFeedbackSent);
@@ -53,24 +57,24 @@ function SendFeedback() {
   const feedbackSuccess = useSelector(getFeedbackSuccess);
   const feedbackError = useSelector(getFeedbackError);
 
-  useEffect(() => {
-    if (isFeedbackSent) {
-      showSuccess(feedbackSuccess);
+  // useEffect(() => {
+  //   if (isFeedbackSent) {
+  //     showSuccess(feedbackSuccess);
 
-      dispatch(resetFeedbackStatus());
-    }
-    if (isFeedbackError) {
-      showFailure(feedbackError);
-    }
-  }, [
-    feedbackError,
-    feedbackSuccess,
-    isFeedbackError,
-    isFeedbackSent,
-    showFailure,
-    showSuccess,
-    dispatch,
-  ]);
+  //     dispatch(resetFeedbackStatus());
+  //   }
+  //   if (isFeedbackError) {
+  //     showFailure(feedbackError);
+  //   }
+  // }, [
+  //   feedbackError,
+  //   feedbackSuccess,
+  //   isFeedbackError,
+  //   isFeedbackSent,
+  //   showFailure,
+  //   showSuccess,
+  //   dispatch,
+  // ]);
   return (
     <SidebarContainer>
       <PrivateRoute>
@@ -153,6 +157,15 @@ function SendFeedback() {
               <button type="submit" className={styles["btn_primary"]}>
                 Send feedback
               </button>
+              {isFeedbackSent && (
+                <p className={styles["success-msg"]}>
+                  <SuccessIcon color={"yellowgreen"} size={20} />
+                  {feedbackSuccess}
+                </p>
+              )}
+              {isFeedbackError && (
+                <p className={styles["error-msg"]}>{feedbackError}</p>
+              )}
             </form>
           </div>
           {isFeedbackLoading && <Loader />}
