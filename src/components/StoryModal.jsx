@@ -60,101 +60,106 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
     if (swipeDistance > swipeThreshold) {
       // Swipe left, trigger next
       next();
-    }
-
-    if (swipeDistance < -swipeThreshold) {
+    } else if (swipeDistance < -swipeThreshold) {
       // Swipe right, trigger prev
       prev();
     }
   };
   return (
     <>
+      <div className={styles["story-overlay"]} onClick={onClose}></div>
       <div
-        className={styles["story-overlay"]}
-        onClick={onClose}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-      ></div>
-      <div className={styles["story-modal"]} ref={modalRef}>
-        <div className={styles["story-top-nav"]}>
-          <button
-            className={
-              editingMode
-                ? styles["story-back-btn--disabled"]
-                : styles["story-back-btn"]
-            }
-            onClick={onClose}
-          >
-            <BackIcon
-              color={editingMode ? "rgba(16, 16, 16, 0.3)" : "#3b444b"}
-              size={25}
-            />
-            back
-          </button>
-          <div className={styles["story-nav-btn-wrap"]}>
+      >
+        <div
+          className={styles["story-modal"]}
+          ref={modalRef}
+          style={{
+            transform: `translateX(${touchStart - touchEnd}px)`,
+            transition: "transform 0.3s ease",
+          }}
+        >
+          <div className={styles["story-top-nav"]}>
             <button
-              onClick={prev}
               className={
-                currentStory.story_number > 1 && !editingMode
-                  ? styles["story-nav-btn"]
-                  : styles["story-nav-btn--disabled"]
+                editingMode
+                  ? styles["story-back-btn--disabled"]
+                  : styles["story-back-btn"]
               }
+              onClick={onClose}
             >
-              <LeftArrowIcon
-                color={
-                  currentStory.story_number > 1 && !editingMode
-                    ? "#3b444b"
-                    : "rgba(16, 16, 16, 0.3)"
-                }
-                size={22}
+              <BackIcon
+                color={editingMode ? "rgba(16, 16, 16, 0.3)" : "#3b444b"}
+                size={25}
               />
-              prev
+              back
             </button>
-            <button
-              onClick={next}
-              className={
-                currentStory.story_number < 6 && !editingMode
-                  ? styles["story-nav-btn"]
-                  : styles["story-nav-btn--disabled"]
-              }
-            >
-              <RightArrowIcon
-                color={
-                  currentStory.story_number < 6 && !editingMode
-                    ? "#3b444b"
-                    : "rgba(16, 16, 16, 0.3)"
-                }
-                size={22}
-              />
-              next
-            </button>
-          </div>
-        </div>
-        <div className={styles["story-content"]}>
-          <h3 className={styles["story-title"]}>
-            {currentStory.story_number}. {currentStory.story_title}
-          </h3>
-          {editingMode ? (
-            <StoryEditingModal
-              order_id={order_id}
-              story_id={currentStory.story_number}
-              story_title={currentStory.story_title}
-              story_text={currentStory.story_text}
-              onClose={closeEditingMode}
-            />
-          ) : (
-            <>
-              <p className={styles["story-text"]}>{storyText}</p>
+            <div className={styles["story-nav-btn-wrap"]}>
               <button
-                className={styles["story-edit-btn"]}
-                onClick={() => setEditionMode(true)}
+                onClick={prev}
+                className={
+                  currentStory.story_number > 1 && !editingMode
+                    ? styles["story-nav-btn"]
+                    : styles["story-nav-btn--disabled"]
+                }
               >
-                <EditIcon color={"#3b444b"} size={20} />
-                Edit
+                <LeftArrowIcon
+                  color={
+                    currentStory.story_number > 1 && !editingMode
+                      ? "#3b444b"
+                      : "rgba(16, 16, 16, 0.3)"
+                  }
+                  size={22}
+                />
+                prev
               </button>
-            </>
-          )}
+              <button
+                onClick={next}
+                className={
+                  currentStory.story_number < 6 && !editingMode
+                    ? styles["story-nav-btn"]
+                    : styles["story-nav-btn--disabled"]
+                }
+              >
+                <RightArrowIcon
+                  color={
+                    currentStory.story_number < 6 && !editingMode
+                      ? "#3b444b"
+                      : "rgba(16, 16, 16, 0.3)"
+                  }
+                  size={22}
+                />
+                next
+              </button>
+            </div>
+          </div>
+          <div className={styles["story-content"]}>
+            <h3 className={styles["story-title"]}>
+              {currentStory.story_number}. {currentStory.story_title}
+            </h3>
+            {editingMode ? (
+              <StoryEditingModal
+                order_id={order_id}
+                story_id={currentStory.story_number}
+                story_title={currentStory.story_title}
+                story_text={currentStory.story_text}
+                onClose={closeEditingMode}
+              />
+            ) : (
+              <>
+                <p className={styles["story-text"]}>{storyText}</p>
+                <button
+                  className={styles["story-edit-btn"]}
+                  onClick={() => setEditionMode(true)}
+                >
+                  <EditIcon color={"#3b444b"} size={20} />
+                  Edit
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>
