@@ -31,7 +31,6 @@ function Profile() {
   const [modalOpen, setModalOpen] = useState(false);
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
-  const { showFailure } = useNotify();
 
   // const onLogoutClick = () => {
   //   dispatch(logOut({ auth }));
@@ -49,12 +48,6 @@ function Profile() {
   const isUserError = useSelector(getIsUserError);
   const errorMessage = useSelector(getUserError);
   const isUserLoading = useSelector(getIsUserLoading);
-
-  useEffect(() => {
-    if (isUserError) {
-      showFailure(errorMessage);
-    }
-  }, [errorMessage, isUserError, showFailure]);
 
   const formatPhone = (user) => {
     if (user && user.phone) {
@@ -79,37 +72,32 @@ function Profile() {
               <Loader />
             ) : (
               <div className={styles["profile-content"]}>
-                <h1 className={styles["profile-title"]}>
-                  Your{" "}
-                  <span style={{ color: "#f0623d", display: "contents" }}>
-                    profile
-                  </span>
-                </h1>
+                <h1 className={styles["page-title"]}>Your profile</h1>
 
                 <div className={styles["profile-content-box"]}>
                   <p className={styles["profile-content-title"]}>
-                    Personal information:
+                    Personal information
                   </p>
 
                   <ul style={{ display: "contents" }}>
                     <li className={styles["profile-content-item"]}>
                       <div className={styles["profile-content-image-wrap"]}>
                         <UserIcon color={"#3b444b"} size={20} />
-                        Name:
+                        Name
                       </div>
                       <p>{name}</p>
                     </li>
                     <li className={styles["profile-content-item"]}>
                       <div className={styles["profile-content-image-wrap"]}>
                         <EmailIcon color={"#3b444b"} size={20} />
-                        Email:
+                        Email
                       </div>
                       <p>{email}</p>
                     </li>
                     <li className={styles["profile-content-item"]}>
                       <div className={styles["profile-content-image-wrap"]}>
                         <PhoneIcon color={"#3b444b"} size={20} />
-                        Phone:
+                        Phone
                       </div>
                       <p>{phone}</p>
                     </li>
@@ -117,7 +105,7 @@ function Profile() {
                 </div>
 
                 <div className={styles["profile-content-box"]}>
-                  <p className={styles["profile-content-title"]}>Other:</p>
+                  <p className={styles["profile-content-title"]}>Other</p>
                   <ul style={{ display: "contents" }}>
                     <li style={{ listStyle: "none", width: "100%" }}>
                       <Link
@@ -132,7 +120,7 @@ function Profile() {
                     <li style={{ listStyle: "none", width: "100%" }}>
                       <Link
                         href="mailto:support@stastiem.com"
-                        // target="_blanc"
+                        target="_blanc"
                         className={styles["profile-content-item"]}
                       >
                         <p>Ask for help</p>

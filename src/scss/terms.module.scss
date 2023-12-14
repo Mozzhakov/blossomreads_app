@@ -1,18 +1,19 @@
 @import "container";
 @import "mixins";
+@import "page-title";
 
 .page-section {
   padding: 30px 0;
 }
-.page-title {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 30px;
-  font-weight: 500;
-  @include desktop {
-    margin-bottom: 50px;
-  }
-}
+// .page-title {
+//   text-align: center;
+//   margin-bottom: 30px;
+//   font-size: 30px;
+//   font-weight: 500;
+//   @include desktop {
+//     margin-bottom: 50px;
+//   }
+// }
 .terms-text {
   font-size: 14px;
   text-align: justify;

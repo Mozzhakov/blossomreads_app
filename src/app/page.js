@@ -1,14 +1,14 @@
 "use client";
 
 import { auth } from "@/firebase/Firebase";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 // import { useDispatch } from "react-redux";
 // import { fetchOrders } from "@/redux/orders/orders-operations";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useSelector } from "react-redux";
 // import { Suspense } from "react";
 import { Loader } from "@/components/Loader";
-import { useNotify } from "@/hooks/useNotify";
+// import { useNotify } from "@/hooks/useNotify";
 import { SidebarContainer } from "@/components/SidebarContainer";
 import {
   getOrders,
@@ -20,31 +20,18 @@ import OrdersList from "@/components/OrdersList";
 import PrivateRoute from "@/components/PrivateRoute";
 
 function Home() {
-  const { showFailure } = useNotify();
-  // const dispatch = useDispatch();
   const [user, loading, error] = useAuthState(auth);
-
-  // useEffect(() => {
-  //   if (user && user.stsTokenManager.expirationTime > Date.now()) {
-  //     dispatch(fetchOrders(user.accessToken));
-  //   }
-  // }, [user, dispatch]);
 
   const orders = useSelector(getOrders);
 
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
 
-  useEffect(() => {
-    if (isOrderError) {
-      showFailure(errorMessage);
-    }
-  }, [errorMessage, isOrderError, showFailure]);
   return (
     <main>
       <SidebarContainer>
         <PrivateRoute>
-          {!loading && user && orders ? (
+          {!loading && user ? (
             <>
               <Hero orders={orders} />
               <OrdersList user={user} />
@@ -52,7 +39,7 @@ function Home() {
           ) : (
             <Loader />
           )}
-          {error && <p>{error}</p>}
+          {isOrderError && <p>{errorMessage}</p>}
         </PrivateRoute>
       </SidebarContainer>
     </main>

@@ -23,7 +23,6 @@ function Login() {
   async function handleSendLink(e) {
     e.preventDefault();
     await dispatch(sendLink({ email, testing }));
-    setEmail("");
   }
 
   return (

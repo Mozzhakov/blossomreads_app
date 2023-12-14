@@ -1,6 +1,7 @@
 @import "container";
 @import "vars";
 @import "mixins";
+@import "page-title";
 .profile {
   padding: 20px 10px;
   display: flex;
@@ -13,8 +14,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    // border-bottom: 2px solid $accent-color;
-    // padding: 10px;
     width: fit-content;
     margin-bottom: 30px;
     font-size: 30px;
@@ -49,7 +48,7 @@
       padding: 10px;
       width: 100%;
       font-size: 13px;
-      background-color: #fff;
+      background-color: $white-color;
       color: $second-black-color;
       font-family: inherit;
     }

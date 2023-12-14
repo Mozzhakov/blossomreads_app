@@ -13,9 +13,10 @@
   margin-bottom: 30px;
   font-size: 30px;
   font-weight: 500;
-  // border-bottom: 2px solid $accent-color;
-  // padding: 10px;
-  // width: fit-content;
+  @include desktop {
+    font-size: 35px;
+    // margin-bottom: 50px;
+  }
 }
 .order-list {
   display: flex;

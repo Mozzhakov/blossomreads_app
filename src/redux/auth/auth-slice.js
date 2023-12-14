@@ -67,9 +67,9 @@ const authorization = createSlice({
         state.isLoading = false;
         state.isEmailSent = false;
         state.isError = true;
-        const errMsg = action.payload.message.split(":")[1];
+        // const errMsg = action.payload.message.split(":")[1];
         // state.error = errMsg;
-        state.error = "User not found";
+        state.error = "Email not found";
       });
   },
 });

@@ -1,5 +1,3 @@
-"use client";
-
 import { auth } from "@/firebase/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { MenuIcon, ProfileIcon } from "./Icons";

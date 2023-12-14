@@ -61,7 +61,7 @@
   transition: 0.2s;
   &-error {
     @extend .label;
-    color: red;
+    // color: red;
   }
 }
 

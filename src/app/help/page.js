@@ -42,9 +42,7 @@ function Help() {
     <SidebarContainer>
       <section className={styles["help-section"]}>
         <div className={styles["container"]}>
-          <h1 className={styles["help-title"]}>
-            Need <span style={{ color: "#f0623d" }}>help?</span>
-          </h1>
+          <h1 className={styles["help-title"]}>Need help?</h1>
           <ul className={styles["help-list"]}>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}>

@@ -1,6 +1,6 @@
 "use client";
 // import { useState } from "react";
-import { LoginIcon } from "./Icons";
+import { LoginIcon, WarningIcon } from "./Icons";
 import { useSelector } from "react-redux";
 import { Loader } from "./Loader";
 import { EmailInput } from "./EmailInput";
@@ -41,14 +41,14 @@ function LoginWithLink({ handleLogin, email, setEmail }) {
               <EmailInput val={email} fn={handleChange} isError={isError} />
               {isError && (
                 <p className={styles["form-error-msg"]}>
-                  {errorMessage} Click{" "}
+                  <WarningIcon size={20} />
+                  {errorMessage}
                   <a
                     href="https://app.stastiem.com/login"
                     className={styles["form-error-msg-link"]}
                   >
-                    here
-                  </a>{" "}
-                  to login
+                    Click here to login
+                  </a>
                 </p>
               )}
             </div>

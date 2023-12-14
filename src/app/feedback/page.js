@@ -2,7 +2,7 @@
 import { auth } from "@/firebase/Firebase";
 import { FaStar } from "react-icons/fa";
 import { Loader } from "@/components/Loader";
-import { useNotify } from "@/hooks/useNotify";
+// import { useNotify } from "@/hooks/useNotify";
 import { fetchUser } from "@/redux/user/user-operations";
 import { getUserInfo } from "@/redux/user/user-selectors";
 import { sendFeedback } from "@/redux/feedback/feedback-operations";
@@ -80,9 +80,7 @@ function SendFeedback() {
       <PrivateRoute>
         <div className={styles["feedback-page"]}>
           <div className={styles.container}>
-            <h1 className={styles["feedback-page-title"]}>
-              Leave your <span style={{ color: "#f0623d" }}>feedback</span>
-            </h1>
+            <h1 className={styles["page-title"]}>Leave your feedback</h1>
             <form className={styles["feedback-form"]} onSubmit={onSubmit}>
               <legend className={styles["feedback-form-legend"]}>
                 Feedback form

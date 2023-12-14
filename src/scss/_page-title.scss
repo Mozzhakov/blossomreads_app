@@ -1,0 +1,11 @@
+@import "vars";
+.page-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 500;
+  @include desktop {
+    font-size: 35px;
+    margin-bottom: 50px;
+  }
+}

@@ -51,7 +51,9 @@ export default function OrderList({ user }) {
           orders.filter((order) =>
             ["created", "queued", "paid"].includes(order.status)
           );
-
+        if (filteredOrders.length === 0) {
+          return setIsLoading(false);
+        }
         // Fetch stories based on filtered orders
         const ordersWithStories = await Promise.all(
           filteredOrders.map(async (order) => {
@@ -145,7 +147,8 @@ export default function OrderList({ user }) {
         {relevantOrders && relevantOrders.length !== 0 && !isLoading && (
           <>
             <h1 className={styles["order-list-title"]}>
-              Your <span style={{ color: "#f0623d" }}>Stastiem</span> books
+              {/* Your <span style={{ color: "#f0623d" }}>Stastiem</span> books */}
+              Your Stastiem books
             </h1>
             <ul className={styles["order-list"]}>
               {relevantOrders.map((el) => (
@@ -183,20 +186,22 @@ export default function OrderList({ user }) {
           </>
         )}
         {isLoading && <Loader />}
+        {relevantOrders.length === 0 && !isLoading && (
+          <h4 className={styles["order-list-title"]}>
+            You don&#39;t have orders. You can place new order{" "}
+            <Link
+              href="https://www.stastiem.com/order"
+              style={{ color: "#f0623d", textDecoration: "underline" }}
+              target="_blank"
+            >
+              here
+            </Link>
+          </h4>
+        )}
       </div>
     </section>
   );
 }
 
 {
-  /* <h4 className={styles["order-list-title"]}>
-  You don&#39;t have orders. You can place new order{" "}
-  <Link
-    href="https://www.stastiem.com/order"
-    style={{ color: "#f0623d", textDecoration: "underline" }}
-    target="_blank"
-  >
-    here
-  </Link>
-</h4>; */
 }

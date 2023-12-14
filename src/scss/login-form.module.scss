@@ -33,7 +33,7 @@
   text-align: left;
   gap: 30px;
   // width: calc(100% - 20px);
-  width: 300px;
+  width: 320px;
   padding: 0 15px;
   border-radius: 10px;
   font-family: inherit;
@@ -100,10 +100,13 @@
   }
 }
 .form-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-size: 11px;
-  // font-style: italic;
   color: red;
   margin-top: 5px;
+
   &-link {
     font-style: italic;
     text-decoration: underline;

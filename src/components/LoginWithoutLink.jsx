@@ -1,6 +1,6 @@
 "use client";
 // import { useState } from "react";
-import { LoginIcon } from "./Icons";
+import { LoginIcon, WarningIcon } from "./Icons";
 import { useSelector } from "react-redux";
 import { Loader } from "./Loader";
 import {
@@ -57,7 +57,10 @@ function LoginWithoutLink({ handleLogin, email, setEmail }) {
               <div className={styles["form-input-wrapper"]}>
                 <EmailInput val={email} fn={handleChange} isError={isError} />
                 {isError && (
-                  <p className={styles["form-error-msg"]}>{errorMessage}</p>
+                  <p className={styles["form-error-msg"]}>
+                    <WarningIcon size={20} />
+                    {errorMessage}
+                  </p>
                 )}
               </div>
               <button type="submit" className={styles["form-btn"]}>

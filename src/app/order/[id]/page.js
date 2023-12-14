@@ -8,7 +8,7 @@ import {
   getStoryError,
   getIsStoryLoading,
 } from "@/redux/stories/stories-selectors";
-import { useNotify } from "@/hooks/useNotify";
+// import { useNotify } from "@/hooks/useNotify";
 import StoryList from "@/components/StoryList";
 import styles from "../../../scss/story-list.module.scss";
 import PrivateRoute from "@/components/PrivateRoute";
@@ -19,7 +19,6 @@ import { getOrders } from "@/redux/orders/orders-selectors";
 import Link from "next/link";
 
 function StoryPage({ params }) {
-  const { showFailure } = useNotify();
   const dispatch = useDispatch();
   const [stories, setStories] = useState([]);
   const [currentOrder, setCurrentOrder] = useState(null);
@@ -93,12 +92,6 @@ function StoryPage({ params }) {
   const storyErrorMessage = useSelector(getStoryError);
   const isStoryLoading = useSelector(getIsStoryLoading);
 
-  useEffect(() => {
-    if (isStoryError) {
-      showFailure(storyErrorMessage);
-    }
-  }, [isStoryError, showFailure, storyErrorMessage]);
-
   const cover =
     stories &&
     stories.find((el) => {
@@ -131,10 +124,9 @@ function StoryPage({ params }) {
             {stories && stories.length !== 0 && (
               <>
                 <h1 className={styles["story-list-title"]}>
-                  <span className={styles["story-list-title-part"]}>
-                    {cover && heroName}
-                  </span>{" "}
-                  {cover && bookTitle}
+                  {/* <span className={styles["story-list-title-part"]}> */}
+                  {cover && heroName}
+                  {/* </span> */} {cover && bookTitle}
                 </h1>
                 <StoryList stories={stories} params={params} />
               </>
