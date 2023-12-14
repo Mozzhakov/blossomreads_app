@@ -34,7 +34,7 @@ function Home() {
           {!loading && user ? (
             <>
               <Hero orders={orders} />
-              <OrdersList user={user} />
+              <OrdersList user={user} loading={loading} />
             </>
           ) : (
             <Loader />

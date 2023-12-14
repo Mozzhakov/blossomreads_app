@@ -7,6 +7,7 @@ import {
   getIsStoryError,
   getStoryError,
   getIsStoryLoading,
+  getStories,
 } from "@/redux/stories/stories-selectors";
 // import { useNotify } from "@/hooks/useNotify";
 import StoryList from "@/components/StoryList";
@@ -24,6 +25,8 @@ function StoryPage({ params }) {
   const [currentOrder, setCurrentOrder] = useState(null);
   const [paymentLink, setPaymentLink] = useState("");
   const [user, loading] = useAuthState(auth);
+
+  // const storiesFormLS = useSelector(getStories);
 
   useEffect(() => {
     const fetchData = async () => {

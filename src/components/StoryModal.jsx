@@ -1,6 +1,6 @@
 import React from "react";
 import { getStories } from "@/redux/stories/stories-selectors";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { StoryEditingModal } from "./StoryEditingModal";
 import {
@@ -14,6 +14,10 @@ import styles from "../scss/story-details.module.scss";
 export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
   const stories = useSelector(getStories);
   const [editingMode, setEditionMode] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const modalRef = useRef(null);
 
   const currentStory = stories.find(
     (el) => el.story_number === Number(story_number)
@@ -38,10 +42,41 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
   const closeEditingMode = () => {
     setEditionMode(false);
   };
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    const modalWidth = modalRef.current.offsetWidth;
+    const swipeDistance = touchStart - touchEnd;
+
+    // Adjust the threshold based on your preference
+    const swipeThreshold = modalWidth * 0.2;
+
+    if (swipeDistance > swipeThreshold) {
+      // Swipe left, trigger next
+      next();
+    }
+
+    if (swipeDistance < -swipeThreshold) {
+      // Swipe right, trigger prev
+      prev();
+    }
+  };
   return (
     <>
-      <div className={styles["story-overlay"]} onClick={onClose}></div>
-      <div className={styles["story-modal"]}>
+      <div
+        className={styles["story-overlay"]}
+        onClick={onClose}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      ></div>
+      <div className={styles["story-modal"]} ref={modalRef}>
         <div className={styles["story-top-nav"]}>
           <button
             className={

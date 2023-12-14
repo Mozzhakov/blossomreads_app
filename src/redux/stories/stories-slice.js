@@ -42,11 +42,11 @@ const stories = createSlice({
   },
 });
 
-const persistConfig = {
-  key: "stories",
-  storage,
-  whitelist: ["items"],
-};
+// const persistConfig = {
+//   key: "stories",
+//   storage,
+//   whitelist: ["items"],
+// };
 
 export const storiesReducer = stories.reducer;
 

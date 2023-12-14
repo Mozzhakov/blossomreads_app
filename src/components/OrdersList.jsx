@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { ImageLoader, Loader } from "./Loader";
 import { fetchOrders } from "@/redux/orders/orders-operations";
 
-export default function OrderList({ user }) {
+export default function OrderList({ user, loading }) {
   const dispatch = useDispatch();
   const [relevantOrders, setRelevantOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -71,6 +71,7 @@ export default function OrderList({ user }) {
             };
           })
         );
+        console.log(ordersWithStories);
 
         // Sort orders with stories
         const sortedOrders = ordersWithStories.sort((a, b) => {
@@ -186,7 +187,7 @@ export default function OrderList({ user }) {
           </>
         )}
         {isLoading && <Loader />}
-        {relevantOrders.length === 0 && !isLoading && (
+        {relevantOrders.length === 0 && !isLoading && !loading && (
           <h4 className={styles["order-list-title"]}>
             You don&#39;t have orders. You can place new order{" "}
             <Link
