@@ -6,6 +6,7 @@ import { useState } from "react";
 import { StoryModal } from "@/components/StoryModal";
 import { ImageLoader } from "./Loader";
 import { Portal } from "./Modal";
+// import { Swipeable } from "react-swipeable";
 
 export default function StoryList({ stories, params }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -13,11 +14,11 @@ export default function StoryList({ stories, params }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const goToPrev = () => {
-    setCurrStory((currStory) => currStory - 1);
+    currStory > 1 ? setCurrStory((currStory) => currStory - 1) : null;
   };
 
   const goToNext = () => {
-    setCurrStory((currStory) => currStory + 1);
+    currStory < 6 ? setCurrStory((currStory) => currStory + 1) : null;
   };
 
   const truncatedString = (str, maxLength, link) => {
@@ -58,7 +59,6 @@ export default function StoryList({ stories, params }) {
                     priority={true}
                     onLoad={() => setIsLoading(false)}
                   />
-                  {/* <ImageLoader /> */}
                   {isLoading && <ImageLoader />}
                 </div>
               ) : (
