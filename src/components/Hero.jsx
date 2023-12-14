@@ -6,6 +6,9 @@ export default function Hero({ orders }) {
   const paidOrders = orders.filter(
     (el) => el.status === "paid" || el.status === "queued"
   );
+  const convertDate = (date) => {
+    return new Date(date).getTime();
+  };
   const sortedOrders = paidOrders.sort(
     (a, b) => convertDate(a.created_at) - convertDate(b.created_at)
   );
