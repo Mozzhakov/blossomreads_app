@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logIn, sendLink } from "@/redux/auth/auth-operations";
-import { auth, actionCodeSettings } from "@/firebase/Firebase";
+import { auth } from "@/firebase/Firebase";
 import { SidebarContainer } from "@/components/SidebarContainer";
 import LoginWithoutLink from "@/components/LoginWithoutLink";
 import LoginWithLink from "@/components/LoginWithLink";

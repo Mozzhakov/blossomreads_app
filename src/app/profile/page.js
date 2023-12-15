@@ -1,9 +1,7 @@
 "use client";
 import { auth } from "@/firebase/Firebase";
-import { logOut } from "@/redux/auth/auth-operations";
 import { useEffect, useState } from "react";
 import { fetchUser } from "@/redux/user/user-operations";
-import { useNotify } from "@/hooks/useNotify";
 import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
@@ -112,6 +110,7 @@ function Profile() {
                         href="https://www.stastiem.com/order"
                         target="_blanc"
                         className={styles["profile-content-item"]}
+                        // style={{ justifyContent: "center" }}
                       >
                         <p>Make new order</p>
                         <LinkArrowIcon color={"#3b444b"} size={20} />
@@ -122,6 +121,7 @@ function Profile() {
                         href="mailto:support@stastiem.com"
                         target="_blanc"
                         className={styles["profile-content-item"]}
+                        // style={{ justifyContent: "center" }}
                       >
                         <p>Ask for help</p>
                         <LinkArrowIcon color={"#3b444b"} size={20} />
@@ -131,6 +131,7 @@ function Profile() {
                       <button
                         className={styles["profile-content-item"]}
                         onClick={() => setModalOpen(true)}
+                        // style={{ justifyContent: "center" }}
                       >
                         <p>Logout</p>
                         <LinkArrowIcon color={"#3b444b"} size={20} />

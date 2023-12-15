@@ -1,5 +1,4 @@
 "use client";
-// import { useState } from "react";
 import { LoginIcon, WarningIcon } from "./Icons";
 import { useSelector } from "react-redux";
 import { Loader } from "./Loader";
@@ -16,25 +15,14 @@ import { EmailSentSuccess } from "./EmailSentSuccess";
 import { EmailInput } from "./EmailInput";
 
 function LoginWithoutLink({ handleLogin, email, setEmail }) {
-  // const [error, setError] = useState(null);
   const isError = useSelector(getIsAuthError);
   const errorMessage = useSelector(getAuthError);
   const isEmailSent = useSelector(getIsEmailSent);
   const isLoading = useSelector(getIsLoading);
 
-  // function isValidEmail(email) {
-  //   return /\S+@\S+\.\S+/.test(email);
-  // }
-
   const handleChange = (event) => {
     const inputEmail = event.target.value;
     setEmail(inputEmail);
-
-    // if (!isValidEmail(inputEmail)) {
-    //   setError("Email is invalid");
-    // } else {
-    //   setError(null);
-    // }
   };
 
   return (

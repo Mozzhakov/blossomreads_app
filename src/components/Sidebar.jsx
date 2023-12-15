@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-// import { useState } from "react";
 import styles from "../scss/sidebar.module.scss";
 import { usePathname } from "next/navigation";
 

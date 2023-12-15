@@ -1,31 +1,7 @@
-import { Puff, Oval } from "react-loader-spinner";
-// import { Portal } from "./Modal";
+import { Oval } from "react-loader-spinner";
 import styles from "../scss/loader.module.scss";
 export const Loader = () => {
-  return (
-    <div className={styles["loader-overlay"]}>
-      <div className={styles["loader"]}>
-        <Puff
-          height="80"
-          width="80"
-          radius={1}
-          color="#f0623d"
-          ariaLabel="puff-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        />
-      </div>
-    </div>
-    // <div className={styles["loading-bar"]}>
-    //   <div className={styles["progress-bar"]}></div>
-    // </div>
-  );
+  return <div className={styles["running-line"]}></div>;
 };
 
 export const ImageLoader = () => {
@@ -45,4 +21,8 @@ export const ImageLoader = () => {
       />
     </div>
   );
+};
+
+export const StoryModalLoader = () => {
+  return <div className={styles["running-line-modal"]}></div>;
 };

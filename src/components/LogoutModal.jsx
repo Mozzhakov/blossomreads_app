@@ -2,6 +2,7 @@ import { auth } from "@/firebase/Firebase";
 import { logOut } from "@/redux/auth/auth-operations";
 import { useDispatch } from "react-redux";
 import styles from "../scss/logout.module.scss";
+
 export const LogoutModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const onLogoutClick = () => {

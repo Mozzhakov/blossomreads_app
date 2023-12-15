@@ -1,5 +1,4 @@
 "use client";
-// import { useState } from "react";
 import { LoginIcon, WarningIcon } from "./Icons";
 import { useSelector } from "react-redux";
 import { Loader } from "./Loader";
@@ -12,7 +11,6 @@ import {
 import styles from "../scss/login-form.module.scss";
 
 function LoginWithLink({ handleLogin, email, setEmail }) {
-  // const [error, setError] = useState(null);
   const isError = useSelector(getIsAuthError);
   const errorMessage = useSelector(getAuthError);
   const isLoading = useSelector(getIsLoading);
@@ -20,12 +18,6 @@ function LoginWithLink({ handleLogin, email, setEmail }) {
   const handleChange = (event) => {
     const inputEmail = event.target.value;
     setEmail(inputEmail);
-
-    // if (event.target.value.length < 1) {
-    //   setError("Email is invalid");
-    // } else {
-    //   setError(null);
-    // }
   };
 
   return (
@@ -58,7 +50,6 @@ function LoginWithLink({ handleLogin, email, setEmail }) {
             </button>
           </form>
         </div>
-        {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
         {isLoading && <Loader />}
       </>
     </div>

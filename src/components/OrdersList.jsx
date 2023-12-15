@@ -2,14 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../scss/order-list.module.scss";
 import { useEffect, useState } from "react";
-import { fetchStories } from "@/redux/stories/stories-operations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ImageLoader, Loader } from "./Loader";
-import { fetchOrders } from "@/redux/orders/orders-operations";
+import { fetchOrdersAndStories } from "@/redux/orders/orders-operations";
+import { getOrders } from "@/redux/orders/orders-selectors";
 
 export default function OrderList({ user, loading }) {
   const dispatch = useDispatch();
-  const [relevantOrders, setRelevantOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isImageLoading, setIsImageLoading] = useState(true);
 
@@ -38,71 +37,25 @@ export default function OrderList({ user, loading }) {
 
     return formattedDate;
   }
-  useEffect(() => {
-    const fetchData = async () => {
-      if (user && user.stsTokenManager.expirationTime > Date.now()) {
-        // Fetch orders
-        const ordersPromise = await dispatch(fetchOrders(user.accessToken));
-        const orders = ordersPromise.payload;
-
-        // Filter orders
-        const filteredOrders =
-          orders &&
-          orders.filter((order) =>
-            ["created", "queued", "paid"].includes(order.status)
-          );
-        if (filteredOrders.length === 0) {
-          return setIsLoading(false);
-        }
-        // Fetch stories based on filtered orders
-        const ordersWithStories = await Promise.all(
-          filteredOrders.map(async (order) => {
-            const storiesPromise = await dispatch(
-              fetchStories({
-                id: Number(order.order_id),
-                token: user.accessToken,
-              })
-            );
-            const stories = storiesPromise.payload;
-            setIsLoading(false);
-            return {
-              ...order,
-              stories,
-            };
-          })
-        );
-        console.log(ordersWithStories);
-
-        // Sort orders with stories
-        const sortedOrders = ordersWithStories.sort((a, b) => {
-          const statusPriority = { paid: 1, queued: 2, created: 3 };
-          const statusA = statusPriority[a.status];
-          const statusB = statusPriority[b.status];
-
-          if (statusA === statusB) {
-            return new Date(a.created_at) - new Date(b.created_at);
-          }
-
-          return statusA - statusB;
-        });
-
-        setRelevantOrders(sortedOrders);
-      }
-    };
-
-    if (user) {
-      fetchData();
-    }
-  }, [dispatch, user]);
   // useEffect(() => {
-  //   const fetchOrderData = async () => {
-  //     const filteredOrders = orders.filter((order) =>
-  //       ["created", "queued", "paid"].includes(order.status)
-  //     );
-  //     // const filteredOrders = orders;
-  //     const ordersWithStories = await Promise.all(
-  //       filteredOrders.map(async (order) => {
-  //         if (user && user.stsTokenManager.expirationTime > Date.now()) {
+  //   const fetchData = async () => {
+  //     if (user && user.stsTokenManager.expirationTime > Date.now()) {
+  //       // Fetch orders
+  //       const ordersPromise = await dispatch(fetchOrders(user.accessToken));
+  //       const orders = ordersPromise.payload;
+
+  //       // Filter orders
+  //       const filteredOrders =
+  //         orders &&
+  //         orders.filter((order) =>
+  //           ["created", "queued", "paid"].includes(order.status)
+  //         );
+  //       if (filteredOrders.length === 0) {
+  //         return setIsLoading(false);
+  //       }
+  //       // Fetch stories based on filtered orders
+  //       const ordersWithStories = await Promise.all(
+  //         filteredOrders.map(async (order) => {
   //           const storiesPromise = await dispatch(
   //             fetchStories({
   //               id: Number(order.order_id),
@@ -115,44 +68,48 @@ export default function OrderList({ user, loading }) {
   //             ...order,
   //             stories,
   //           };
+  //         })
+  //       );
+  //       // console.log(ordersWithStories);
+  //       localStorage.setItem("orders", JSON.stringify(ordersWithStories));
+
+  //       // Sort orders with stories
+  //       const sortedOrders = ordersWithStories.sort((a, b) => {
+  //         const statusPriority = { paid: 1, queued: 2, created: 3 };
+  //         const statusA = statusPriority[a.status];
+  //         const statusB = statusPriority[b.status];
+
+  //         if (statusA === statusB) {
+  //           return new Date(a.created_at) - new Date(b.created_at);
   //         }
-  //       })
-  //     );
 
-  //     const sortedOrders = ordersWithStories.sort((a, b) => {
-  //       // Sort by status priority
-  //       const statusPriority = { paid: 1, queued: 2, created: 3 };
-  //       const statusA = statusPriority[a.status];
-  //       const statusB = statusPriority[b.status];
+  //         return statusA - statusB;
+  //       });
 
-  //       // If statuses are equal, sort by created_at in ascending order
-  //       if (statusA === statusB) {
-  //         return new Date(a.created_at) - new Date(b.created_at);
-  //       }
-
-  //       // Sort by status priority
-  //       return statusA - statusB;
-  //     });
-
-  //     setRelevantOrders(sortedOrders);
+  //       setRelevantOrders(sortedOrders);
+  //     }
   //   };
 
   //   if (user) {
-  //     fetchOrderData();
+  //     fetchData();
   //   }
-  // }, [dispatch, orders, user]);
-  // console.log(relevantOrders);
+  // }, [dispatch, user]);
+
+  useEffect(() => {
+    if (user && user.stsTokenManager.expirationTime > Date.now()) {
+      dispatch(fetchOrdersAndStories(user));
+      setIsLoading(false);
+    }
+  }, [dispatch, user]);
+  const orders = useSelector(getOrders);
   return (
     <section className={styles["order-list-section"]}>
       <div className={styles.container}>
-        {relevantOrders && relevantOrders.length !== 0 && !isLoading && (
+        {orders && orders.length !== 0 && !isLoading && (
           <>
-            <h1 className={styles["order-list-title"]}>
-              {/* Your <span style={{ color: "#f0623d" }}>Stastiem</span> books */}
-              Your Stastiem books
-            </h1>
+            <h1 className={styles["order-list-title"]}>Your Stastiem books</h1>
             <ul className={styles["order-list"]}>
-              {relevantOrders.map((el) => (
+              {orders.map((el) => (
                 <li key={el.order_id} className={styles["order-item"]}>
                   <Link href={`/order/${el.order_id}`}>
                     {el.stories.left_image_optimized ? (
@@ -187,7 +144,7 @@ export default function OrderList({ user, loading }) {
           </>
         )}
         {isLoading && <Loader />}
-        {relevantOrders.length === 0 && !isLoading && !loading && (
+        {orders.length === 0 && !isLoading && !loading && (
           <h4 className={styles["order-list-title"]}>
             You don&#39;t have orders. You can place new order{" "}
             <Link

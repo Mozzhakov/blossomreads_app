@@ -65,6 +65,6 @@
   cursor: pointer;
   border-color: $accent-color;
   & path {
-    fill: $accent-color;
+    stroke: $accent-color;
   }
 }

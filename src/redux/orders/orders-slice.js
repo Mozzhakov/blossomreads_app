@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchOrders } from "./orders-operations";
+import { fetchOrders, fetchOrdersAndStories } from "./orders-operations";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -19,13 +19,20 @@ const orders = createSlice({
   initialState: { items: [], isLoading: false, isError: null, error: "" },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOrders.pending, handlePending)
-      .addCase(fetchOrders.fulfilled, (state, action) => {
+      // .addCase(fetchOrders.pending, handlePending)
+      // .addCase(fetchOrders.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.items = action.payload;
+      // })
+      // .addCase(fetchOrders.rejected, handleRejected)
+      .addCase(fetchOrdersAndStories.pending, handlePending)
+      .addCase(fetchOrdersAndStories.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
       })
-      .addCase(fetchOrders.rejected, handleRejected);
+      .addCase(fetchOrdersAndStories.rejected, handleRejected);
   },
 });
 

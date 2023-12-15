@@ -1,12 +1,9 @@
-import Link from "next/link";
 import Image from "next/image";
-import cover from "../images/order-placeholder.png";
 import styles from "../scss/story-list.module.scss";
 import { useState } from "react";
 import { StoryModal } from "@/components/StoryModal";
 import { ImageLoader } from "./Loader";
 import { Portal } from "./Modal";
-// import { Swipeable } from "react-swipeable";
 
 export default function StoryList({ stories, params }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -103,6 +100,7 @@ export default function StoryList({ stories, params }) {
       {modalOpen && (
         <Portal>
           <StoryModal
+            stories={stories}
             order_id={params.id}
             story_number={currStory}
             onClose={() => setModalOpen(false)}

@@ -2,7 +2,6 @@
 import { auth } from "@/firebase/Firebase";
 import { FaStar } from "react-icons/fa";
 import { Loader } from "@/components/Loader";
-// import { useNotify } from "@/hooks/useNotify";
 import { fetchUser } from "@/redux/user/user-operations";
 import { getUserInfo } from "@/redux/user/user-selectors";
 import { sendFeedback } from "@/redux/feedback/feedback-operations";
@@ -26,8 +25,6 @@ function SendFeedback() {
   const [user] = useAuthState(auth);
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
-  // const { showSuccess, showFailure } = useNotify();
-  // const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
@@ -46,10 +43,6 @@ function SendFeedback() {
     dispatch(sendFeedback(feedbackData));
     e.target.reset();
     setRating(null);
-    // setShowNotification(true);
-    // setTimeout(() => {
-    //   setShowNotification(false);
-    // }, 2000);
   };
   const isFeedbackLoading = useSelector(getIsFeedbackLoading);
   const isFeedbackSent = useSelector(getIsFeedbackSent);
@@ -57,24 +50,6 @@ function SendFeedback() {
   const feedbackSuccess = useSelector(getFeedbackSuccess);
   const feedbackError = useSelector(getFeedbackError);
 
-  // useEffect(() => {
-  //   if (isFeedbackSent) {
-  //     showSuccess(feedbackSuccess);
-
-  //     dispatch(resetFeedbackStatus());
-  //   }
-  //   if (isFeedbackError) {
-  //     showFailure(feedbackError);
-  //   }
-  // }, [
-  //   feedbackError,
-  //   feedbackSuccess,
-  //   isFeedbackError,
-  //   isFeedbackSent,
-  //   showFailure,
-  //   showSuccess,
-  //   dispatch,
-  // ]);
   return (
     <SidebarContainer>
       <PrivateRoute>

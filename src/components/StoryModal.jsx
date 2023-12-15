@@ -1,7 +1,5 @@
 import React from "react";
-import { getStories } from "@/redux/stories/stories-selectors";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { StoryEditingModal } from "./StoryEditingModal";
 import { useSwipeable } from "react-swipeable";
 import {
@@ -12,14 +10,20 @@ import {
 } from "@/components/Icons";
 import styles from "../scss/story-details.module.scss";
 
-export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
-  const stories = useSelector(getStories);
+export const StoryModal = ({
+  stories,
+  order_id,
+  story_number,
+  onClose,
+  prev,
+  next,
+}) => {
   const [editingMode, setEditionMode] = useState(false);
+  const [swipeDirection, setSwipeDirection] = useState(null);
 
   const currentStory = stories.find(
     (el) => el.story_number === Number(story_number)
   );
-
   function TextComponent(text) {
     const lines = text.split("\n");
     return (
@@ -40,13 +44,68 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
     setEditionMode(false);
   };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => next(),
-    onSwipedRight: () => prev(),
+  // const swipeHandlers = useSwipeable({
+  //   onSwipedLeft: () => {
+  //     next();
+  //   },
+  //   onSwipedRight: () => {
+  //     prev();
+  //   },
+  //   swipeDuration: 500,
+  //   preventScrollOnSwipe: true,
+  //   trackMouse: true,
+  // });
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => {
+      setSwipeDirection("left");
+      next();
+    },
+    onSwipedRight: () => {
+      setSwipeDirection("right");
+      prev();
+    },
+    onSwiped: () => {
+      setSwipeDirection(null);
+    },
     swipeDuration: 500,
     preventScrollOnSwipe: true,
     trackMouse: true,
   });
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setSwipeDirection(null);
+    }, 200); // Adjust the duration to match the animation duration
+    return () => clearTimeout(timeoutId);
+  }, [swipeDirection]);
+
+  // const swipeHandlers = useSwipeable({
+  //   onSwipedLeft: () => {
+  //     setFadeIn(false); // Trigger fade-out animation
+  //     next();
+  //   },
+  //   onSwipedRight: () => {
+  //     if (currentStory < 6) {
+  //       setFadeIn(false);
+  //     } // Trigger fade-out animation
+  //     prev();
+  //   },
+  //   onSwiped: () => {
+  //     // No need to setFadeIn(true) here, as it's handled by the useEffect below
+  //   },
+  //   swipeDuration: 500,
+  //   preventScrollOnSwipe: true,
+  //   trackMouse: true,
+  // });
+
+  // // Reset fadeIn after a delay
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     setFadeIn(true); // Trigger fade-in animation
+  //   }, 200); // Adjust the duration to match the animation duration
+  //   return () => clearTimeout(timeoutId);
+  // }, [story_number]);
+  const isMobile = window.innerWidth <= 768;
   return (
     <>
       <div className={styles["story-overlay"]} onClick={onClose}></div>
@@ -105,7 +164,15 @@ export const StoryModal = ({ order_id, story_number, onClose, prev, next }) => {
             </button>
           </div>
         </div>
-        <div className={styles["story-content"]} {...handlers}>
+        <div
+          // {...swipeHandlers}
+          {...(isMobile ? swipeHandlers : {})}
+          className={`${styles["story-content"]} ${styles[swipeDirection]}`}
+          // style={{
+          //   opacity: fadeIn ? 1 : 0,
+          //   transition: "0.2s",
+          // }}
+        >
           <h3 className={styles["story-title"]}>
             {currentStory.story_number}. {currentStory.story_title}
           </h3>

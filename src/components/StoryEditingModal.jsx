@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "@/firebase/Firebase";
-import { editStory, fetchStories } from "@/redux/stories/stories-operations";
+import { editStory } from "@/redux/stories/stories-operations";
+import { fetchOrdersAndStories } from "@/redux/orders/orders-operations";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 import { UndoIcon, RedoIcon, DoneIcon } from "@/components/Icons";
+import { StoryModalLoader } from "./Loader";
 import styles from "../scss/story-details.module.scss";
 import useUndoableState from "@/hooks/UseUndoableState";
-// import useDynamicVH from "@/hooks/useDynamicVH";
-import Textarea from "./Textarea";
 
 export const StoryEditingModal = ({
   order_id,
@@ -16,6 +16,7 @@ export const StoryEditingModal = ({
   story_text,
   onClose,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [user] = useAuthState(auth);
   const {
@@ -39,6 +40,7 @@ export const StoryEditingModal = ({
   };
 
   const onDoneClick = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     const storyTextValue = e.target.elements.textarea.value;
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
@@ -54,11 +56,13 @@ export const StoryEditingModal = ({
             })
           );
 
-          dispatch(fetchStories({ id: order_id, token: user.accessToken }));
-
+          // dispatch(fetchStories({ id: order_id, token: user.accessToken }));
+          dispatch(fetchOrdersAndStories(user));
+          setIsLoading(false);
           onClose();
         }
         onClose();
+        setIsLoading(false);
       } catch (error) {
         console.log(error.message);
       }
@@ -92,9 +96,7 @@ export const StoryEditingModal = ({
   }, []);
 
   return (
-    // <div style={{ width: "100%" }}>
     <form style={{ width: "100%" }} onSubmit={onDoneClick}>
-      {/* <Textarea val={doc} fn={handleChange} styles={styles} /> */}
       <textarea
         name="textarea"
         onChange={handleChange}
@@ -137,7 +139,7 @@ export const StoryEditingModal = ({
           </button>
         </div>
       </div>
+      {isLoading && <StoryModalLoader />}
     </form>
-    // </div>
   );
 };

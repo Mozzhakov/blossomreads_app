@@ -1,14 +1,8 @@
 "use client";
-
 import { auth } from "@/firebase/Firebase";
-// import { useEffect } from "react";
-// import { useDispatch } from "react-redux";
-// import { fetchOrders } from "@/redux/orders/orders-operations";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useSelector } from "react-redux";
-// import { Suspense } from "react";
 import { Loader } from "@/components/Loader";
-// import { useNotify } from "@/hooks/useNotify";
 import { SidebarContainer } from "@/components/SidebarContainer";
 import {
   getOrders,
@@ -20,10 +14,8 @@ import OrdersList from "@/components/OrdersList";
 import PrivateRoute from "@/components/PrivateRoute";
 
 function Home() {
-  const [user, loading, error] = useAuthState(auth);
-
+  const [user, loading] = useAuthState(auth);
   const orders = useSelector(getOrders);
-
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
 

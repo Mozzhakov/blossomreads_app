@@ -1,4 +1,9 @@
 "use client";
+import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/firebase/Firebase";
+import { SidebarContainer } from "@/components/SidebarContainer";
+import { getOrders } from "@/redux/orders/orders-selectors";
 import { Loader } from "@/components/Loader";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,17 +12,10 @@ import {
   getIsStoryError,
   getStoryError,
   getIsStoryLoading,
-  getStories,
 } from "@/redux/stories/stories-selectors";
-// import { useNotify } from "@/hooks/useNotify";
 import StoryList from "@/components/StoryList";
 import styles from "../../../scss/story-list.module.scss";
 import PrivateRoute from "@/components/PrivateRoute";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/firebase/Firebase";
-import { SidebarContainer } from "@/components/SidebarContainer";
-import { getOrders } from "@/redux/orders/orders-selectors";
-import Link from "next/link";
 
 function StoryPage({ params }) {
   const dispatch = useDispatch();
@@ -25,11 +23,24 @@ function StoryPage({ params }) {
   const [currentOrder, setCurrentOrder] = useState(null);
   const [paymentLink, setPaymentLink] = useState("");
   const [user, loading] = useAuthState(auth);
-
-  // const storiesFormLS = useSelector(getStories);
+  const orders = useSelector(getOrders);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const initializeData = () => {
+      const order = orders.find((el) => el.order_id === Number(params.id));
+
+      if (order) {
+        setCurrentOrder(order);
+
+        if (order.stories) {
+          setStories(order.stories);
+        } else {
+          fetchStoriesData();
+        }
+      }
+    };
+
+    const fetchStoriesData = async () => {
       try {
         if (user && user.stsTokenManager.expirationTime > Date.now()) {
           const fetchedStories = await dispatch(
@@ -42,17 +53,10 @@ function StoryPage({ params }) {
       }
     };
 
-    fetchData();
-  }, [dispatch, params.id, user]);
-
-  const orders = useSelector(getOrders);
+    initializeData();
+  }, [dispatch, orders, params.id, user]);
 
   useEffect(() => {
-    setCurrentOrder(
-      orders.find((el) => {
-        return el.order_id === Number(params.id);
-      })
-    );
     if (currentOrder && user && currentOrder.status === "created") {
       const generatePaymentLink = async (orderData) => {
         const paymentPayload = {
@@ -82,7 +86,6 @@ function StoryPage({ params }) {
           }
           const data = await response.json();
           setPaymentLink(data.payment_url);
-          // console.log(data.payment_url);
         } catch (error) {
           console.error("Error fetching payment link:", error);
         }
@@ -127,9 +130,7 @@ function StoryPage({ params }) {
             {stories && stories.length !== 0 && (
               <>
                 <h1 className={styles["story-list-title"]}>
-                  {/* <span className={styles["story-list-title-part"]}> */}
-                  {cover && heroName}
-                  {/* </span> */} {cover && bookTitle}
+                  {heroName + " " + bookTitle}
                 </h1>
                 <StoryList stories={stories} params={params} />
               </>
@@ -139,8 +140,7 @@ function StoryPage({ params }) {
                 Oops! No stories found for order ID {params.id}
               </h1>
             )}
-
-            {isStoryLoading && <Loader />}
+            {/* {isStoryLoading && <Loader />} */}
             {loading && <Loader />}
           </div>
         </section>
