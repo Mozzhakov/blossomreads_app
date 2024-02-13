@@ -30,12 +30,6 @@ function Profile() {
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
 
-  // const onLogoutClick = () => {
-  //   dispatch(logOut({ auth }));
-  //   localStorage.removeItem("persist:orders");
-  //   localStorage.removeItem("persist:stories");
-  // };
-
   useEffect(() => {
     if (user && user.stsTokenManager.expirationTime > Date.now()) {
       dispatch(fetchUser(user.accessToken));

@@ -15,9 +15,9 @@ function Help() {
   const faqsData = [
     {
       id: 1,
-      question: "What is a Stastiem Deeply Personalized Book?",
+      question: "What is a Blossom Reads Deeply Personalized Book?",
       answer:
-        "A Stastiem Deeply Personalized Book is a unique, high-quality children’s storybook, customized with stories and illustrations that reflect the child’s own life and interests. Each book is crafted to include the child as the main character, using the photos you upload.",
+        "A Blossom Reads Deeply Personalized Book is a unique, high-quality children’s storybook, customized with stories and illustrations that reflect the child’s own life and interests. Each book is crafted to include the child as the main character, using the photos you upload.",
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ function Help() {
       id: 4,
       question: "How do I order additional products?",
       answer:
-        "Additional products like the Stastiem Audio Book, Painting, and Gift Card can be added to your order at checkout. Simply select the products you’re interested in, and they will be included with your book.",
+        "Additional products like the Blossom Reads Audio Book, Painting, and Gift Card can be added to your order at checkout. Simply select the products you’re interested in, and they will be included with your book.",
     },
   ];
   return (
@@ -46,13 +46,13 @@ function Help() {
           <ul className={styles["help-list"]}>
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}>
-                1. Overview of Stastiem App
+                1. Overview of Blossom Reads App
               </h5>
               <p className={styles["help-item-content"]}>
-                Welcome to the Stastiem App, your personal portal to creating
-                magical storybook experiences for the children in your life. Our
-                app is designed to bring your personalized storybook orders to
-                life, offering a seamless, user-friendly platform for
+                Welcome to the Blossom Reads App, your personal portal to
+                creating magical storybook experiences for the children in your
+                life. Our app is designed to bring your personalized storybook
+                orders to life, offering a seamless, user-friendly platform for
                 customizing and managing your unique storybook creations. Here,
                 you can upload images, edit story texts, preview illustrations,
                 and keep track of all your orders, ensuring each book is as
@@ -97,10 +97,10 @@ function Help() {
                 Our dedicated support team is here to assist you with any
                 queries or concerns. Feel free to reach out to us at{" "}
                 <a
-                  href={"mailto:support@stastiem.com"}
+                  href={"mailto:support@blossomreads.com"}
                   style={{ color: "#f0623d" }}
                 >
-                  support@stastiem.com
+                  support@blossomreads.com
                 </a>
                 , and we’ll ensure to provide timely and helpful responses to
                 your inquiries.
@@ -144,8 +144,9 @@ function Help() {
             <li className={styles["help-item"]}>
               <h5 className={styles["help-item-title"]}> 5. Tips and Best</h5>
               <p className={styles["help-item-content"]}>
-                Practices Creating the Perfect Storybook To ensure your Stastiem
-                book is as magical as possible, consider the following tips:
+                Practices Creating the Perfect Storybook To ensure your Blossom
+                reads book is as magical as possible, consider the following
+                tips:
               </p>
               <ul className={styles["help-item-list"]}>
                 <li>

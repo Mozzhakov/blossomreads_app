@@ -13,7 +13,7 @@ const firebaseConfig = {
 
 const actionCodeSettings = {
   // url: "http://localhost:3000/login/",
-  url: "https://app.stastiem.com/login/",
+  url: "https://app.blossomreads.com/login/",
   handleCodeInApp: true,
 };
 

@@ -18,7 +18,7 @@ function Home() {
   const orders = useSelector(getOrders);
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
-
+  console.log(user);
   return (
     <main>
       <SidebarContainer>

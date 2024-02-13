@@ -30,6 +30,7 @@
     padding: 8px;
     cursor: pointer;
     font-family: inherit;
+    transition: 0.25s;
     & svg {
       display: block;
     }
@@ -53,6 +54,7 @@
     text-decoration: none;
     padding: 8px;
     border-radius: 50%;
+    transition: 0.25s;
     &--hidden {
       @extend .header-profile-btn;
       visibility: hidden;

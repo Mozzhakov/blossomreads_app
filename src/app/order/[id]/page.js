@@ -24,11 +24,9 @@ function StoryPage({ params }) {
   const [paymentLink, setPaymentLink] = useState("");
   const [user, loading] = useAuthState(auth);
   const orders = useSelector(getOrders);
-
   useEffect(() => {
     const initializeData = () => {
       const order = orders.find((el) => el.order_id === Number(params.id));
-
       if (order) {
         setCurrentOrder(order);
 
@@ -132,6 +130,12 @@ function StoryPage({ params }) {
                 <h1 className={styles["story-list-title"]}>
                   {heroName + " " + bookTitle}
                 </h1>
+                {/* <p>
+                  Use prev/next to navigate between stories or exit the editor.
+                  The bottom panel lets you undo/redo actions, discard changes
+                  with &#34;Cancel&#34; or save edits with&#34;Done&#34;.
+                </p> */}
+
                 <StoryList stories={stories} params={params} />
               </>
             )}
@@ -140,7 +144,6 @@ function StoryPage({ params }) {
                 Oops! No stories found for order ID {params.id}
               </h1>
             )}
-            {/* {isStoryLoading && <Loader />} */}
             {loading && <Loader />}
           </div>
         </section>

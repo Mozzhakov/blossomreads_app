@@ -4,7 +4,6 @@ import { useState } from "react";
 import { StoryModal } from "@/components/StoryModal";
 import { ImageLoader } from "./Loader";
 import { Portal } from "./Modal";
-
 export default function StoryList({ stories, params }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currStory, setCurrStory] = useState(null);

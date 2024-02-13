@@ -24,10 +24,10 @@ export const Sidebar = ({ onClose, isOpen }) => {
           onClick={onClose}
         >
           <Image
-            src="/stastiem-logo.webp"
+            src="/blossom-reads-logo.webp"
             alt="Logo"
             width="70"
-            height="42"
+            height="73"
             priority={true}
           />
         </Link>

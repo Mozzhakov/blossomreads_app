@@ -11,14 +11,14 @@ export default function TermsPolicy() {
           <p className={styles["terms-text"]}>Last Updated: 04.12.2023</p>
           <p className={styles["terms-title"]}>1. Introduction</p>
           <p className={styles["terms-text"]}>
-            Welcome to the Stastiem App. These Terms and Conditions govern your
-            use of our App and services. By accessing or using our App, you
+            Welcome to the Blossom Reads App. These Terms and Conditions govern
+            your use of our App and services. By accessing or using our App, you
             agree to be bound by these terms.
           </p>
           <p className={styles["terms-title"]}>2. Use of App</p>
           <p className={styles["terms-text"]}>
-            a. The Stastiem App is a service allowing customers to review and
-            edit personalized storybook orders. <br />
+            a. The Blossom Reads App is a service allowing customers to review
+            and edit personalized storybook orders. <br />
             b. You agree to use this App solely for lawful purposes, in
             compliance with all applicable laws.
           </p>
@@ -34,8 +34,8 @@ export default function TermsPolicy() {
           </p>
           <p className={styles["terms-text"]}>
             a. All content on this App, including text, graphics, logos, and
-            software, is the property of Stastiem or its content suppliers and
-            protected by intellectual property laws.
+            software, is the property of Blossom reads or its content suppliers
+            and protected by intellectual property laws.
             <br /> b. You may not reproduce, distribute, modify, or create
             derivative works of any content without explicit permission.
           </p>
@@ -47,7 +47,7 @@ export default function TermsPolicy() {
           </p>
           <p className={styles["terms-title"]}>6. Limitation of Liability</p>
           <p className={styles["terms-text"]}>
-            Stastiem is not liable for any direct, indirect, incidental,
+            Blossom reads is not liable for any direct, indirect, incidental,
             special, or consequential damages arising from your use of the App.
           </p>
           <p className={styles["terms-title"]}>7. Amendments</p>
@@ -59,19 +59,26 @@ export default function TermsPolicy() {
           <p className={styles["terms-title"]}>8. Governing Law</p>
           <p className={styles["terms-text"]}>
             These terms shall be governed by and construed in accordance with
-            the laws of the jurisdiction where Stastiem is based, without regard
-            to its conflict of law provisions.
+            the laws of the jurisdiction where Blossom reads is based, without
+            regard to its conflict of law provisions.
           </p>
           <p className={styles["terms-title"]}>9. Contact Information</p>
           <p className={styles["terms-text"]} style={{ marginBottom: "30px" }}>
             For any questions or concerns regarding these terms, please contact
-            us at support@stastiem.com.
+            us at{" "}
+            <a
+              href="mailto:support@blossomreads.com"
+              style={{ color: "#f0623d" }}
+            >
+              support@blossomreads.com
+            </a>
+            .
           </p>
           <h1 className={styles["page-title"]}>Privacy Policy</h1>
           <p className={styles["terms-text"]}>Last Updated: 04.12.2023</p>
           <p className={styles["terms-text"]}>
-            This Privacy Policy outlines how Stastiem collects, uses, and
-            discloses information through the Stastiem App.
+            This Privacy Policy outlines how Blossom reads collects, uses, and
+            discloses information through the Blossom Reads App.
           </p>
           <p className={styles["terms-text"]}>
             <span className={styles["terms-title"]}>
@@ -100,7 +107,14 @@ export default function TermsPolicy() {
           <p className={styles["terms-text"]}>
             <span className={styles["terms-title"]}>Your Rights: </span>
             You have the right to access, correct, or delete your personal
-            information. Contact us at support@stastiem.com for assistance.
+            information. Contact us at{" "}
+            <a
+              href="mailto:support@blossomreads.com"
+              style={{ color: "#f0623d" }}
+            >
+              support@blossomreads.com
+            </a>{" "}
+            for assistance.
           </p>
           <p className={styles["terms-text"]}>
             <span className={styles["terms-title"]}>

@@ -10,7 +10,7 @@ import PublicRoute from "@/components/PublicRoute";
 import { isSignInWithEmailLink } from "firebase/auth";
 
 function Login() {
-  const testing = !window.location.href.includes("app.stastiem.com");
+  const testing = !window.location.href.includes("app.blossomreads.com");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
 

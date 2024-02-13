@@ -101,13 +101,17 @@ export default function OrderList({ user, loading }) {
       setIsLoading(false);
     }
   }, [dispatch, user]);
+
   const orders = useSelector(getOrders);
+
   return (
     <section className={styles["order-list-section"]}>
       <div className={styles.container}>
         {orders && orders.length !== 0 && !isLoading && (
           <>
-            <h1 className={styles["order-list-title"]}>Your Stastiem books</h1>
+            <h1 className={styles["order-list-title"]}>
+              Your Blossom Reads books
+            </h1>
             <ul className={styles["order-list"]}>
               {orders.map((el) => (
                 <li key={el.order_id} className={styles["order-item"]}>
