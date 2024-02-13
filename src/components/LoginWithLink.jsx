@@ -36,7 +36,7 @@ function LoginWithLink({ handleLogin, email, setEmail }) {
                   <WarningIcon size={20} />
                   {errorMessage}
                   <a
-                    href="https://app.stastiem.com/login"
+                    href="https://app.blossomreads.com/login"
                     className={styles["form-error-msg-link"]}
                   >
                     Click here to login

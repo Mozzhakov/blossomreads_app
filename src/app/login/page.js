@@ -13,7 +13,7 @@ function Login() {
   const testing = !window.location.href.includes("app.blossomreads.com");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
-
+  console.log(new URL(document.location).searchParams);
   async function handleSignIn(e) {
     e.preventDefault();
     const emailLink = window.location.href;
