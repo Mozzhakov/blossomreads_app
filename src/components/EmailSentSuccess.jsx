@@ -9,15 +9,15 @@ export const EmailSentSuccess = ({ email, styles }) => {
       <p className={styles["success-box__content"]}>
         ✨ A login link has been sent to{" "}
         <span className={styles["success-box__email"]}>{userEmail}</span>. Click
-        it to access your Stastiem world!
+        it to access your Blossom Reads world!
       </p>
       <p className={styles["success-box__content"]}>
         🔎 Can’t see it? Check your Spam folder or contact us at{" "}
         <a
-          href={"mailto:support@stastiem.com"}
+          href={"mailto:support@blossomreads.com"}
           className={styles["success-box__link"]}
         >
-          support@stastiem.com
+          support@blossomreads.com
         </a>{" "}
         for assistance.
       </p>

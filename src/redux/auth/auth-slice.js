@@ -35,7 +35,7 @@ const authorization = createSlice({
         state.isLoading = false;
         state.isLoggedIn = false;
         state.isError = true;
-        state.error = "Invalid email or expired link.";
+        state.error = "Your link expired, please login again.";
       })
       .addCase(logOut.pending, (state) => {
         state.isLoading = true;
