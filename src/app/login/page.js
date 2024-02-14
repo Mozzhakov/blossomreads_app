@@ -45,14 +45,22 @@ function Login() {
   return (
     <SidebarContainer>
       <PublicRoute>
-        {isSignInLink || !isError ? (
+        {isSignInLink ? (
+          isError ? (
+            <LoginWithoutLink
+              handleLogin={handleSendLink}
+              email={email}
+              setEmail={setEmail}
+            />
+          ) : (
+            <Loader />
+          )
+        ) : (
           <LoginWithoutLink
             handleLogin={handleSendLink}
             email={email}
             setEmail={setEmail}
           />
-        ) : (
-          <Loader />
         )}
       </PublicRoute>
     </SidebarContainer>
