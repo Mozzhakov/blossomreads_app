@@ -101,7 +101,7 @@ function Profile() {
                   <ul style={{ display: "contents" }}>
                     <li style={{ listStyle: "none", width: "100%" }}>
                       <Link
-                        href="https://www.stastiem.com/order"
+                        href="https://www.blossomreads.com/order"
                         target="_blanc"
                         className={styles["profile-content-item"]}
                         // style={{ justifyContent: "center" }}
@@ -112,7 +112,7 @@ function Profile() {
                     </li>
                     <li style={{ listStyle: "none", width: "100%" }}>
                       <Link
-                        href="mailto:support@stastiem.com"
+                        href="mailto:support@blossomreads.com"
                         target="_blanc"
                         className={styles["profile-content-item"]}
                         // style={{ justifyContent: "center" }}

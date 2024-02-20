@@ -13,7 +13,7 @@ export default function Hero({ orders }) {
     (a, b) => convertDate(a.created_at) - convertDate(b.created_at)
   );
   const earliestOrder = sortedOrders[sortedOrders.length - 1];
-
+  console.log(sortedOrders);
   return (
     <>
       <section className={styles["hero-section"]}>
@@ -23,25 +23,26 @@ export default function Hero({ orders }) {
             Preview and personalize your unique Storybook Adventures
           </p>
           <div className={styles["hero-btn-wrapper"]}>
-            <Link
-              href={earliestOrder ? `/order/${earliestOrder.order_id}` : "/"}
-              className={
-                earliestOrder
-                  ? styles["hero-btn"]
-                  : styles["hero-btn--disabled"]
-              }
-            >
-              <ReviewIcon
-                color={"#fff"}
-                size={20}
-                style={styles["hero-btn-image"]}
-              />
-              Start reviewing
-            </Link>
+            {sortedOrders.length > 0 ? (
+              <Link
+                href={earliestOrder ? `/order/${earliestOrder.order_id}` : "/"}
+                className={styles["hero-btn"]}
+              >
+                <ReviewIcon
+                  color={"#fff"}
+                  size={20}
+                  style={styles["hero-btn-image"]}
+                />
+                Start reviewing
+              </Link>
+            ) : (
+              <Link href={"/feedback"} className={styles["hero-btn"]}>
+                Share your experience
+              </Link>
+            )}
           </div>
         </div>
       </section>
     </>
   );
 }
-// style={{ color: "#f0623d" }}

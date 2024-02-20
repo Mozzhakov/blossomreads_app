@@ -148,7 +148,7 @@ export default function OrderList({ user, loading }) {
           </>
         )}
         {isLoading && <Loader />}
-        {orders.length === 0 && !isLoading && !loading && (
+        {!orders && !isLoading && !loading && (
           <h4 className={styles["order-list-title"]}>
             You don&#39;t have orders. You can place new order{" "}
             <Link
