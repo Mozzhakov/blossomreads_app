@@ -1,0 +1,22 @@
+.slider-container {
+  width: 100%;
+  max-width: 500px;
+}
+.slider-pag {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding-top: 10px;
+  gap: 10px;
+}
+.slider-image {
+  border-radius: 5px;
+  width: 100%;
+  max-height: 500px;
+  max-width: 500px;
+}
+
+.slider-image-small {
+  border-radius: 5px;
+}

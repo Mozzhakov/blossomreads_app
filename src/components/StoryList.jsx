@@ -4,6 +4,7 @@ import { useState } from "react";
 import { StoryModal } from "@/components/StoryModal";
 import { ImageLoader } from "./Loader";
 import { Portal } from "./Modal";
+import Link from "next/link";
 export default function StoryList({ stories, params }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currStory, setCurrStory] = useState(null);
@@ -16,7 +17,7 @@ export default function StoryList({ stories, params }) {
   const goToNext = () => {
     currStory < 6 ? setCurrStory((currStory) => currStory + 1) : null;
   };
-
+  const orderNumber = params.id;
   const truncatedString = (str, maxLength, link) => {
     if (str.length <= maxLength) {
       return str;
@@ -38,60 +39,64 @@ export default function StoryList({ stories, params }) {
           {relevantStories.map((story) => (
             <li
               key={story.story_number}
-              className={styles["story-item"]}
+              // className={styles["story-item"]}
               onClick={() => {
                 setCurrStory(story.story_number);
                 setModalOpen(true);
               }}
             >
-              {story.left_image_optimized ? (
-                <div className={styles["story-item-image-wrap"]}>
-                  <Image
-                    src={story.left_image_optimized}
-                    alt="Story cover"
-                    width={400}
-                    height={400}
-                    className={styles["story-item-image"]}
-                    priority={true}
-                    onLoad={() => setIsLoading(false)}
-                  />
-                  {isLoading && <ImageLoader />}
-                </div>
-              ) : (
-                <div className={styles["story-item-image-wrap"]}>
-                  <div
-                    className={styles["story-item-image-ph"]}
-                    style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
-                  >
-                    <p className={styles["story-item-image-ph-text"]}>
-                      {story.story_title}
-                    </p>
+              <Link
+                href={`/order/${orderNumber}/story?number=${story.story_number}`}
+                className={styles["story-item"]}
+              >
+                {story.left_image_optimized ? (
+                  <div className={styles["story-item-image-wrap"]}>
+                    <Image
+                      src={story.left_image_optimized}
+                      alt="Story cover"
+                      width={400}
+                      height={400}
+                      className={styles["story-item-image"]}
+                      priority={true}
+                      onLoad={() => setIsLoading(false)}
+                    />
+                    {isLoading && <ImageLoader />}
                   </div>
-                </div>
-              )}
-
-              <div className={styles["story-item-content"]}>
-                <p className={styles["story-item-title"]}>
-                  {story.story_number}. {story.story_title}
-                </p>
-                {window.innerWidth > 768 ? (
-                  <p className={styles["story-item-text"]}>
-                    {truncatedString(
-                      story.story_text,
-                      600,
-                      <span className={styles["story-item-btn"]}>more</span>
-                    )}
-                  </p>
                 ) : (
-                  <p className={styles["story-item-text"]}>
-                    {truncatedString(
-                      story.story_text,
-                      300,
-                      <span className={styles["story-item-btn"]}>more</span>
-                    )}
-                  </p>
+                  <div className={styles["story-item-image-wrap"]}>
+                    <div
+                      className={styles["story-item-image-ph"]}
+                      style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
+                    >
+                      <p className={styles["story-item-image-ph-text"]}>
+                        {story.story_title}
+                      </p>
+                    </div>
+                  </div>
                 )}
-              </div>
+                <div className={styles["story-item-content"]}>
+                  <p className={styles["story-item-title"]}>
+                    {story.story_number}. {story.story_title}
+                  </p>
+                  {window.innerWidth > 768 ? (
+                    <p className={styles["story-item-text"]}>
+                      {truncatedString(
+                        story.story_text,
+                        600,
+                        <span className={styles["story-item-btn"]}>more</span>
+                      )}
+                    </p>
+                  ) : (
+                    <p className={styles["story-item-text"]}>
+                      {truncatedString(
+                        story.story_text,
+                        300,
+                        <span className={styles["story-item-btn"]}>more</span>
+                      )}
+                    </p>
+                  )}
+                </div>
+              </Link>
             </li>
           ))}
         </ol>

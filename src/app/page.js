@@ -15,6 +15,7 @@ import PrivateRoute from "@/components/PrivateRoute";
 
 function Home() {
   const [user, loading] = useAuthState(auth);
+  console.log(user);
   const orders = useSelector(getOrders);
   const isOrderError = useSelector(getIsOrderError);
   const errorMessage = useSelector(getOrderError);
