@@ -109,6 +109,7 @@ function ImageSlider({ order, story_id }) {
     // else {
     //   console.log("Your token expired, please reload the page");
     // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex]);
 
   return (

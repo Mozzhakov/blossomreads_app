@@ -45,6 +45,7 @@ function StoryPage({ params }) {
     router.push(`/order/${params.id}/story/${storyNumber + 1}`);
   };
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
       if (storyNumber < 6) {

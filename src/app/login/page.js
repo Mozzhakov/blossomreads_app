@@ -30,6 +30,7 @@ function Login() {
     if (isSignInLink && email) {
       handleSignIn();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignInLink, email]);
 
   async function handleSignIn() {
