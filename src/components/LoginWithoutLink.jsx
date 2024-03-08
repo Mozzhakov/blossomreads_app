@@ -10,7 +10,7 @@ import {
 } from "@/redux/auth/auth-selectors";
 import loginImage from "../images/Login-image.webp";
 import styles from "../scss/login-form.module.scss";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { EmailSentSuccess } from "./EmailSentSuccess";
 import { EmailInput } from "./EmailInput";
 

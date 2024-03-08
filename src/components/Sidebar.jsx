@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "../scss/sidebar.module.scss";
 import { usePathname } from "next/navigation";
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchStories, editStory } from "./stories-operations";
+import { fetchStories, editStory, editStoryImage } from "./stories-operations";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
@@ -31,13 +31,24 @@ const stories = createSlice({
       .addCase(editStory.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        // state.items = action.payload;
       })
       .addCase(editStory.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.error =
           "The error occurred during editing the story. Please try again.";
+      })
+
+      .addCase(editStoryImage.pending, handlePending)
+      .addCase(editStoryImage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(editStoryImage.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error =
+          "The error occurred during saving the image. Please try again.";
       });
   },
 });

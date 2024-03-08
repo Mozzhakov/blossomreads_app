@@ -1,0 +1,23 @@
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+  gap: 10px;
+}
+.not-found-title {
+  text-align: center;
+  font-size: 50px;
+}
+.not-found-subtitle {
+  text-align: center;
+  font-size: 20px;
+}
+.not-found-link {
+  text-decoration: underline;
+  text-align: center;
+  font-style: italic;
+  font-size: 16px;
+  color: #f0623d;
+}

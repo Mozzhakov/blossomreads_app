@@ -2,7 +2,7 @@ import { auth } from "@/firebase/Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { MenuIcon, ProfileIcon } from "./Icons";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "../scss/header.module.scss";
 
 function Header({ onOpen }) {

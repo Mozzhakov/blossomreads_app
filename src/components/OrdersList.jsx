@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "../scss/order-list.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

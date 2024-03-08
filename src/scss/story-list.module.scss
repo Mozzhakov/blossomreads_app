@@ -33,6 +33,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow: visible;
     gap: 50px;
     :nth-child(2n) {
       flex-direction: row-reverse;
@@ -64,8 +65,8 @@
       margin-bottom: 10px;
       @include desktop {
         margin-bottom: 0;
-        height: 420px;
-        width: 420px;
+        height: 400px;
+        width: 400px;
       }
     }
     &-image {

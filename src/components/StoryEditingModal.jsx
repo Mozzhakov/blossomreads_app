@@ -52,6 +52,7 @@ export const StoryEditingModal = ({
               story_id: Number(story_id),
               story_title: story_title,
               story_text: encodeURIComponent(storyTextValue),
+              story_image: "",
               token: user.accessToken,
             })
           );
@@ -66,6 +67,9 @@ export const StoryEditingModal = ({
       } catch (error) {
         console.log(error.message);
       }
+    } else {
+      onClose();
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -78,9 +82,9 @@ export const StoryEditingModal = ({
       const vv = window.visualViewport;
 
       function fixPosition() {
-        textarea.style.height = `calc(${vv.height}px - 150.5px)`;
+        textarea.style.height = `calc(${vv.height}px - 104.5px)`;
         textarea.style.bottom = "auto";
-        textarea.style.top = "90.5px";
+        textarea.style.top = "49.5px";
         bottomPanel.style.top = `${vv.height}px`;
         bottomPanel.style.bottom = "auto";
         bottomPanel.style.transform = "translateY(-100%)";
@@ -96,52 +100,63 @@ export const StoryEditingModal = ({
   }, []);
 
   return (
-    <form style={{ width: "100%" }} onSubmit={onDoneClick}>
-      <div style={{ width: "100%", height: "500px" }}>
-        <textarea
-          name="textarea"
-          onChange={handleChange}
-          value={doc}
-          autoFocus
-          className={styles["story-textarea"]}
-        ></textarea>
+    <>
+      <div className={styles["story-overlay"]}></div>
+      <div className={styles["story-modal-window"]}>
+        <h3 className={styles["story-title"]}>
+          {story_id}. {story_title}
+        </h3>
+        <form
+          style={{ width: "100%", height: "calc(100% - 70px)" }}
+          onSubmit={onDoneClick}
+        >
+          {/* <div style={{ width: "100%", height: "100%" }}> */}
+          <textarea
+            name="textarea"
+            onChange={handleChange}
+            value={doc}
+            autoFocus
+            className={styles["story-textarea"]}
+          ></textarea>
+          {/* </div> */}
+          <div className={styles["story-bottom-panel"]}>
+            <div className={styles["story-btn-wrapper"]}>
+              <button
+                onClick={() => handleClick(undoDoc)}
+                disabled={!canUndo}
+                className={styles["story-btn"]}
+              >
+                <UndoIcon
+                  color={canUndo ? "#3b444b" : "rgba(16, 16, 16, 0.3)"}
+                  size={20}
+                />
+                Undo
+              </button>
+              <button
+                onClick={() => handleClick(redoDoc)}
+                disabled={!canRedo}
+                className={styles["story-btn"]}
+              >
+                <RedoIcon
+                  color={canRedo ? "#3b444b" : "rgba(16, 16, 16, 0.3)"}
+                  size={20}
+                />
+                Redo
+              </button>
+            </div>
+            <div className={styles["story-btn-wrapper"]}>
+              <button className={styles["story-btn"]} onClick={onClose}>
+                Cancel
+              </button>
+              <button type="submit" className={styles["story-btn"]}>
+                <DoneIcon color={"#f0623d"} size={20} />
+                Done
+              </button>
+            </div>
+          </div>
+          {isLoading && <StoryModalLoader />}
+        </form>
       </div>
-      <div className={styles["story-bottom-panel"]}>
-        <div className={styles["story-btn-wrapper"]}>
-          <button
-            onClick={() => handleClick(undoDoc)}
-            disabled={!canUndo}
-            className={styles["story-btn"]}
-          >
-            <UndoIcon
-              color={canUndo ? "#3b444b" : "rgba(16, 16, 16, 0.3)"}
-              size={20}
-            />
-            Undo
-          </button>
-          <button
-            onClick={() => handleClick(redoDoc)}
-            disabled={!canRedo}
-            className={styles["story-btn"]}
-          >
-            <RedoIcon
-              color={canRedo ? "#3b444b" : "rgba(16, 16, 16, 0.3)"}
-              size={20}
-            />
-            Redo
-          </button>
-        </div>
-        <div className={styles["story-btn-wrapper"]}>
-          <button className={styles["story-btn"]} onClick={onClose}>
-            Cancel
-          </button>
-          <button type="submit" className={styles["story-btn"]}>
-            <DoneIcon color={"#f0623d"} size={20} />
-            Done
-          </button>
-        </div>
-      </div>
-      {isLoading && <StoryModalLoader />}
-    </form>
+    </>
   );
 };

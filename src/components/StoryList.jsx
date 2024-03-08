@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "../scss/story-list.module.scss";
 import { useState } from "react";
 import { StoryModal } from "@/components/StoryModal";
@@ -36,66 +36,114 @@ export default function StoryList({ stories, params }) {
     <>
       {relevantStories && (
         <ol className={styles["story-list"]}>
-          {relevantStories.map((story) => (
+          {relevantStories.map((story, index) => (
             <li
               key={story.story_number}
-              // className={styles["story-item"]}
+              className={index % 2 === 0 ? styles["even"] : styles["odd"]}
               onClick={() => {
                 setCurrStory(story.story_number);
                 setModalOpen(true);
               }}
             >
               <Link
-                href={`/order/${orderNumber}/story?number=${story.story_number}`}
+                href={`/order/${orderNumber}/story/${story.story_number}`}
                 className={styles["story-item"]}
               >
-                {story.left_image_optimized ? (
-                  <div className={styles["story-item-image-wrap"]}>
-                    <Image
-                      src={story.left_image_optimized}
-                      alt="Story cover"
-                      width={400}
-                      height={400}
-                      className={styles["story-item-image"]}
-                      priority={true}
-                      onLoad={() => setIsLoading(false)}
-                    />
-                    {isLoading && <ImageLoader />}
-                  </div>
-                ) : (
-                  <div className={styles["story-item-image-wrap"]}>
-                    <div
-                      className={styles["story-item-image-ph"]}
-                      style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
-                    >
-                      <p className={styles["story-item-image-ph-text"]}>
-                        {story.story_title}
+                {index % 2 === 0 ? (
+                  <>
+                    <div className={styles["story-item-content"]}>
+                      <p className={styles["story-item-title"]}>
+                        {story.story_number}. {story.story_title}
+                      </p>
+                      <p className={styles["story-item-text"]}>
+                        {window.innerWidth > 768
+                          ? truncatedString(
+                              story.story_text,
+                              600,
+                              <span className={styles["story-item-btn"]}>
+                                more
+                              </span>
+                            )
+                          : truncatedString(
+                              story.story_text,
+                              300,
+                              <span className={styles["story-item-btn"]}>
+                                more
+                              </span>
+                            )}
                       </p>
                     </div>
-                  </div>
+                    <div className={styles["story-item-image-wrap"]}>
+                      {story.right_image_optimized ? (
+                        <Image
+                          src={story.right_image_optimized}
+                          alt="Story cover"
+                          width={400}
+                          height={400}
+                          className={styles["story-item-image"]}
+                          priority={true}
+                          onLoad={() => setIsLoading(false)}
+                        />
+                      ) : (
+                        <div
+                          className={styles["story-item-image-ph"]}
+                          style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
+                        >
+                          <p className={styles["story-item-image-ph-text"]}>
+                            {story.story_title}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles["story-item-image-wrap"]}>
+                      {story.right_image_optimized ? (
+                        <Image
+                          src={story.right_image_optimized}
+                          alt="Story cover"
+                          width={400}
+                          height={400}
+                          className={styles["story-item-image"]}
+                          priority={true}
+                          onLoad={() => setIsLoading(false)}
+                        />
+                      ) : (
+                        <div
+                          className={styles["story-item-image-ph"]}
+                          style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
+                        >
+                          <p className={styles["story-item-image-ph-text"]}>
+                            {story.story_title}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <div className={styles["story-item-content"]}>
+                      <p className={styles["story-item-title"]}>
+                        {story.story_number}. {story.story_title}
+                      </p>
+                      <p className={styles["story-item-text"]}>
+                        {window.innerWidth > 768
+                          ? truncatedString(
+                              story.story_text,
+                              600,
+                              <span className={styles["story-item-btn"]}>
+                                more
+                              </span>
+                            )
+                          : truncatedString(
+                              story.story_text,
+                              300,
+                              <span className={styles["story-item-btn"]}>
+                                more
+                              </span>
+                            )}
+                      </p>
+                    </div>
+                  </>
                 )}
-                <div className={styles["story-item-content"]}>
-                  <p className={styles["story-item-title"]}>
-                    {story.story_number}. {story.story_title}
-                  </p>
-                  {window.innerWidth > 768 ? (
-                    <p className={styles["story-item-text"]}>
-                      {truncatedString(
-                        story.story_text,
-                        600,
-                        <span className={styles["story-item-btn"]}>more</span>
-                      )}
-                    </p>
-                  ) : (
-                    <p className={styles["story-item-text"]}>
-                      {truncatedString(
-                        story.story_text,
-                        300,
-                        <span className={styles["story-item-btn"]}>more</span>
-                      )}
-                    </p>
-                  )}
-                </div>
               </Link>
             </li>
           ))}
