@@ -22,10 +22,15 @@
     }
   }
   &-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+    @include desktop {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    & span {
+      display: none;
+    }
   }
 }
 

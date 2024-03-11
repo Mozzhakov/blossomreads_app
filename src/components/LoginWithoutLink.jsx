@@ -60,10 +60,8 @@ function LoginWithoutLink({ handleLogin, email, setEmail }) {
               src={loginImage}
               alt="Books"
               width={500}
+              height={500}
               className={styles["form-image"]}
-              style={{
-                borderRadius: "0 10px 10px 0",
-              }}
               priority={true}
             />
           </div>
