@@ -6,7 +6,7 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
+  maximumScale: 1,
   viewportFit: "cover",
   interactiveWidget: "resizes-visual",
 };
