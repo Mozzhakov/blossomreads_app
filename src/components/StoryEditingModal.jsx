@@ -77,6 +77,9 @@ export const StoryEditingModal = ({
     const bottomPanel = document.querySelector(
       `.${styles["story-bottom-panel"]}`
     );
+    const storyModalWindow = document.querySelector(
+      `.${styles["story-modal-window"]}`
+    );
     const isiOS = /iPad|iPhone|iPod/.test(navigator.platform);
     if (window.visualViewport && isiOS) {
       const vv = window.visualViewport;
@@ -88,6 +91,7 @@ export const StoryEditingModal = ({
         bottomPanel.style.top = `calc(${vv.height}px - 20px)`;
         bottomPanel.style.bottom = "auto";
         bottomPanel.style.transform = "translateY(-100%)";
+        storyModalWindow.style.overflow = "hidden";
       }
 
       vv.addEventListener("resize", fixPosition);
