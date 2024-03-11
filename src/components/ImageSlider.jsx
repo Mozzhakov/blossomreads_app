@@ -32,6 +32,7 @@ function ImageSlider({ order, story_id }) {
   // console.log(currStory);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [showHint, setShowHint] = useState(false);
   const imagesObj = currStory.right_image_selections_optimized;
 
   const allSmallImages = document.querySelectorAll(
@@ -72,6 +73,7 @@ function ImageSlider({ order, story_id }) {
   };
   // console.log(imagesArray);
   useEffect(() => {
+    let timeout;
     setActiveIndex((prevIndex) => {
       allSmallImages.forEach((el) => (el.style.border = "none"));
       const slickCurrentElement = document.querySelector("li.slick-active");
@@ -99,9 +101,19 @@ function ImageSlider({ order, story_id }) {
             story_image: correctActiveKey,
             token: user.accessToken,
           })
-        ).then(() => {
-          dispatch(fetchOrdersAndStories(user));
-        });
+        )
+          .then(() => {
+            setShowHint(true);
+          })
+          .then(() => {
+            dispatch(fetchOrdersAndStories(user));
+            timeout = setTimeout(() => {
+              setShowHint(false); // Remove the hint after some time
+            }, 2000);
+          });
+        // .finally(() => {
+        //   setShowHint(false);
+        // });
       } catch (error) {
         console.log(error.message);
       }
@@ -109,6 +121,9 @@ function ImageSlider({ order, story_id }) {
     // else {
     //   console.log("Your token expired, please reload the page");
     // }
+    return () => {
+      clearTimeout(timeout); // Cleanup function to clear the timeout
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex]);
 
@@ -131,6 +146,13 @@ function ImageSlider({ order, story_id }) {
           </div>
         ))}
       </Slider>
+      <p
+        className={`${styles["slider-hint"]} ${
+          showHint ? styles["slider-hint--visible"] : ""
+        }`}
+      >
+        Story illustration changed
+      </p>
     </div>
   );
 }
