@@ -29,7 +29,10 @@
       gap: 20px;
     }
     & span {
-      display: none;
+      display: none !important;
+      @include desktop {
+        display: block !important;
+      }
     }
   }
 }
