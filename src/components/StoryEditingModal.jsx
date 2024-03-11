@@ -85,7 +85,7 @@ export const StoryEditingModal = ({
         textarea.style.height = `calc(${vv.height}px - 104.5px)`;
         textarea.style.bottom = "auto";
         textarea.style.top = "49.5px";
-        bottomPanel.style.top = `${vv.height}px`;
+        bottomPanel.style.top = `calc(${vv.height}px - 20px)`;
         bottomPanel.style.bottom = "auto";
         bottomPanel.style.transform = "translateY(-100%)";
       }

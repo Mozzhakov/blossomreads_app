@@ -49,7 +49,7 @@ export default function StoryList({ stories, params }) {
                 href={`/order/${orderNumber}/story/${story.story_number}`}
                 className={styles["story-item"]}
               >
-                {index % 2 === 0 ? (
+                {index % 2 === 0 && window.innerWidth > 768 ? (
                   <>
                     <div className={styles["story-item-content"]}>
                       <p className={styles["story-item-title"]}>
